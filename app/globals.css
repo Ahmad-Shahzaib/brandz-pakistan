@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: var(--font-playfair), 'Playfair Display SC', serif;
+  --font-sans: var(--font-karla), 'Karla', sans-serif;
+  --font-script: var(--font-caveat), 'Caveat', cursive;
+
+  --color-brand-red: #E51821;
+  --color-brand-red-dark: #B80F16;
+  --color-brand-red-light: #FFF0F1;
+  
+  --color-brand-yellow: #FFC700;
+  --color-brand-yellow-light: #FFF9E6;
+
+  --color-brand-orange: #F0821B;
+  --color-brand-orange-light: #FDF2E9;
+
+  --color-charcoal: #1A1818;
+  --color-warm-gray: #6B655C;
+  --color-light-bg: #FAF8F7;
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-script {
+    font-family: var(--font-script);
+  }
+}
+
+/* Custom scrollbar styling for horizontal timeline */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer components {
+  .eyebrow { @apply mb-5 text-xs font-bold uppercase tracking-[.18em] text-[#2563EB]; }
+  .section-title { @apply font-heading text-3xl font-bold leading-[1.12] tracking-[-.025em] text-[#0F172A] sm:text-5xl; }
+  .brand-card { @apply rounded-xl border border-[#DCE3EA] bg-white p-6 transition duration-300 hover:border-[#1D5D9B] hover:shadow-lg hover:shadow-[#102A43]/5; }
+  .brand-mark { @apply grid h-16 w-16 place-items-center rounded-2xl font-heading text-xl font-extrabold; }
+}
+
+@layer base {
+  html, body { overflow-x: clip; }
+  body { letter-spacing: -0.01em; }
+  a, button { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2; }
+}
+
+/* One-time section reveals are assigned by ScrollReveal, with a different motion
+   direction for consecutive sections so long corporate pages keep their rhythm. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal {
+    opacity: 0;
+    transition: opacity 680ms cubic-bezier(.22, .8, .25, 1), transform 760ms cubic-bezier(.22, .8, .25, 1);
+    will-change: opacity, transform;
+  }
+  .scroll-reveal[data-reveal='rise'] { transform: translateY(32px); }
+  .scroll-reveal[data-reveal='slide-left'] { transform: translateX(-42px); }
+  .scroll-reveal[data-reveal='slide-right'] { transform: translateX(42px); }
+  .scroll-reveal[data-reveal='soft-scale'] { transform: scale(.975); }
+  .scroll-reveal.is-revealed { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
