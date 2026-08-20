@@ -32,19 +32,19 @@ export const RestaurantExplorer: React.FC = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search restaurants…"
-            className="w-full bg-[#FAF8F7] text-sm pl-9 pr-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E51821]"
+            className="w-full bg-[#F7F7F7] text-sm pl-9 pr-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]"
           />
         </div>
-        <select value={city} onChange={(e) => setCity(e.target.value)} className="bg-[#FAF8F7] text-sm px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E51821]">
+        <select value={city} onChange={(e) => setCity(e.target.value)} className="bg-[#F7F7F7] text-sm px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]">
           {cities.map((c) => <option key={c}>{c}</option>)}
         </select>
-        <select value={format} onChange={(e) => setFormat(e.target.value)} className="bg-[#FAF8F7] text-sm px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E51821]">
+        <select value={format} onChange={(e) => setFormat(e.target.value)} className="bg-[#F7F7F7] text-sm px-3 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]">
           {formats.map((f) => <option key={f}>{f}</option>)}
         </select>
       </div>
 
-      <p className="text-sm text-[#6B655C] mb-6">
-        Showing <strong className="text-[#1A1818]">{filtered.length}</strong> of {RESTAURANTS.length} restaurants
+      <p className="text-sm text-[#717275] mb-6">
+        Showing <strong className="text-[#343538]">{filtered.length}</strong> of {RESTAURANTS.length} restaurants
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -59,32 +59,32 @@ export const RestaurantExplorer: React.FC = () => {
             <div className="relative h-44 overflow-hidden">
               <img src={r.image} alt={r.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <span className="absolute top-3 left-3 bg-white/95 text-[#1A1818] text-[10px] font-bold px-2.5 py-1 rounded-full">{r.format}</span>
+              <span className="absolute top-3 left-3 bg-white/95 text-[#343538] text-[10px] font-bold px-2.5 py-1 rounded-full">{r.format}</span>
               {r.flagship && (
-                <span className="absolute top-3 right-3 bg-[#E51821] text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-[#FFC700] text-[#FFC700]" /> Flagship
+                <span className="absolute top-3 right-3 bg-[#F05535] text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                  <Star className="w-3 h-3 fill-[#F6A18F] text-[#F6A18F]" /> Flagship
                 </span>
               )}
             </div>
             <div className="p-5">
-              <h3 className="font-heading font-extrabold text-lg text-[#1A1818] leading-snug">{r.name}</h3>
-              <div className="mt-3 space-y-1.5 text-xs text-[#6B655C]">
-                <p className="flex items-start gap-2"><MapPin className="w-3.5 h-3.5 text-[#E51821] shrink-0 mt-0.5" />{r.address}</p>
-                <p className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-[#E51821] shrink-0" />{r.phone}</p>
-                <p className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-[#E51821] shrink-0" />{r.hours}</p>
+              <h3 className="font-heading font-extrabold text-lg text-[#343538] leading-snug">{r.name}</h3>
+              <div className="mt-3 space-y-1.5 text-xs text-[#717275]">
+                <p className="flex items-start gap-2"><MapPin className="w-3.5 h-3.5 text-[#F05535] shrink-0 mt-0.5" />{r.address}</p>
+                <p className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-[#F05535] shrink-0" />{r.phone}</p>
+                <p className="flex items-center gap-2"><Clock className="w-3.5 h-3.5 text-[#F05535] shrink-0" />{r.hours}</p>
               </div>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {r.services.map((s) => (
-                  <span key={s} className="text-[10px] font-semibold text-[#E51821] bg-[#FFF0F1] px-2 py-0.5 rounded-full">{s}</span>
+                  <span key={s} className="text-[10px] font-semibold text-[#F05535] bg-[#FFF0EC] px-2 py-0.5 rounded-full">{s}</span>
                 ))}
               </div>
               <a
                 href={`https://www.google.com/maps/search/${encodeURIComponent(r.name + ' ' + r.address)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 w-full flex items-center justify-center gap-2 bg-[#1A1818] hover:bg-black text-white py-2.5 rounded-xl font-bold text-xs transition-colors"
+                className="mt-4 w-full flex items-center justify-center gap-2 bg-[#343538] hover:bg-black text-white py-2.5 rounded-xl font-bold text-xs transition-colors"
               >
-                <Navigation className="w-3.5 h-3.5 text-[#FFC700]" /> Get Directions
+                <Navigation className="w-3.5 h-3.5 text-[#F6A18F]" /> Get Directions
               </a>
             </div>
           </motion.div>
@@ -92,10 +92,10 @@ export const RestaurantExplorer: React.FC = () => {
       </div>
 
       {filtered.length === 0 && (
-        <div className="text-center py-16 text-[#6B655C]">
+        <div className="text-center py-16 text-[#717275]">
           <MapPin className="w-10 h-10 mx-auto text-gray-300 mb-3" />
           <p className="font-semibold">No restaurants match your filters.</p>
-          <button onClick={() => { setCity('All Cities'); setFormat('All Formats'); setQuery(''); }} className="mt-3 text-[#E51821] font-bold text-sm">Reset filters</button>
+          <button onClick={() => { setCity('All Cities'); setFormat('All Formats'); setQuery(''); }} className="mt-3 text-[#F05535] font-bold text-sm">Reset filters</button>
         </div>
       )}
     </div>

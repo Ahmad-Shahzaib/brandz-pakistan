@@ -25,7 +25,7 @@ export const CareersExplorer: React.FC = () => {
             key={d}
             onClick={() => setDept(d)}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-colors ${
-              dept === d ? 'bg-[#67C63C] text-[#032316] border-[#67C63C]' : 'bg-white text-[#1A1818] border-gray-200 hover:border-[#67C63C]'
+              dept === d ? 'bg-[#F05535] text-[#292A2D] border-[#F05535]' : 'bg-white text-[#343538] border-gray-200 hover:border-[#F05535]'
             }`}
           >
             {d}
@@ -35,23 +35,23 @@ export const CareersExplorer: React.FC = () => {
 
       <div className="space-y-3">
         {filtered.map((job) => (
-          <div key={job.id} className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#67C63C]/50 transition-colors">
+          <div key={job.id} className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-[#F05535]/50 transition-colors">
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h3 className="font-heading font-extrabold text-lg text-[#1A1818]">{job.title}</h3>
-                <span className="text-[10px] font-bold text-[#0E3B2A] bg-[#EAF7E4] px-2 py-0.5 rounded-full">{job.department}</span>
+                <h3 className="font-heading font-extrabold text-lg text-[#343538]">{job.title}</h3>
+                <span className="text-[10px] font-bold text-[#4A4B4E] bg-[#FFF0EC] px-2 py-0.5 rounded-full">{job.department}</span>
               </div>
-              <p className="text-sm text-[#6B655C] mt-1">{job.summary}</p>
-              <div className="mt-2 flex items-center gap-4 text-xs text-[#6B655C]">
-                <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#2C7A35]" />{job.location}</span>
-                <span className="flex items-center gap-1"><Briefcase className="w-3.5 h-3.5 text-[#2C7A35]" />{job.type}</span>
+              <p className="text-sm text-[#717275] mt-1">{job.summary}</p>
+              <div className="mt-2 flex items-center gap-4 text-xs text-[#717275]">
+                <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#D34518]" />{job.location}</span>
+                <span className="flex items-center gap-1"><Briefcase className="w-3.5 h-3.5 text-[#D34518]" />{job.type}</span>
               </div>
             </div>
             <button
               onClick={() => { setActive(job); setApplied(false); }}
-              className="shrink-0 flex items-center gap-1.5 bg-[#1A1818] hover:bg-black text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors cursor-pointer"
+              className="shrink-0 flex items-center gap-1.5 bg-[#343538] hover:bg-black text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-colors cursor-pointer"
             >
-              View & Apply <ChevronRight className="w-4 h-4 text-[#FFC700]" />
+              View & Apply <ChevronRight className="w-4 h-4 text-[#F6A18F]" />
             </button>
           </div>
         ))}
@@ -68,39 +68,39 @@ export const CareersExplorer: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
-              <div className="bg-[#1A1818] text-white p-6 relative">
+              <div className="bg-[#343538] text-white p-6 relative">
                 <button onClick={() => setActive(null)} className="absolute top-5 right-5 text-white/80 hover:text-white bg-white/10 p-2 rounded-full transition-colors cursor-pointer">
                   <X className="w-5 h-5" />
                 </button>
-                <span className="text-[#FFC700] text-xs font-bold uppercase tracking-widest">{active.department} · {active.type}</span>
+                <span className="text-[#F6A18F] text-xs font-bold uppercase tracking-widest">{active.department} · {active.type}</span>
                 <h3 className="font-heading font-extrabold text-2xl mt-1">{active.title}</h3>
-                <p className="text-sm text-gray-300 mt-1 flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#FFC700]" />{active.location}</p>
+                <p className="text-sm text-gray-300 mt-1 flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-[#F6A18F]" />{active.location}</p>
               </div>
               <div className="p-6">
                 {applied ? (
                   <div className="text-center py-8 space-y-3">
-                    <div className="w-16 h-16 bg-[#EAF7E4] text-[#2C7A35] rounded-full flex items-center justify-center mx-auto">
+                    <div className="w-16 h-16 bg-[#FFF0EC] text-[#D34518] rounded-full flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
-                    <h4 className="font-heading font-bold text-xl text-[#1A1818]">Application Received</h4>
-                    <p className="text-sm text-[#6B655C]">Thank you for applying. Our HR team will review your profile and reach out if there's a match.</p>
-                    <button onClick={() => setActive(null)} className="bg-[#67C63C] text-[#032316] font-bold px-6 py-2.5 rounded-xl text-sm cursor-pointer">Done</button>
+                    <h4 className="font-heading font-bold text-xl text-[#343538]">Application Received</h4>
+                    <p className="text-sm text-[#717275]">Thank you for applying. Our HR team will review your profile and reach out if there's a match.</p>
+                    <button onClick={() => setActive(null)} className="bg-[#F05535] text-[#292A2D] font-bold px-6 py-2.5 rounded-xl text-sm cursor-pointer">Done</button>
                   </div>
                 ) : (
                   <form onSubmit={(e) => { e.preventDefault(); setApplied(true); }} className="space-y-4">
-                    <p className="text-sm text-[#6B655C]">{active.summary}</p>
+                    <p className="text-sm text-[#717275]">{active.summary}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <input required placeholder="Full name *" className="w-full bg-[#FAF8F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#67C63C]" />
-                      <input required type="email" placeholder="Email *" className="w-full bg-[#FAF8F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#67C63C]" />
+                      <input required placeholder="Full name *" className="w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]" />
+                      <input required type="email" placeholder="Email *" className="w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]" />
                     </div>
-                    <input required placeholder="Phone / WhatsApp *" className="w-full bg-[#FAF8F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#67C63C]" />
-                    <textarea rows={3} placeholder="Why are you a great fit?" className="w-full bg-[#FAF8F7] text-sm p-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#67C63C]" />
-                    <label className="flex items-center gap-2 text-sm text-[#6B655C] border-2 border-dashed border-gray-300 rounded-xl p-3 cursor-pointer hover:border-[#67C63C] transition-colors">
-                      <Upload className="w-4 h-4 text-[#2C7A35]" />
+                    <input required placeholder="Phone / WhatsApp *" className="w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]" />
+                    <textarea rows={3} placeholder="Why are you a great fit?" className="w-full bg-[#F7F7F7] text-sm p-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]" />
+                    <label className="flex items-center gap-2 text-sm text-[#717275] border-2 border-dashed border-gray-300 rounded-xl p-3 cursor-pointer hover:border-[#F05535] transition-colors">
+                      <Upload className="w-4 h-4 text-[#D34518]" />
                       <span>Attach CV (PDF) — upload wiring ready for backend</span>
                       <input type="file" accept=".pdf,.doc,.docx" className="hidden" />
                     </label>
-                    <button type="submit" className="w-full bg-[#67C63C] hover:bg-[#88D961] text-[#032316] font-bold py-3 rounded-xl text-sm transition-all cursor-pointer">Submit Application</button>
+                    <button type="submit" className="w-full bg-[#F05535] hover:bg-[#D34518] text-[#292A2D] font-bold py-3 rounded-xl text-sm transition-all cursor-pointer">Submit Application</button>
                   </form>
                 )}
               </div>

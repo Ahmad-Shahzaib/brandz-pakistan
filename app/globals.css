@@ -5,19 +5,19 @@
   --font-sans: var(--font-karla), 'Karla', sans-serif;
   --font-script: var(--font-caveat), 'Caveat', cursive;
 
-  --color-brand-red: #E51821;
-  --color-brand-red-dark: #B80F16;
-  --color-brand-red-light: #FFF0F1;
-  
-  --color-brand-yellow: #FFC700;
-  --color-brand-yellow-light: #FFF9E6;
+  --color-brand-primary: #F05535;
+  --color-brand-primary-dark: #D34518;
+  --color-brand-primary-light: #FFF0EC;
 
-  --color-brand-orange: #F0821B;
-  --color-brand-orange-light: #FDF2E9;
+  --color-brand-gray: #717275;
+  --color-brand-gray-dark: #343538;
+  --color-brand-gray-light: #F7F7F7;
 
-  --color-charcoal: #1A1818;
-  --color-warm-gray: #6B655C;
-  --color-light-bg: #FAF8F7;
+  --color-brand-accent-soft: #F6A18F;
+
+  --color-charcoal: #343538;
+  --color-warm-gray: #717275;
+  --color-light-bg: #F7F7F7;
 }
 
 @layer utilities {
@@ -39,16 +39,16 @@
 }
 
 @layer components {
-  .eyebrow { @apply mb-5 text-xs font-bold uppercase tracking-[.18em] text-[#2563EB]; }
-  .section-title { @apply font-heading text-3xl font-bold leading-[1.12] tracking-[-.025em] text-[#0F172A] sm:text-5xl; }
-  .brand-card { @apply rounded-xl border border-[#DCE3EA] bg-white p-6 transition duration-300 hover:border-[#1D5D9B] hover:shadow-lg hover:shadow-[#102A43]/5; }
+  .eyebrow { @apply mb-5 text-xs font-bold uppercase tracking-[.18em] text-[#F05535]; }
+  .section-title { @apply font-heading text-3xl font-bold leading-[1.12] tracking-[-.025em] text-[#343538] sm:text-5xl; }
+  .brand-card { @apply rounded-xl border border-[#E3E3E4] bg-white p-6 transition duration-300 hover:border-[#F05535] hover:shadow-lg hover:shadow-[#343538]/5; }
   .brand-mark { @apply grid h-16 w-16 place-items-center rounded-2xl font-heading text-xl font-extrabold; }
 }
 
 @layer base {
   html, body { overflow-x: clip; }
   body { letter-spacing: -0.01em; }
-  a, button { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2; }
+  a, button { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05535] focus-visible:ring-offset-2; }
 }
 
 /* One-time section reveals are assigned by ScrollReveal, with a different motion

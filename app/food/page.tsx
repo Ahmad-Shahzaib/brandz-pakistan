@@ -24,16 +24,16 @@ export default function FoodPage() {
         image={HERO_IMAGE}
         title={
           <>
-            The Taste <span className="text-[#FFC700]">Behind the Brand</span>
+            The Taste <span className="text-[#F6A18F]">Behind the Brand</span>
           </>
         }
         description="Even as a corporate brand, our food is everything. Freshly prepared, generously portioned, and built on recipes people come back for."
       >
         <a
           href="https://frichiks.pk"
-          className="inline-flex items-center gap-2 bg-[#E51821] hover:bg-[#B80F16] text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all"
+          className="inline-flex items-center gap-2 bg-[#F05535] hover:bg-[#D34518] text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all"
         >
-          <Utensils className="w-4 h-4 text-[#FFC700]" />
+          <Utensils className="w-4 h-4 text-[#F6A18F]" />
           Explore Full Menu & Order
         </a>
       </PageHero>
@@ -54,7 +54,7 @@ export default function FoodPage() {
       <BrandStory />
 
       {/* Full category list */}
-      <section className="py-20 bg-[#FAF8F7]">
+      <section className="py-20 bg-[#F7F7F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="The Full Range" title="Something for Every Craving" align="left" />
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -64,14 +64,14 @@ export default function FoodPage() {
                   <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
                 </div>
                 <div className="p-5">
-                  <h3 className="font-heading font-extrabold text-lg text-[#1A1818]">{cat.name}</h3>
-                  <p className="text-sm text-[#6B655C] mt-1.5 leading-relaxed">{cat.description}</p>
+                  <h3 className="font-heading font-extrabold text-lg text-[#343538]">{cat.name}</h3>
+                  <p className="text-sm text-[#717275] mt-1.5 leading-relaxed">{cat.description}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-10 text-center">
-            <Link href="/franchise" className="inline-flex items-center gap-2 text-[#E51821] font-bold hover:gap-3 transition-all">
+            <Link href="/franchise" className="inline-flex items-center gap-2 text-[#F05535] font-bold hover:gap-3 transition-all">
               See how this menu powers a franchise business
               <ArrowRight className="w-4 h-4" />
             </Link>

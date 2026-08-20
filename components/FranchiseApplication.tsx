@@ -64,8 +64,8 @@ const steps = [
 ];
 
 const inputClass =
-  'w-full bg-[#FAF8F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E51821] transition';
-const labelClass = 'block text-xs font-bold text-[#1A1818] mb-1.5';
+  'w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535] transition';
+const labelClass = 'block text-xs font-bold text-[#343538] mb-1.5';
 
 const Field: React.FC<{ label: string; children: React.ReactNode; full?: boolean }> = ({ label, children }) => (
   <div>
@@ -114,19 +114,19 @@ export const FranchiseApplication: React.FC = () => {
   if (submitted) {
     return (
       <div className="max-w-2xl mx-auto text-center bg-white rounded-3xl border border-gray-200/80 shadow-xl p-10">
-        <div className="w-20 h-20 bg-[#FFF0F1] text-[#E51821] rounded-full flex items-center justify-center mx-auto">
+        <div className="w-20 h-20 bg-[#FFF0EC] text-[#F05535] rounded-full flex items-center justify-center mx-auto">
           <CheckCircle2 className="w-12 h-12" />
         </div>
-        <h2 className="font-heading font-extrabold text-3xl text-[#1A1818] mt-6">
+        <h2 className="font-heading font-extrabold text-3xl text-[#343538] mt-6">
           Thank You for Your Interest in Fri-Chiks ®
         </h2>
-        <p className="text-[#6B655C] mt-3 leading-relaxed">
-          Your application has been received. Our franchise development team will review your submission and reach out to <strong className="text-[#1A1818]">{data.email}</strong> to discuss the next steps.
+        <p className="text-[#717275] mt-3 leading-relaxed">
+          Your application has been received. Our franchise development team will review your submission and reach out to <strong className="text-[#343538]">{data.email}</strong> to discuss the next steps.
         </p>
         <div className="mt-8 flex flex-wrap gap-3 justify-center">
-          <Link href="/our-story" className="bg-[#E51821] hover:bg-[#B80F16] text-white px-5 py-3 rounded-xl font-bold text-sm transition-all">Explore Our Story</Link>
-          <Link href="/restaurants" className="bg-[#FAF8F7] border border-gray-200 text-[#1A1818] px-5 py-3 rounded-xl font-bold text-sm transition-all">View Restaurants</Link>
-          <Link href="/" className="bg-[#FAF8F7] border border-gray-200 text-[#1A1818] px-5 py-3 rounded-xl font-bold text-sm transition-all">Return Home</Link>
+          <Link href="/our-story" className="bg-[#F05535] hover:bg-[#D34518] text-white px-5 py-3 rounded-xl font-bold text-sm transition-all">Explore Our Story</Link>
+          <Link href="/restaurants" className="bg-[#F7F7F7] border border-gray-200 text-[#343538] px-5 py-3 rounded-xl font-bold text-sm transition-all">View Restaurants</Link>
+          <Link href="/" className="bg-[#F7F7F7] border border-gray-200 text-[#343538] px-5 py-3 rounded-xl font-bold text-sm transition-all">Return Home</Link>
         </div>
       </div>
     );
@@ -139,11 +139,11 @@ export const FranchiseApplication: React.FC = () => {
       {/* Progress */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-sm font-bold text-[#1A1818]">Step {step + 1} of {steps.length}</span>
-          <span className="text-sm text-[#6B655C]">{steps[step].label}</span>
+          <span className="text-sm font-bold text-[#343538]">Step {step + 1} of {steps.length}</span>
+          <span className="text-sm text-[#717275]">{steps[step].label}</span>
         </div>
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-          <motion.div className="h-full bg-[#E51821] rounded-full" animate={{ width: `${progress}%` }} transition={{ duration: 0.4 }} />
+          <motion.div className="h-full bg-[#F05535] rounded-full" animate={{ width: `${progress}%` }} transition={{ duration: 0.4 }} />
         </div>
         <div className="mt-4 hidden sm:flex items-center justify-between">
           {steps.map((s) => {
@@ -152,10 +152,10 @@ export const FranchiseApplication: React.FC = () => {
             const current = s.id === step;
             return (
               <div key={s.id} className="flex flex-col items-center gap-1 flex-1">
-                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs transition-colors ${current ? 'bg-[#E51821] text-white' : done ? 'bg-[#FFC700] text-[#1A1818]' : 'bg-gray-200 text-gray-500'}`}>
+                <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs transition-colors ${current ? 'bg-[#F05535] text-white' : done ? 'bg-[#F6A18F] text-[#343538]' : 'bg-gray-200 text-gray-500'}`}>
                   <Icon className="w-4 h-4" />
                 </div>
-                <span className={`text-[10px] font-semibold ${current ? 'text-[#E51821]' : 'text-[#6B655C]'}`}>{s.label}</span>
+                <span className={`text-[10px] font-semibold ${current ? 'text-[#F05535]' : 'text-[#717275]'}`}>{s.label}</span>
               </div>
             );
           })}
@@ -173,7 +173,7 @@ export const FranchiseApplication: React.FC = () => {
           >
             {step === 0 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Personal Details</h3>
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Personal Details</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Full Name *"><input className={inputClass} value={data.fullName} onChange={(e) => set('fullName', e.target.value)} placeholder="e.g. Ali Raza" /></Field>
                   <Field label="Email Address *"><input type="email" className={inputClass} value={data.email} onChange={(e) => set('email', e.target.value)} placeholder="ali@example.pk" /></Field>
@@ -186,7 +186,7 @@ export const FranchiseApplication: React.FC = () => {
 
             {step === 1 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Business Experience</h3>
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Business Experience</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Current Occupation"><input className={inputClass} value={data.occupation} onChange={(e) => set('occupation', e.target.value)} /></Field>
                   <Field label="Company / Organisation"><input className={inputClass} value={data.company} onChange={(e) => set('company', e.target.value)} /></Field>
@@ -206,7 +206,7 @@ export const FranchiseApplication: React.FC = () => {
 
             {step === 2 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Franchise Interest</h3>
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Franchise Interest</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Preferred City / Territory"><input className={inputClass} value={data.preferredCity} onChange={(e) => set('preferredCity', e.target.value)} placeholder="e.g. Multan" /></Field>
                   <Field label="Preferred Restaurant Format">
@@ -230,7 +230,7 @@ export const FranchiseApplication: React.FC = () => {
 
             {step === 3 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Financial Profile</h3>
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Financial Profile</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Available Investment Range">
                     <select className={inputClass} value={data.investmentRange} onChange={(e) => set('investmentRange', e.target.value)}>
@@ -243,7 +243,7 @@ export const FranchiseApplication: React.FC = () => {
                     </select>
                   </Field>
                 </div>
-                <p className="text-xs text-[#6B655C] bg-[#FFF9E6] border border-[#FFC700]/40 rounded-xl p-3">
+                <p className="text-xs text-[#717275] bg-[#FFF5F2] border border-[#F6A18F]/40 rounded-xl p-3">
                   We never ask for banking credentials or account numbers. Verified investment details are shared after initial screening.
                 </p>
               </div>
@@ -251,7 +251,7 @@ export const FranchiseApplication: React.FC = () => {
 
             {step === 4 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Property</h3>
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Property</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Do You Already Have a Location?">
                     <select className={inputClass} value={data.hasLocation} onChange={(e) => set('hasLocation', e.target.value)}>
@@ -266,7 +266,7 @@ export const FranchiseApplication: React.FC = () => {
 
             {step === 5 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Final Questions</h3>
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Final Questions</h3>
                 <Field label="Why Fri-Chiks ®?">
                   <textarea rows={3} className={inputClass} value={data.whyFrichiks} onChange={(e) => set('whyFrichiks', e.target.value)} placeholder="Tell us what draws you to the brand…" />
                 </Field>
@@ -285,8 +285,8 @@ export const FranchiseApplication: React.FC = () => {
 
             {step === 6 && (
               <div className="space-y-4">
-                <h3 className="font-heading font-extrabold text-xl text-[#1A1818]">Review Your Application</h3>
-                <div className="bg-[#FAF8F7] rounded-2xl p-5 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                <h3 className="font-heading font-extrabold text-xl text-[#343538]">Review Your Application</h3>
+                <div className="bg-[#F7F7F7] rounded-2xl p-5 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm">
                   {([
                     ['Name', data.fullName], ['Email', data.email], ['Phone', data.phone], ['City', data.city],
                     ['Occupation', data.occupation], ['Business Exp.', data.businessExp], ['Restaurant Exp.', data.restaurantExp],
@@ -295,17 +295,17 @@ export const FranchiseApplication: React.FC = () => {
                     ['Has Location', data.hasLocation],
                   ] as [string, string][]).map(([k, v]) => (
                     <div key={k} className="flex justify-between gap-3 border-b border-gray-200/70 py-1">
-                      <span className="text-[#6B655C]">{k}</span>
-                      <span className="font-semibold text-[#1A1818] text-right">{v || '—'}</span>
+                      <span className="text-[#717275]">{k}</span>
+                      <span className="font-semibold text-[#343538] text-right">{v || '—'}</span>
                     </div>
                   ))}
                 </div>
-                <label className="flex items-start gap-2.5 text-sm text-[#1A1818] cursor-pointer">
-                  <input type="checkbox" checked={data.accurate} onChange={(e) => set('accurate', e.target.checked)} className="mt-1 accent-[#E51821]" />
+                <label className="flex items-start gap-2.5 text-sm text-[#343538] cursor-pointer">
+                  <input type="checkbox" checked={data.accurate} onChange={(e) => set('accurate', e.target.checked)} className="mt-1 accent-[#F05535]" />
                   <span>I confirm that the information provided is accurate.</span>
                 </label>
-                <label className="flex items-start gap-2.5 text-sm text-[#1A1818] cursor-pointer">
-                  <input type="checkbox" checked={data.consent} onChange={(e) => set('consent', e.target.checked)} className="mt-1 accent-[#E51821]" />
+                <label className="flex items-start gap-2.5 text-sm text-[#343538] cursor-pointer">
+                  <input type="checkbox" checked={data.consent} onChange={(e) => set('consent', e.target.checked)} className="mt-1 accent-[#F05535]" />
                   <span>I consent to Fri-Chiks ® processing my details to respond to this application.</span>
                 </label>
               </div>
@@ -313,25 +313,25 @@ export const FranchiseApplication: React.FC = () => {
           </motion.div>
         </AnimatePresence>
 
-        {error && <p className="mt-4 text-sm text-[#E51821] font-semibold">{error}</p>}
+        {error && <p className="mt-4 text-sm text-[#F05535] font-semibold">{error}</p>}
 
         {/* Controls */}
         <div className="mt-8 flex items-center justify-between">
           <button
             onClick={back}
             disabled={step === 0}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-sm border border-gray-200 text-[#1A1818] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-sm border border-gray-200 text-[#343538] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors cursor-pointer"
           >
             <ChevronLeft className="w-4 h-4" /> Back
           </button>
 
           {step < steps.length - 1 ? (
-            <button onClick={next} className="flex items-center gap-1.5 bg-[#E51821] hover:bg-[#B80F16] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
-              Continue <ChevronRight className="w-4 h-4 text-[#FFC700]" />
+            <button onClick={next} className="flex items-center gap-1.5 bg-[#F05535] hover:bg-[#D34518] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
+              Continue <ChevronRight className="w-4 h-4 text-[#F6A18F]" />
             </button>
           ) : (
-            <button onClick={submit} className="flex items-center gap-2 bg-[#E51821] hover:bg-[#B80F16] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
-              <Send className="w-4 h-4 text-[#FFC700]" /> Submit Application
+            <button onClick={submit} className="flex items-center gap-2 bg-[#F05535] hover:bg-[#D34518] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
+              <Send className="w-4 h-4 text-[#F6A18F]" /> Submit Application
             </button>
           )}
         </div>

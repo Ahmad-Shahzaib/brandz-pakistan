@@ -23,7 +23,7 @@ export interface CoreValue {
   iconName: string;
   title: string;
   description: string;
-  accentColor: 'green' | 'yellow' | 'orange';
+  accentColor: 'coral' | 'gray' | 'charcoal';
 }
 
 export interface StatItem {

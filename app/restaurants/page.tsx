@@ -19,12 +19,12 @@ export default function RestaurantsPage() {
         image={STOREFRONT_IMAGE}
         title={
           <>
-            Growing One <span className="text-[#FFC700]">Restaurant at a Time</span>
+            Growing One <span className="text-[#F6A18F]">Restaurant at a Time</span>
           </>
         }
         description="45+ outlets and counting across Pakistan's major cities. Find your nearest Fri-Chiks ® and see the formats we operate."
       />
-      <section className="py-16 sm:py-20 bg-[#FAF8F7]">
+      <section className="py-16 sm:py-20 bg-[#F7F7F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <RestaurantExplorer />
         </div>

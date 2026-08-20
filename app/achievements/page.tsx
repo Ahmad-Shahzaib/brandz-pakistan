@@ -21,7 +21,7 @@ export default function AchievementsPage() {
         image={AWARD_IMAGE}
         title={
           <>
-            Two Decades of <span className="text-[#FFC700]">Milestones</span>
+            Two Decades of <span className="text-[#F6A18F]">Milestones</span>
           </>
         }
         description="Recognised by food-safety guilds, franchise associations and — most importantly — millions of customers across Pakistan."
@@ -33,10 +33,10 @@ export default function AchievementsPage() {
           <SectionHeader eyebrow="By the Numbers" title="Growth You Can Measure" />
           <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-6">
             {STATS_DATA.map((stat) => (
-              <div key={stat.id} className="bg-[#FAF8F7] rounded-2xl p-6 border border-gray-200/80 text-center">
-                <div className="font-heading font-extrabold text-4xl text-[#E51821]">{stat.prefix}{stat.value}{stat.suffix}</div>
-                <div className="font-bold text-sm text-[#1A1818] mt-1">{stat.label}</div>
-                <p className="text-xs text-[#6B655C] mt-0.5">{stat.subtext}</p>
+              <div key={stat.id} className="bg-[#F7F7F7] rounded-2xl p-6 border border-gray-200/80 text-center">
+                <div className="font-heading font-extrabold text-4xl text-[#F05535]">{stat.prefix}{stat.value}{stat.suffix}</div>
+                <div className="font-bold text-sm text-[#343538] mt-1">{stat.label}</div>
+                <p className="text-xs text-[#717275] mt-0.5">{stat.subtext}</p>
               </div>
             ))}
           </div>

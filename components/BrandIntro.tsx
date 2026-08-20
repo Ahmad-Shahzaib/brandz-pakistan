@@ -9,7 +9,7 @@ import { useModals } from './SiteChrome';
 export const BrandIntro: React.FC = () => {
   const { openFranchiseModal } = useModals();
   return (
-    <section id="brand-intro" className="py-20 bg-[#FAF8F7] overflow-hidden">
+    <section id="brand-intro" className="py-20 bg-[#F7F7F7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
@@ -23,7 +23,7 @@ export const BrandIntro: React.FC = () => {
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Outer Decorative Accent Frame */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-[#E51821]/20 via-[#FFC700]/20 to-[#E51821]/10 rounded-3xl transform -rotate-2 blur-sm" />
+              <div className="absolute -inset-4 bg-gradient-to-tr from-[#F05535]/20 via-[#F6A18F]/20 to-[#F05535]/10 rounded-3xl transform -rotate-2 blur-sm" />
 
               {/* Main Storefront Image */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white">
@@ -38,27 +38,27 @@ export const BrandIntro: React.FC = () => {
                 {/* Overlaid Store Badge */}
                 <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-lg flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#E51821] text-white flex items-center justify-center font-bold">
+                    <div className="w-10 h-10 rounded-full bg-[#F05535] text-white flex items-center justify-center font-bold">
                       <Store className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-heading font-bold text-sm text-[#1A1818]">
+                      <h4 className="font-heading font-bold text-sm text-[#343538]">
                         Flagship Outlet - MM Alam Road, Lahore
                       </h4>
-                      <p className="text-xs text-[#6B655C]">
+                      <p className="text-xs text-[#717275]">
                         Modern Dine-In & Express Concept
                       </p>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-[#E51821] bg-[#FFF0F1] px-2.5 py-1 rounded-full border border-[#E51821]/30">
+                  <span className="text-xs font-bold text-[#F05535] bg-[#FFF0EC] px-2.5 py-1 rounded-full border border-[#F05535]/30">
                     Open Daily
                   </span>
                 </div>
               </div>
 
               {/* Floating Stat Pill Top Right */}
-              <div className="absolute -top-6 -right-4 sm:right-2 bg-[#FFC700] text-[#1A1818] px-4 py-2.5 rounded-2xl font-bold text-xs sm:text-sm shadow-xl flex items-center gap-2 border-2 border-white transform rotate-3">
-                <Award className="w-4 h-4 text-[#E51821]" />
+              <div className="absolute -top-6 -right-4 sm:right-2 bg-[#F6A18F] text-[#343538] px-4 py-2.5 rounded-2xl font-bold text-xs sm:text-sm shadow-xl flex items-center gap-2 border-2 border-white transform rotate-3">
+                <Award className="w-4 h-4 text-[#F05535]" />
                 <span>45+ Active Outlets</span>
               </div>
             </div>
@@ -72,20 +72,20 @@ export const BrandIntro: React.FC = () => {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
             className="lg:col-span-6 flex flex-col justify-center"
           >
-            <div className="inline-flex items-center gap-2 text-[#E51821] font-bold text-xs sm:text-sm uppercase tracking-widest bg-[#FFF0F1] px-3.5 py-1.5 rounded-full w-fit mb-3 border border-[#E51821]/20">
-              <span className="w-2 h-2 rounded-full bg-[#E51821] animate-ping" />
+            <div className="inline-flex items-center gap-2 text-[#F05535] font-bold text-xs sm:text-sm uppercase tracking-widest bg-[#FFF0EC] px-3.5 py-1.5 rounded-full w-fit mb-3 border border-[#F05535]/20">
+              <span className="w-2 h-2 rounded-full bg-[#F05535] animate-ping" />
               <span>Fri-Chiks ® Brand Overview</span>
             </div>
 
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1A1818] tracking-tight leading-tight">
-              Lahore's Premier <span className="text-[#E51821] relative">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#343538] tracking-tight leading-tight">
+              Lahore's Premier <span className="text-[#F05535] relative">
                 Crispy Fried Chicken
               </span> Chain
             </h2>
 
-            <div className="mt-6 space-y-4 text-base sm:text-lg text-[#6B655C] leading-relaxed">
+            <div className="mt-6 space-y-4 text-base sm:text-lg text-[#717275] leading-relaxed">
               <p>
-                Founded in 2002 in Lahore, <strong className="text-[#1A1818]">Fri-Chiks ®</strong> started with a passionate mission: delivering supreme golden crunch, proprietary spice marinades, and affordable family meals under our famous tagline <strong className="text-[#E51821]">"Something Different!"</strong>.
+                Founded in 2002 in Lahore, <strong className="text-[#343538]">Fri-Chiks ®</strong> started with a passionate mission: delivering supreme golden crunch, proprietary spice marinades, and affordable family meals under our famous tagline <strong className="text-[#F05535]">"Something Different!"</strong>.
               </p>
               <p>
                 What began as a pioneer fast-food kitchen in Lahore has rapidly expanded into a robust 45+ outlet network across Gulberg, Johar Town, DHA, Model Town, Gujranwala, Faisalabad, and Islamabad. By combining standardized kitchen SOPs with central processing intelligence, we empower franchise partners to achieve predictable, sustainable growth.
@@ -93,21 +93,21 @@ export const BrandIntro: React.FC = () => {
             </div>
 
             {/* Value Checkmarks */}
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-semibold text-[#1A1818]">
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-semibold text-[#343538]">
               <div className="flex items-center gap-2.5 bg-white p-3 rounded-xl border border-gray-200/80 shadow-xs">
-                <CheckCircle2 className="w-5 h-5 text-[#E51821] shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#F05535] shrink-0" />
                 <span>100% Halal & PFA A+ Certified</span>
               </div>
               <div className="flex items-center gap-2.5 bg-white p-3 rounded-xl border border-gray-200/80 shadow-xs">
-                <CheckCircle2 className="w-5 h-5 text-[#E51821] shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#F05535] shrink-0" />
                 <span>Proprietary 12-Spice Coating</span>
               </div>
               <div className="flex items-center gap-2.5 bg-white p-3 rounded-xl border border-gray-200/80 shadow-xs">
-                <CheckCircle2 className="w-5 h-5 text-[#E51821] shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#F05535] shrink-0" />
                 <span>Zero Franchisee Store Closures</span>
               </div>
               <div className="flex items-center gap-2.5 bg-white p-3 rounded-xl border border-gray-200/80 shadow-xs">
-                <CheckCircle2 className="w-5 h-5 text-[#E51821] shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[#F05535] shrink-0" />
                 <span>Turnkey Central Supply Logistics</span>
               </div>
             </div>
@@ -116,10 +116,10 @@ export const BrandIntro: React.FC = () => {
             <div className="mt-8 flex items-center gap-4">
               <button
                 onClick={openFranchiseModal}
-                className="bg-[#E51821] hover:bg-[#B80F16] text-white px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base shadow-md shadow-red-900/20 hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
+                className="bg-[#F05535] hover:bg-[#D34518] text-white px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base shadow-md shadow-red-900/20 hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>Partner With Us</span>
-                <ArrowRight className="w-4 h-4 text-[#FFC700]" />
+                <ArrowRight className="w-4 h-4 text-[#F6A18F]" />
               </button>
             </div>
           </motion.div>
@@ -136,13 +136,13 @@ export const BrandIntro: React.FC = () => {
         >
           {STATS_DATA.map((stat, idx) => (
             <div key={stat.id} className={`p-4 ${idx !== STATS_DATA.length - 1 ? 'lg:border-r lg:border-gray-100' : ''}`}>
-              <div className="font-heading font-extrabold text-3xl sm:text-4xl text-[#E51821]">
+              <div className="font-heading font-extrabold text-3xl sm:text-4xl text-[#F05535]">
                 {stat.prefix}{stat.value}{stat.suffix}
               </div>
-              <div className="font-bold text-sm sm:text-base text-[#1A1818] mt-1">
+              <div className="font-bold text-sm sm:text-base text-[#343538] mt-1">
                 {stat.label}
               </div>
-              <p className="text-xs text-[#6B655C] mt-0.5">
+              <p className="text-xs text-[#717275] mt-0.5">
                 {stat.subtext}
               </p>
             </div>

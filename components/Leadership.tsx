@@ -8,7 +8,7 @@ import { LEADERSHIP } from '../data/siteData';
 
 export const Leadership: React.FC = () => {
   return (
-    <section className="py-20 bg-[#FAF8F7] overflow-hidden">
+    <section className="py-20 bg-[#F7F7F7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Leadership"
@@ -33,9 +33,9 @@ export const Leadership: React.FC = () => {
                 </a>
               </div>
               <div className="p-5">
-                <h3 className="font-heading font-extrabold text-lg text-[#1A1818]">{m.name}</h3>
-                <p className="text-[#E51821] font-bold text-xs uppercase tracking-wide mt-0.5">{m.role}</p>
-                <p className="text-sm text-[#6B655C] mt-2 leading-relaxed">{m.bio}</p>
+                <h3 className="font-heading font-extrabold text-lg text-[#343538]">{m.name}</h3>
+                <p className="text-[#F05535] font-bold text-xs uppercase tracking-wide mt-0.5">{m.role}</p>
+                <p className="text-sm text-[#717275] mt-2 leading-relaxed">{m.bio}</p>
               </div>
             </motion.div>
           ))}

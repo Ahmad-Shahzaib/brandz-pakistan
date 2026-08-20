@@ -23,38 +23,38 @@ export const ClosingCTA: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-6"
           >
-            <div className="inline-flex items-center gap-2 text-[#E51821] font-bold text-xs uppercase tracking-widest bg-[#FFF0F1] px-3.5 py-1.5 rounded-full mb-3 border border-[#E51821]/20">
+            <div className="inline-flex items-center gap-2 text-[#F05535] font-bold text-xs uppercase tracking-widest bg-[#FFF0EC] px-3.5 py-1.5 rounded-full mb-3 border border-[#F05535]/20">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Shape the Future of QSR</span>
             </div>
 
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1A1818] tracking-tight leading-tight">
-              Be Part of <span className="text-[#E51821]">Fri-Chiks ®</span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#343538] tracking-tight leading-tight">
+              Be Part of <span className="text-[#F05535]">Fri-Chiks ®</span>
             </h2>
 
-            <p className="mt-5 text-base sm:text-lg text-[#6B655C] leading-relaxed">
+            <p className="mt-5 text-base sm:text-lg text-[#717275] leading-relaxed">
               Whether you are an experienced restaurant operator or an ambitious entrepreneur seeking a high-growth quick service restaurant franchise, our corporate team is ready to welcome you.
             </p>
 
-            <p className="mt-3 text-sm text-[#6B655C]">
+            <p className="mt-3 text-sm text-[#717275]">
               Join our rapidly growing network of 45+ outlets as we expand into prime commercial hubs across Lahore, Faisalabad, Gujranwala, Islamabad, and nationwide.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <button
                 onClick={onOpenFranchiseModal}
-                className="bg-[#E51821] hover:bg-[#B80F16] text-white px-7 py-4 rounded-xl font-bold text-base shadow-lg shadow-red-900/20 hover:shadow-xl transition-all flex items-center gap-2 cursor-pointer"
+                className="bg-[#F05535] hover:bg-[#D34518] text-white px-7 py-4 rounded-xl font-bold text-base shadow-lg shadow-red-900/20 hover:shadow-xl transition-all flex items-center gap-2 cursor-pointer"
               >
-                <Building2 className="w-5 h-5 text-[#FFC700]" />
+                <Building2 className="w-5 h-5 text-[#F6A18F]" />
                 <span>Franchise Opportunities</span>
-                <ArrowRight className="w-4 h-4 text-[#FFC700]" />
+                <ArrowRight className="w-4 h-4 text-[#F6A18F]" />
               </button>
 
               <button
                 onClick={onOpenFranchiseModal}
-                className="bg-[#FAF8F7] hover:bg-gray-100 text-[#1A1818] border border-gray-300 px-6 py-4 rounded-xl font-bold text-base transition-all flex items-center gap-2 cursor-pointer"
+                className="bg-[#F7F7F7] hover:bg-gray-100 text-[#343538] border border-gray-300 px-6 py-4 rounded-xl font-bold text-base transition-all flex items-center gap-2 cursor-pointer"
               >
-                <PhoneCall className="w-4 h-4 text-[#E51821]" />
+                <PhoneCall className="w-4 h-4 text-[#F05535]" />
                 <span>Speak With Franchising Team</span>
               </button>
             </div>
@@ -78,7 +78,7 @@ export const ClosingCTA: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-black/20" />
-                <span className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded text-[#1A1818]">
+                <span className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded text-[#343538]">
                   Team Spirit
                 </span>
               </div>
@@ -92,7 +92,7 @@ export const ClosingCTA: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-black/20" />
-                <span className="absolute bottom-2 left-2 bg-[#E51821] text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                <span className="absolute bottom-2 left-2 bg-[#F05535] text-white text-[10px] font-bold px-2 py-0.5 rounded">
                   New Outlet Launch
                 </span>
               </div>
@@ -106,7 +106,7 @@ export const ClosingCTA: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-black/20" />
-                <span className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded text-[#1A1818]">
+                <span className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] font-bold px-2 py-0.5 rounded text-[#343538]">
                   Kitchen Excellence
                 </span>
               </div>
@@ -120,7 +120,7 @@ export const ClosingCTA: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-black/20" />
-                <span className="absolute bottom-2 left-2 bg-[#FFC700] text-[#1A1818] text-[10px] font-bold px-2 py-0.5 rounded">
+                <span className="absolute bottom-2 left-2 bg-[#F6A18F] text-[#343538] text-[10px] font-bold px-2 py-0.5 rounded">
                   Gala Recognition
                 </span>
               </div>

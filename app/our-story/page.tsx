@@ -26,7 +26,7 @@ export default function OurStoryPage() {
           <>
             Born From a Love for Great Chicken.
             <br />
-            <span className="text-[#FFC700]">Built for Bigger Ambitions.</span>
+            <span className="text-[#F6A18F]">Built for Bigger Ambitions.</span>
           </>
         }
         description="From a single kitchen in Lahore in 2002 to a 45+ outlet network — a journey powered by consistent taste, standardized systems and franchise partnership."

@@ -26,18 +26,18 @@ export const CoreValues: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-[#E51821] font-extrabold text-xs uppercase tracking-widest bg-[#FFF0F1] px-3.5 py-1.5 rounded-full border border-[#E51821]/20">
+          <span className="text-[#F05535] font-extrabold text-xs uppercase tracking-widest bg-[#FFF0EC] px-3.5 py-1.5 rounded-full border border-[#F05535]/20">
             Brand Pillars
           </span>
 
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1A1818] mt-3">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#343538] mt-3">
             Our <span className="relative inline-block px-1">
               <span className="relative z-10">Core Values</span>
-              <span className="absolute bottom-1.5 left-0 w-full h-3 bg-[#FFC700] z-0 rounded-xs opacity-80" />
+              <span className="absolute bottom-1.5 left-0 w-full h-3 bg-[#F6A18F] z-0 rounded-xs opacity-80" />
             </span> Driving Excellence
           </h2>
 
-          <p className="text-[#6B655C] text-base sm:text-lg mt-3">
+          <p className="text-[#717275] text-base sm:text-lg mt-3">
             The fundamental beliefs that steer our kitchen operations, team culture, and partner relationships.
           </p>
         </div>
@@ -53,26 +53,26 @@ export const CoreValues: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 whileHover={{ y: -6 }}
-                className="bg-[#FAF8F7] p-6 rounded-2xl border border-gray-200/80 shadow-sm transition-all duration-300 hover:border-[#E51821]/50 flex flex-col justify-between"
+                className="bg-[#F7F7F7] p-6 rounded-2xl border border-gray-200/80 shadow-sm transition-all duration-300 hover:border-[#F05535]/50 flex flex-col justify-between"
               >
                 <div>
                   {/* Icon Circle */}
-                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center font-bold mb-5 bg-[#FFF0F1] text-[#E51821]">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center font-bold mb-5 bg-[#FFF0EC] text-[#F05535]">
                     {renderIcon(value.iconName)}
                   </div>
 
-                  <h3 className="font-heading font-extrabold text-lg text-[#1A1818] mb-2 leading-snug">
+                  <h3 className="font-heading font-extrabold text-lg text-[#343538] mb-2 leading-snug">
                     {value.title}
                   </h3>
 
-                  <p className="text-sm text-[#6B655C] leading-relaxed">
+                  <p className="text-sm text-[#717275] leading-relaxed">
                     {value.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-gray-200/60 flex items-center justify-between text-xs font-semibold text-[#6B655C]">
+                <div className="mt-6 pt-4 border-t border-gray-200/60 flex items-center justify-between text-xs font-semibold text-[#717275]">
                   <span>Pillar #{idx + 1}</span>
-                  <span className="text-[#E51821]">Fri-Chiks ® Standard</span>
+                  <span className="text-[#F05535]">Fri-Chiks ® Standard</span>
                 </div>
               </motion.div>
             );

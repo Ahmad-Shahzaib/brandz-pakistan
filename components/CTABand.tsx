@@ -24,7 +24,7 @@ export const CTABand: React.FC<CTABandProps> = ({
 }) => {
   const { openFranchiseModal } = useModals();
   return (
-    <section className="py-16 sm:py-20 bg-[#F8FAF8]">
+    <section className="py-16 sm:py-20 bg-[#F7F7F7]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -35,7 +35,7 @@ export const CTABand: React.FC<CTABandProps> = ({
         >
           <div className="absolute inset-0">
             <img src={image} alt="" aria-hidden className="h-full w-full object-cover" referrerPolicy="no-referrer" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#031B12] via-[#031B12]/85 to-[#0D6B34]/55" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#292A2D] via-[#292A2D]/85 to-[#B93A23]/55" />
           </div>
           <div className="relative z-10 max-w-2xl p-8 sm:p-12 lg:p-16">
             <h2 className="font-heading text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
@@ -45,16 +45,16 @@ export const CTABand: React.FC<CTABandProps> = ({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={primaryHref}
-                className="flex items-center gap-2 rounded-xl bg-[#67C63C] px-7 py-4 text-base font-bold text-[#032316] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#88D961]"
+                className="flex items-center gap-2 rounded-xl bg-[#F05535] px-7 py-4 text-base font-bold text-[#292A2D] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#D34518]"
               >
                 <span>{primaryLabel}</span>
-                <ArrowRight className="h-5 w-5 text-[#032316]" />
+                <ArrowRight className="h-5 w-5 text-[#292A2D]" />
               </Link>
               <button
                 onClick={openFranchiseModal}
                 className="flex cursor-pointer items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20"
               >
-                <PhoneCall className="h-4 w-4 text-[#A7E778]" />
+                <PhoneCall className="h-4 w-4 text-[#F6A18F]" />
                 <span>Talk to Our Franchise Team</span>
               </button>
             </div>

@@ -30,7 +30,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
   children,
 }) => {
   return (
-    <section className="relative bg-[#1A1818] pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden">
+    <section className="relative bg-[#343538] pt-32 pb-16 md:pt-36 md:pb-20 overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-35">
         <img
           src={image}
@@ -39,8 +39,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
           className="w-full h-full object-cover object-center scale-105 brightness-90"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1A1818] via-[#1A1818]/90 to-[#E51821]/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1818] via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#343538] via-[#343538]/90 to-[#F05535]/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#343538] via-transparent to-black/40" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,24 +56,24 @@ export const PageHero: React.FC<PageHeroProps> = ({
               align === 'center' ? 'justify-center' : ''
             }`}
           >
-            <Link href="/" className="flex items-center gap-1 hover:text-[#FFC700] transition-colors">
+            <Link href="/" className="flex items-center gap-1 hover:text-[#F6A18F] transition-colors">
               <Home className="w-3.5 h-3.5" />
             </Link>
             {crumbs.map((c) => (
               <span key={c.label} className="flex items-center gap-1.5">
                 <ChevronRight className="w-3 h-3 text-gray-500" />
                 {c.href ? (
-                  <Link href={c.href} className="hover:text-[#FFC700] transition-colors">
+                  <Link href={c.href} className="hover:text-[#F6A18F] transition-colors">
                     {c.label}
                   </Link>
                 ) : (
-                  <span className="text-[#FFC700] font-semibold">{c.label}</span>
+                  <span className="text-[#F6A18F] font-semibold">{c.label}</span>
                 )}
               </span>
             ))}
           </nav>
 
-          <span className="inline-flex items-center gap-2 bg-[#FFC700] text-[#1A1818] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+          <span className="inline-flex items-center gap-2 bg-[#F6A18F] text-[#343538] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             {eyebrow}
           </span>
 

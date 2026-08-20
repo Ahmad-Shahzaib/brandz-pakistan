@@ -44,28 +44,28 @@ export const CORE_VALUES_DATA: CoreValue[] = [
     iconName: 'ShieldCheck',
     title: 'Uncompromising Taste & Standards',
     description: 'We source only 100% fresh, non-frozen local farm poultry, marinated in our proprietary 12-spice recipe for 24 hours.',
-    accentColor: 'green'
+    accentColor: 'coral'
   },
   {
     id: 'franchise-empowerment',
     iconName: 'TrendingUp',
     title: 'Franchise Success First',
     description: 'We prioritize our franchise partners with end-to-end central kitchen supply, staff SOP training, and site selection in high-footfall areas.',
-    accentColor: 'orange'
+    accentColor: 'charcoal'
   },
   {
     id: '100-halal',
     iconName: 'Award',
     title: '100% Halal & PFA Certified',
     description: 'Strict compliance with Punjab Food Authority (PFA) A+ hygiene standards and SANHA Halal certification across all kitchens.',
-    accentColor: 'yellow'
+    accentColor: 'gray'
   },
   {
     id: 'people-community',
     iconName: 'HeartHandshake',
     title: 'Pakistani Hospitality & Warmth',
     description: 'Bringing families together across Lahore and Pakistan with affordable luxury comfort food, generous portions, and "Something Different!".',
-    accentColor: 'green'
+    accentColor: 'coral'
   }
 ];
 

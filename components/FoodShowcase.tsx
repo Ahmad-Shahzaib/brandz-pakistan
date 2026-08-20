@@ -23,8 +23,8 @@ export const FoodShowcase: React.FC = () => {
         <img src={active.image} alt={active.name} className="absolute inset-0 w-full h-full object-cover" referrerPolicy="no-referrer" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
         <div className="relative z-10 h-full flex flex-col justify-end p-8">
-          <div className="inline-flex items-center gap-1.5 bg-[#FFC700] text-[#1A1818] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider w-fit mb-3">
-            <Flame className="w-3.5 h-3.5 fill-[#1A1818]" />
+          <div className="inline-flex items-center gap-1.5 bg-[#F6A18F] text-[#343538] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider w-fit mb-3">
+            <Flame className="w-3.5 h-3.5 fill-[#343538]" />
             {active.tagline}
           </div>
           <h3 className="font-heading text-3xl sm:text-4xl font-extrabold text-white">{active.name}</h3>
@@ -43,7 +43,7 @@ export const FoodShowcase: React.FC = () => {
               onFocus={() => setActive(cat)}
               onClick={() => setActive(cat)}
               className={`text-left rounded-2xl overflow-hidden border-2 transition-all group ${
-                isActive ? 'border-[#E51821] shadow-lg' : 'border-transparent hover:border-[#FFC700]'
+                isActive ? 'border-[#F05535] shadow-lg' : 'border-transparent hover:border-[#F6A18F]'
               }`}
             >
               <div className="relative h-24 sm:h-28">
@@ -58,10 +58,10 @@ export const FoodShowcase: React.FC = () => {
         })}
         <Link
           href="/food"
-          className="col-span-2 flex items-center justify-center gap-2 bg-[#1A1818] hover:bg-black text-white py-3 rounded-2xl font-bold text-sm transition-colors"
+          className="col-span-2 flex items-center justify-center gap-2 bg-[#343538] hover:bg-black text-white py-3 rounded-2xl font-bold text-sm transition-colors"
         >
           Explore Full Menu
-          <ArrowRight className="w-4 h-4 text-[#FFC700]" />
+          <ArrowRight className="w-4 h-4 text-[#F6A18F]" />
         </Link>
       </div>
     </div>

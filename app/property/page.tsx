@@ -27,7 +27,7 @@ export default function PropertyPage() {
         eyebrow="Property / Site Submission"
         crumbs={[{ label: 'Suggest a Location' }]}
         image={STOREFRONT_IMAGE}
-        title={<>Suggest a <span className="text-[#FFC700]">Location</span></>}
+        title={<>Suggest a <span className="text-[#F6A18F]">Location</span></>}
         description="Property owners and agents can submit potential restaurant sites. Strong locations are a key driver of our expansion."
       />
 
@@ -38,10 +38,10 @@ export default function PropertyPage() {
             {criteria.map((c) => {
               const Icon = c.icon;
               return (
-                <div key={c.title} className="bg-[#FAF8F7] rounded-2xl p-6 border border-gray-200/80">
-                  <div className="w-11 h-11 rounded-xl bg-[#FFF0F1] text-[#E51821] flex items-center justify-center mb-3"><Icon className="w-5 h-5" /></div>
-                  <h3 className="font-heading font-bold text-base text-[#1A1818]">{c.title}</h3>
-                  <p className="text-sm text-[#6B655C] mt-1">{c.text}</p>
+                <div key={c.title} className="bg-[#F7F7F7] rounded-2xl p-6 border border-gray-200/80">
+                  <div className="w-11 h-11 rounded-xl bg-[#FFF0EC] text-[#F05535] flex items-center justify-center mb-3"><Icon className="w-5 h-5" /></div>
+                  <h3 className="font-heading font-bold text-base text-[#343538]">{c.title}</h3>
+                  <p className="text-sm text-[#717275] mt-1">{c.text}</p>
                 </div>
               );
             })}
@@ -49,7 +49,7 @@ export default function PropertyPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-[#FAF8F7]">
+      <section className="py-20 bg-[#F7F7F7]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="Submit Your Site" title="Tell Us About the Property" className="mb-10" />
           <PropertyForm />

@@ -7,7 +7,7 @@ import { Heart, Sparkles } from 'lucide-react';
 
 export const SomethingDifferentStrip: React.FC = () => {
   return (
-    <section className="py-16 bg-[#FFF9E6] border-y border-[#FFC700]/40 overflow-hidden">
+    <section className="py-16 bg-[#FFF5F2] border-y border-[#F6A18F]/40 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Three-part Horizontal Strip */}
@@ -29,7 +29,7 @@ export const SomethingDifferentStrip: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-lg text-xs font-bold text-[#1A1818]">
+              <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-lg text-xs font-bold text-[#343538]">
                 Warm Local Hospitality
               </div>
             </div>
@@ -43,18 +43,18 @@ export const SomethingDifferentStrip: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="md:col-span-4 text-center py-4 md:py-0 px-2"
           >
-            <div className="inline-flex items-center gap-1 text-[#E51821] font-bold text-xs uppercase tracking-widest mb-1">
-              <Sparkles className="w-3.5 h-3.5 fill-[#E51821]" />
+            <div className="inline-flex items-center gap-1 text-[#F05535] font-bold text-xs uppercase tracking-widest mb-1">
+              <Sparkles className="w-3.5 h-3.5 fill-[#F05535]" />
               <span>The Fri-Chiks ® Signature</span>
-              <Sparkles className="w-3.5 h-3.5 fill-[#E51821]" />
+              <Sparkles className="w-3.5 h-3.5 fill-[#F05535]" />
             </div>
 
             {/* Signature Expressive Font Callout */}
-            <h2 className="font-script text-5xl sm:text-6xl lg:text-7xl font-bold text-[#E51821] leading-tight -rotate-2 drop-shadow-xs">
+            <h2 className="font-script text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F05535] leading-tight -rotate-2 drop-shadow-xs">
               "Something Different!"
             </h2>
 
-            <p className="mt-3 text-sm sm:text-base text-[#6B655C] font-medium max-w-sm mx-auto leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-[#717275] font-medium max-w-sm mx-auto leading-relaxed">
               We don't do cookie-cutter fast food. Every batch is freshly marinated in our proprietary 12-spice blend for an unforgettable local flavor profile.
             </p>
           </motion.div>
@@ -75,8 +75,8 @@ export const SomethingDifferentStrip: React.FC = () => {
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              <div className="absolute bottom-3 right-3 bg-[#E51821] text-white px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
-                <Heart className="w-3.5 h-3.5 fill-white text-[#FFC700]" />
+              <div className="absolute bottom-3 right-3 bg-[#F05535] text-white px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                <Heart className="w-3.5 h-3.5 fill-white text-[#F6A18F]" />
                 <span>Made With Passion</span>
               </div>
             </div>
