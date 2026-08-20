@@ -25,7 +25,7 @@ export function Navbar() {
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link href="/" className="group block" aria-label="Brandz Pakistan home">
           <Image
-            src="/assets/logos/BRANDZ%20PAKISTAN%20LOGO.png"
+            src="/assets/logos/brandz-logo.png"
             alt="Brandz Pakistan"
             width={180}
             height={39}
