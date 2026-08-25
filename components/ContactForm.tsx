@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
 import type { InquiryType } from '@/lib/types';
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 
 const defaultInquiryTypes: InquiryType[] = [
   { id: 'general', label: 'General', description: 'General questions and business support.' },

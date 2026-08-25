@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, Briefcase, ChevronRight, X, Upload, CheckCircle2 } from 'lucide-react';
 import type { Job } from '@/lib/types';
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 
 export const CareersExplorer: React.FC<{ jobs: Job[] }> = ({ jobs }) => {
   const [dept, setDept] = useState('All');

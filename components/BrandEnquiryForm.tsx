@@ -23,7 +23,7 @@ interface BrandEnquiryFormProps {
 const inputClass =
   'w-full rounded-xl border border-[#E3E3E4] bg-white px-4 py-3.5 text-sm text-[#343538] outline-none transition placeholder:text-[#9A9A9D] focus:border-[#F05535] focus:ring-4 focus:ring-[#F05535]/10';
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 
 export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }: BrandEnquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);

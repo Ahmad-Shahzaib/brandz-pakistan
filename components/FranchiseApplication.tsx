@@ -66,7 +66,7 @@ const steps = [
 const inputClass =
   'w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535] transition';
 const labelClass = 'block text-xs font-bold text-[#343538] mb-1.5';
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 
 const Field: React.FC<{ label: string; children: React.ReactNode; full?: boolean }> = ({ label, children }) => (
   <div>
