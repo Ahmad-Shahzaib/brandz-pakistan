@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ContactForm } from '../../components/ContactForm';
-import { INTERIOR_IMAGE } from '../../data/corporateData';
+import { getSiteContent } from '@/lib/api';
 import { MapPin, Phone, Mail, Clock, Building2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -11,7 +11,15 @@ export const metadata: Metadata = {
     'Contact Fri-Chiks ® corporate — general, franchise, partnership, property, supplier, media and careers inquiries, plus our headquarters details.',
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const { images, settings, inquiryTypes, pageHeroes } = await getSiteContent();
+  const contact = settings.contact || {};
+  const hero = pageHeroes.contact;
+  const contactText = (key: string, fallback: string) => {
+    const raw = contact[key]?.text ?? contact[key]?.value;
+    return typeof raw === 'string' ? raw : fallback;
+  };
+
   return (
     <main className="bg-[#F7F7F7] text-[#343538]">
       <section className="relative overflow-hidden bg-[#292A2D] pt-20 text-white">
@@ -24,7 +32,7 @@ export default function ContactPage() {
         />
         <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
           <Image
-            src={INTERIOR_IMAGE}
+            src={images.interior}
             alt="Fri-Chiks interior and service environment"
             fill
             priority
@@ -37,14 +45,13 @@ export default function ContactPage() {
         <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
           <div className="max-w-2xl">
             <p className="mb-6 text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">
-              Contact · Fri-Chiks Corporate
+              {hero?.eyebrow || 'Contact · Brandz Pakistan'}
             </p>
             <h1 className="text-5xl font-bold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">
-              Let&apos;s <span className="text-[#F05535]">talk</span>.
+              {hero?.title || <>Let&apos;s <span className="text-[#F05535]">talk</span>.</>}
             </h1>
             <p className="mt-6 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
-              Choose the right inquiry type and reach the right team. For franchise applications,
-              use our dedicated application form.
+              {hero?.description || 'Choose the right inquiry type and reach the right team.'}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -80,15 +87,15 @@ export default function ContactPage() {
               <ul className="space-y-4 text-sm text-[#717275]">
                 <li className="flex items-start gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#D34518]" />
-                  <span>Fri-Chiks Corporate Tower, MM Alam Road, Gulberg III, Lahore, Pakistan</span>
+                  <span>{contactText('address', 'Lahore, Punjab, Pakistan')}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="h-4 w-4 shrink-0 text-[#D34518]" />
-                  <span>+92 (42) 111 374 244</span>
+                  <span>{contactText('phone', '+92 42 111 272 697')}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="h-4 w-4 shrink-0 text-[#D34518]" />
-                  <span>franchise@frichiks.pk</span>
+                  <span>{contactText('email', 'hello@brandz.pk')}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Clock className="h-4 w-4 shrink-0 text-[#D34518]" />
@@ -115,7 +122,7 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <ContactForm />
+            <ContactForm inquiryTypes={inquiryTypes} />
           </div>
         </div>
       </section>

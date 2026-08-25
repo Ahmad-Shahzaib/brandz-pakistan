@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import { ArrowRight, Flame } from 'lucide-react';
-import { FOOD_CATEGORIES } from '../data/siteData';
+import type { FoodCategory } from '@/lib/types';
 
-export const FoodShowcase: React.FC = () => {
-  const featured = FOOD_CATEGORIES.find((c) => c.featured) || FOOD_CATEGORIES[0];
+export const FoodShowcase: React.FC<{ categories: FoodCategory[] }> = ({ categories }) => {
+  const featured = categories.find((c) => c.featured) || categories[0];
   const [active, setActive] = useState(featured);
+
+  if (!active) return null;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -34,7 +36,7 @@ export const FoodShowcase: React.FC = () => {
 
       {/* Category tiles */}
       <div className="lg:col-span-5 grid grid-cols-2 gap-3 content-start">
-        {FOOD_CATEGORIES.map((cat) => {
+        {categories.map((cat) => {
           const isActive = cat.id === active.id;
           return (
             <button

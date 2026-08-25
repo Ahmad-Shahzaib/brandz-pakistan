@@ -66,6 +66,7 @@ const steps = [
 const inputClass =
   'w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535] transition';
 const labelClass = 'block text-xs font-bold text-[#343538] mb-1.5';
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
 
 const Field: React.FC<{ label: string; children: React.ReactNode; full?: boolean }> = ({ label, children }) => (
   <div>
@@ -79,6 +80,7 @@ export const FranchiseApplication: React.FC = () => {
   const [data, setData] = useState<FormState>(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const set = (k: keyof FormState, v: string | boolean) => {
     setData((d) => ({ ...d, [k]: v }));
@@ -105,10 +107,30 @@ export const FranchiseApplication: React.FC = () => {
   };
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
-  const submit = () => {
+  const submit = async () => {
     if (!validateStep()) return;
-    // Placeholder submit — a real backend (POST /api/franchise/applications) plugs in here.
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+    try {
+      const response = await fetch(`${API_BASE}/franchise-applications`, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          city: data.city,
+          consent: data.consent,
+          payload: data,
+        }),
+      });
+      if (!response.ok) throw new Error('Could not submit application.');
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not submit application.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -330,8 +352,8 @@ export const FranchiseApplication: React.FC = () => {
               Continue <ChevronRight className="w-4 h-4 text-[#F6A18F]" />
             </button>
           ) : (
-            <button onClick={submit} className="flex items-center gap-2 bg-[#F05535] hover:bg-[#D34518] text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
-              <Send className="w-4 h-4 text-[#F6A18F]" /> Submit Application
+            <button onClick={submit} disabled={submitting} className="flex items-center gap-2 bg-[#F05535] hover:bg-[#D34518] disabled:opacity-60 text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer">
+              <Send className="w-4 h-4 text-[#F6A18F]" /> {submitting ? 'Submitting...' : 'Submit Application'}
             </button>
           )}
         </div>

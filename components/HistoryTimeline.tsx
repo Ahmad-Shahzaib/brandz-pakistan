@@ -2,12 +2,12 @@
 
 import React, { useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { TIMELINE_DATA } from '../data/corporateData';
+import type { TimelineMilestone } from '../types';
 import { ChevronLeft, ChevronRight, History, Calendar } from 'lucide-react';
 
-export const HistoryTimeline: React.FC = () => {
+export const HistoryTimeline: React.FC<{ timeline: TimelineMilestone[] }> = ({ timeline }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [activeYear, setActiveYear] = useState<string>(TIMELINE_DATA[TIMELINE_DATA.length - 2]?.year || '2024');
+  const [activeYear, setActiveYear] = useState<string>(timeline[timeline.length - 2]?.year || timeline[0]?.year || '');
 
   const handleScrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -69,7 +69,7 @@ export const HistoryTimeline: React.FC = () => {
             ref={scrollContainerRef}
             className="flex items-start gap-6 sm:gap-8 overflow-x-auto hide-scrollbar pt-4 pb-8 px-2 snap-x snap-mandatory relative z-10"
           >
-            {TIMELINE_DATA.map((item, index) => {
+            {timeline.map((item, index) => {
               const isActive = activeYear === item.year;
 
               return (

@@ -2,10 +2,9 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { HERO_IMAGE } from '../data/corporateData';
 import { Flame, Sparkles, CheckCircle } from 'lucide-react';
 
-export const BrandStory: React.FC = () => {
+export const BrandStory: React.FC<{ image?: string }> = ({ image = '/assets/images/hero_fried_chicken_1785741263782.jpg' }) => {
   return (
     <section className="py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,7 +76,7 @@ export const BrandStory: React.FC = () => {
                 className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white"
               >
                 <img
-                  src={HERO_IMAGE}
+                  src={image}
                   alt="Fri-Chiks Crispy Fried Chicken Bucket & Sides"
                   className="w-full h-[360px] sm:h-[420px] object-cover hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"

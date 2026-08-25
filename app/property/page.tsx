@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { PageHero } from '../../components/PageHero';
 import { SectionHeader } from '../../components/SectionHeader';
 import { PropertyForm } from '../../components/PropertyForm';
-import { STOREFRONT_IMAGE } from '../../data/corporateData';
+import { getSiteContent } from '@/lib/api';
 import { MapPin, Eye, Car, Users, Store, Ruler } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -11,32 +11,28 @@ export const metadata: Metadata = {
     'Own or manage a commercial property? Submit it for a potential Fri-Chiks ® restaurant. See our site-selection criteria and share your site.',
 };
 
-const criteria = [
-  { icon: Users, title: 'Footfall & Density', text: 'High pedestrian and vehicle traffic with strong local population.' },
-  { icon: Eye, title: 'Visibility', text: 'Clear frontage and signage exposure from the main road.' },
-  { icon: Car, title: 'Accessibility & Parking', text: 'Easy access, parking and delivery-rider convenience.' },
-  { icon: Store, title: 'Commercial Profile', text: 'Established commercial zone with complementary anchors.' },
-  { icon: Ruler, title: 'Size & Frontage', text: 'Right footprint for the intended restaurant format.' },
-  { icon: MapPin, title: 'Catchment Area', text: 'Healthy residential and office catchment nearby.' },
-];
+const criteriaIcons = { Users, Eye, Car, Store, Ruler, MapPin };
 
-export default function PropertyPage() {
+export default async function PropertyPage() {
+  const { images, propertyCriteria, pageHeroes } = await getSiteContent();
+  const hero = pageHeroes.property;
+
   return (
     <>
       <PageHero
-        eyebrow="Property / Site Submission"
+        eyebrow={hero?.eyebrow || 'Property / Site Submission'}
         crumbs={[{ label: 'Suggest a Location' }]}
-        image={STOREFRONT_IMAGE}
-        title={<>Suggest a <span className="text-[#F6A18F]">Location</span></>}
-        description="Property owners and agents can submit potential restaurant sites. Strong locations are a key driver of our expansion."
+        image={images.storefront}
+        title={hero?.title || <>Suggest a <span className="text-[#F6A18F]">Location</span></>}
+        description={hero?.description || 'Property owners and agents can submit potential restaurant sites.'}
       />
 
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader eyebrow="What We Look For" title="Our Site-Selection Criteria" />
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {criteria.map((c) => {
-              const Icon = c.icon;
+            {propertyCriteria.map((c) => {
+              const Icon = criteriaIcons[c.icon as keyof typeof criteriaIcons] || MapPin;
               return (
                 <div key={c.title} className="bg-[#F7F7F7] rounded-2xl p-6 border border-gray-200/80">
                   <div className="w-11 h-11 rounded-xl bg-[#FFF0EC] text-[#F05535] flex items-center justify-center mb-3"><Icon className="w-5 h-5" /></div>

@@ -5,12 +5,7 @@ import { SectionHeader } from '../../components/SectionHeader';
 import { FranchiseProcess } from '../../components/FranchiseProcess';
 import { FranchiseFAQ } from '../../components/FranchiseFAQ';
 import { CTABand } from '../../components/CTABand';
-import {
-  FRANCHISE_MODELS,
-  INVESTMENT_OVERVIEW,
-  SUPPORT_PILLARS,
-} from '../../data/siteData';
-import { INTERIOR_IMAGE } from '../../data/corporateData';
+import { getSiteContent } from '@/lib/api';
 import {
   ArrowRight,
   Send,
@@ -32,28 +27,21 @@ export const metadata: Metadata = {
 };
 
 const whyInvest = [
-  { icon: Store, title: 'Established Restaurant Brand', text: 'A recognised homegrown name with 45+ outlets and strong customer loyalty.' },
-  { icon: Star, title: 'Proven, Loved Menu', text: 'A signature product with consistent recipes people return for.' },
-  { icon: ShieldCheck, title: 'Standardized Operations', text: 'Documented SOPs for kitchen, service, hygiene and inventory.' },
-  { icon: Boxes, title: 'Central Supply Chain', text: 'Consistent ingredients through central procurement and distribution.' },
-  { icon: Users, title: 'Training & People Systems', text: 'Structured onboarding and staff training for reliable delivery.' },
-  { icon: TrendingUp, title: 'Scalable & Multi-Format', text: 'From express outlets to drive-thru — models that fit many markets.' },
-];
-
-const idealPartner = [
-  'Entrepreneurial mindset',
-  'Financial capability',
-  'Strong local market understanding',
-  'Commitment to brand standards',
-  'Leadership ability',
-  'Operational involvement',
-  'Long-term business mindset',
-  'Customer-focused approach',
+  Store,
+  Star,
+  ShieldCheck,
+  Boxes,
+  Users,
+  TrendingUp,
 ];
 
 const supportIcons = [Users, Boxes, Megaphone, ShieldCheck];
+const featureIcons = { Store, Star, ShieldCheck, Boxes, Users, TrendingUp };
 
-export default function FranchisePage() {
+export default async function FranchisePage() {
+  const { franchiseModels, investment, supportPillars, franchiseProcess, franchiseFaqs, images, franchiseReasons, idealPartner: idealPartnerItems, pageHeroes } = await getSiteContent();
+  const hero = pageHeroes.franchise;
+
   return (
     <main className="bg-[#F7F7F7] text-[#343538]">
       <section className="relative overflow-hidden bg-[#292A2D] pt-20 text-white">
@@ -66,7 +54,7 @@ export default function FranchisePage() {
         />
         <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
           <Image
-            src={INTERIOR_IMAGE}
+            src={images.interior}
             alt="Brandz Pakistan franchise opportunity and restaurant setup"
             fill
             priority
@@ -79,13 +67,13 @@ export default function FranchisePage() {
         <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
           <div className="max-w-2xl">
             <p className="mb-6 text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">
-              Franchise With Brandz Pakistan
+              {hero?.eyebrow || 'Franchise With Brandz Pakistan'}
             </p>
             <h1 className="text-5xl font-bold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">
-              Bring Brandz Pakistan <span className="text-[#F05535]">to your city</span>
+              {hero?.title || <>Bring Brandz Pakistan <span className="text-[#F05535]">to your city</span></>}
             </h1>
             <p className="mt-6 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
-              Build your restaurant business with an established food brand, proven operating systems, structured training and ongoing franchise support.
+              {hero?.description || 'Build your restaurant business with established food brands, proven operating systems, structured training and ongoing support.'}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -112,12 +100,13 @@ export default function FranchisePage() {
           description="Why choose Brandz Pakistan over another food franchise? Because behind the crunch is a structured system built to be operated consistently and scaled responsibly."
         />
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {whyInvest.map((w) => {
-            const Icon = w.icon;
+          {franchiseReasons.map((w, index) => {
+            const FallbackIcon = whyInvest[index % whyInvest.length];
+            const Icon = featureIcons[w.icon as keyof typeof featureIcons] || Store;
             return (
               <div key={w.title} className="rounded-2xl border border-[#E3E3E4] bg-white p-6 shadow-sm shadow-[#292A2D]/5 transition hover:border-[#F05535]">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF0EC] text-[#D34518]">
-                  <Icon className="h-6 w-6" />
+                  {w.icon ? <Icon className="h-6 w-6" /> : <FallbackIcon className="h-6 w-6" />}
                 </div>
                 <h3 className="mb-1.5 font-heading text-lg font-extrabold text-[#343538]">{w.title}</h3>
                 <p className="text-sm leading-relaxed text-[#717275]">{w.text}</p>
@@ -135,7 +124,7 @@ export default function FranchisePage() {
             description="From compact delivery kitchens to standalone drive-thrus — choose the format that fits your site and ambition."
           />
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {FRANCHISE_MODELS.map((m) => (
+            {franchiseModels.map((m) => (
               <div
                 key={m.id}
                 className={`rounded-2xl border-2 bg-white p-6 transition-all ${
@@ -176,7 +165,7 @@ export default function FranchisePage() {
           description="Final figures depend on format, location and property condition — verified details are shared with qualified applicants."
         />
         <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {INVESTMENT_OVERVIEW.map((item) => (
+          {investment.map((item) => (
             <div key={item.label} className="rounded-2xl border border-[#E3E3E4] bg-[#F7F7F7] p-5">
               <p className="text-xs font-bold uppercase tracking-[.12em] text-[#717275]">{item.label}</p>
               <p className="mt-1.5 font-heading text-lg font-extrabold text-[#D34518]">{item.value}</p>
@@ -207,7 +196,7 @@ export default function FranchisePage() {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            {idealPartner.map((p) => (
+            {idealPartnerItems.map((item) => item.label).map((p) => (
               <div key={p} className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 p-3.5">
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-[#F6A18F]" />
                 <span className="text-sm font-medium">{p}</span>
@@ -224,7 +213,7 @@ export default function FranchisePage() {
           description="A clear, structured 12-step journey — you are supported at every stage."
         />
         <div className="mx-auto mt-14 max-w-5xl">
-          <FranchiseProcess />
+          <FranchiseProcess steps={franchiseProcess} />
         </div>
       </section>
 
@@ -236,7 +225,7 @@ export default function FranchisePage() {
             description="A complete operating system — so you can focus on running a great restaurant."
           />
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {SUPPORT_PILLARS.map((pillar, i) => {
+            {supportPillars.map((pillar, i) => {
               const Icon = supportIcons[i % supportIcons.length];
               return (
                 <div key={pillar.title} className="rounded-2xl border border-[#E3E3E4] bg-[#F7F7F7] p-6">
@@ -268,7 +257,7 @@ export default function FranchisePage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader eyebrow="Franchise FAQ" title="The Questions Investors Actually Ask" />
           <div className="mt-12">
-            <FranchiseFAQ />
+            <FranchiseFAQ faqs={franchiseFaqs} />
           </div>
         </div>
       </section>
@@ -276,6 +265,7 @@ export default function FranchisePage() {
       <CTABand
         heading="Ready to Bring Brandz Pakistan to Your City?"
         text="Submit your application and our franchise development team will be in touch to guide you through the next steps."
+        image={images.interior}
       />
     </main>
   );

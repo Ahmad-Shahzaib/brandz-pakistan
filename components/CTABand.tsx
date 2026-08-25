@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import { ArrowRight, PhoneCall } from 'lucide-react';
-import { INTERIOR_IMAGE } from '../data/corporateData';
 import { useModals } from './SiteChrome';
 
 interface CTABandProps {
@@ -20,7 +19,7 @@ export const CTABand: React.FC<CTABandProps> = ({
   text = 'Join a growing food brand backed by proven restaurant systems, operational experience and dedicated franchise support.',
   primaryLabel = 'Apply for Franchise',
   primaryHref = '/apply',
-  image = INTERIOR_IMAGE,
+  image = '/assets/images/store_interior_1785741297229.jpg',
 }) => {
   const { openFranchiseModal } = useModals();
   return (

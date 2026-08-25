@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { TEAM_IMAGE, INTERIOR_IMAGE } from '../data/corporateData';
 import { Heart, Sparkles } from 'lucide-react';
 
-export const SomethingDifferentStrip: React.FC = () => {
+export const SomethingDifferentStrip: React.FC<{ teamImage?: string; interiorImage?: string }> = ({
+  teamImage = '/assets/images/team_opening_1785741327782.jpg',
+  interiorImage = '/assets/images/store_interior_1785741297229.jpg',
+}) => {
   return (
     <section className="py-16 bg-[#FFF5F2] border-y border-[#F6A18F]/40 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,7 +25,7 @@ export const SomethingDifferentStrip: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-white aspect-4/3 sm:aspect-16/10">
               <img
-                src={TEAM_IMAGE}
+                src={teamImage}
                 alt="Fri-Chiks Happy Staff and Customers"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
@@ -69,7 +71,7 @@ export const SomethingDifferentStrip: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-white aspect-4/3 sm:aspect-16/10">
               <img
-                src={INTERIOR_IMAGE}
+                src={interiorImage}
                 alt="Fri-Chiks Store Environment and Quality"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"

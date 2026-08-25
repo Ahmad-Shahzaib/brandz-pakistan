@@ -2,14 +2,16 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AWARDS_DATA, AWARD_IMAGE } from '../data/corporateData';
+import type { AwardItem } from '../types';
 import { Trophy, Award, Sparkles, ChevronDown } from 'lucide-react';
 
-export const AwardsSection: React.FC = () => {
+export const AwardsSection: React.FC<{ awards: AwardItem[]; image: string }> = ({ awards, image }) => {
   const [visibleCount, setVisibleCount] = useState<number>(3);
 
-  const featuredAward = AWARDS_DATA.find((a) => a.isFeatured) || AWARDS_DATA[0];
-  const awardsList = AWARDS_DATA;
+  const featuredAward = awards.find((a) => a.isFeatured) || awards[0];
+  const awardsList = awards;
+
+  if (!featuredAward) return null;
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => Math.min(prev + 3, awardsList.length));
@@ -47,7 +49,7 @@ export const AwardsSection: React.FC = () => {
         >
           <div className="relative h-[320px] sm:h-[400px] w-full">
             <img
-              src={AWARD_IMAGE}
+              src={image}
               alt="Fri-Chiks Award Ceremony Gala"
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-90"
               referrerPolicy="no-referrer"

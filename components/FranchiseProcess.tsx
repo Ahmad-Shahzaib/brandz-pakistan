@@ -2,16 +2,16 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { FRANCHISE_PROCESS } from '../data/siteData';
+import type { ProcessStep } from '@/lib/types';
 
-export const FranchiseProcess: React.FC = () => {
+export const FranchiseProcess: React.FC<{ steps: ProcessStep[] }> = ({ steps }) => {
   return (
     <div className="relative">
       {/* vertical line */}
       <div className="absolute left-[27px] sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#F6A18F] via-[#F05535] to-[#454649] sm:-translate-x-1/2" />
 
       <div className="space-y-6">
-        {FRANCHISE_PROCESS.map((s, idx) => {
+        {steps.map((s, idx) => {
           const leftSide = idx % 2 === 0;
           return (
             <motion.div

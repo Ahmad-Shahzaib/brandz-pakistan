@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SectionHeader } from '../../components/SectionHeader';
 import { CareersExplorer } from '../../components/CareersExplorer';
-import { TEAM_IMAGE } from '../../data/corporateData';
+import { getSiteContent } from '@/lib/api';
 import { ArrowRight, HeartHandshake, GraduationCap, TrendingUp, Users } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -12,14 +12,12 @@ export const metadata: Metadata = {
     'Grow with Brandz Pakistan. Explore restaurant, management and corporate roles across operations, marketing, supply chain, finance and franchise support.',
 };
 
-const perks = [
-  { icon: GraduationCap, title: 'Structured Training', text: 'SOP-led onboarding and continuous skill development.' },
-  { icon: TrendingUp, title: 'Real Growth', text: 'Clear paths from crew to management and corporate roles.' },
-  { icon: Users, title: 'Team Culture', text: 'Warm, family-first culture across every outlet.' },
-  { icon: HeartHandshake, title: 'Fair & Halal', text: 'Ethical employment and a values-driven workplace.' },
-];
+const perkIcons = { GraduationCap, TrendingUp, Users, HeartHandshake };
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const { jobs, images, careersPerks, pageHeroes } = await getSiteContent();
+  const hero = pageHeroes.careers;
+
   return (
     <main className="bg-[#F7F7F7] text-[#343538]">
       <section className="relative overflow-hidden bg-[#292A2D] pt-20 text-white">
@@ -32,7 +30,7 @@ export default function CareersPage() {
         />
         <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
           <Image
-            src={TEAM_IMAGE}
+            src={images.team}
             alt="Brandz Pakistan team and restaurant staff"
             fill
             priority
@@ -45,13 +43,13 @@ export default function CareersPage() {
         <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
           <div className="max-w-2xl">
             <p className="mb-6 text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">
-              Careers · Brandz Pakistan
+              {hero?.eyebrow || 'Careers · Brandz Pakistan'}
             </p>
             <h1 className="text-5xl font-bold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">
-              Grow with <span className="text-[#F05535]">Brandz Pakistan</span>
+              {hero?.title || <>Grow with <span className="text-[#F05535]">Brandz Pakistan</span></>}
             </h1>
             <p className="mt-6 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
-              From our kitchens to corporate HQ, we&apos;re building a team that loves great food and great service. Find your role.
+              {hero?.description || 'From our kitchens to corporate HQ, we are building a team that loves great food and great service.'}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -74,8 +72,8 @@ export default function CareersPage() {
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <SectionHeader eyebrow="Why Brandz Pakistan" title="More Than a Job" />
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {perks.map((p) => {
-            const Icon = p.icon;
+          {careersPerks.map((p) => {
+            const Icon = perkIcons[p.icon as keyof typeof perkIcons] || GraduationCap;
             return (
               <div key={p.title} className="rounded-2xl border border-[#E3E3E4] bg-white p-6 text-center shadow-sm shadow-[#292A2D]/5">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF0EC] text-[#D34518]">
@@ -92,7 +90,7 @@ export default function CareersPage() {
       <section id="positions" className="bg-[#F7F7F7] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader eyebrow="Open Positions" title="Current Openings" align="left" className="mb-10" />
-          <CareersExplorer />
+          <CareersExplorer jobs={jobs} />
         </div>
       </section>
     </main>

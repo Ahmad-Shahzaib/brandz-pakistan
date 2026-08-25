@@ -1,13 +1,13 @@
 import {notFound} from 'next/navigation';
 import Link from 'next/link';
 import {ArrowLeft,ArrowRight,Award,CheckCircle2,MapPin,ShieldCheck,TrendingUp,UtensilsCrossed} from 'lucide-react';
-import {brands,getBrand} from '../../../data/brands';
+import {getBrand,getSiteContent} from '@/lib/api';
 import {BrandEnquiryForm} from '../../../components/BrandEnquiryForm';
 
-export function generateStaticParams(){return brands.map(({slug})=>({slug}))}
+export async function generateStaticParams(){const {brands}=await getSiteContent();return brands.map(({slug})=>({slug}))}
 
 export default async function BrandPage({params}:{params:Promise<{slug:string}>}){
-  const {slug}=await params; const brand=getBrand(slug); if(!brand)notFound();
+  const {slug}=await params; const brand=await getBrand(slug).catch(()=>null); if(!brand)notFound();
   return <>
     <section className="relative min-h-[760px] overflow-hidden bg-[#343538] text-white">
       <img src={brand.image} alt={`${brand.name} signature food`} className="absolute inset-0 h-full w-full object-cover"/>
@@ -22,7 +22,7 @@ export default async function BrandPage({params}:{params:Promise<{slug:string}>}
 
     <section className="py-24" id="menu"><div className="mx-auto max-w-7xl px-6 lg:px-8"><div className="max-w-2xl"><p className="eyebrow">Signature flavours</p><h2 className="section-title">Made to be remembered.</h2><p className="mt-5 leading-7 text-[#717275]">A focused selection of guest favourites that expresses the flavour, quality and personality of {brand.name}.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{brand.offerings.map((item,i)=><article key={item} className="group overflow-hidden rounded-xl border border-[#E3E3E4] bg-white"><div className="h-64 overflow-hidden"><img src={brand.gallery[i]} alt={item} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy"/></div><div className="p-6"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#F05535]">Guest favourite</p><h3 className="mt-3 font-heading text-2xl font-bold">{item}</h3><p className="mt-3 text-sm leading-6 text-[#717275]">Prepared to the brand’s specification with carefully selected ingredients and consistent kitchen standards.</p></div></article>)}</div></div></section>
 
-    <BrandEnquiryForm brandName={brand.name} brandLogo={brand.logo} offerings={brand.offerings} />
+    <BrandEnquiryForm brandSlug={brand.slug} brandName={brand.name} brandLogo={brand.logo} offerings={brand.offerings} />
 
     <section className="bg-[#343538] py-24 text-white"><div className="mx-auto max-w-7xl px-6 lg:px-8"><div className="grid gap-12 lg:grid-cols-[.75fr_1.25fr]"><div><p className="eyebrow text-[#F05535]">Services & channels</p><h2 className="section-title text-white">Serving guests wherever they are.</h2><p className="mt-6 leading-7 text-white/55">A flexible operating model supports everyday dining, convenient ordering, celebrations and commercial partnerships.</p></div><div className="grid gap-3 sm:grid-cols-2">{brand.services.map((service,i)=><div key={service} className="rounded-2xl border border-white/10 bg-white/[.04] p-6"><div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#F05535]/10 text-[#F05535]">{i===0?<UtensilsCrossed size={19}/>:<CheckCircle2 size={19}/>}</div><h3 className="mt-6 font-bold">{service}</h3><p className="mt-2 text-sm leading-6 text-white/50">Supported by Brandz Pakistan systems, training and quality assurance.</p></div>)}</div></div></div></section>
 

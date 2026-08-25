@@ -11,6 +11,8 @@ interface FranchiseModalProps {
 
 export const FranchiseModal: React.FC<FranchiseModalProps> = ({ isOpen, onClose }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -20,9 +22,30 @@ export const FranchiseModal: React.FC<FranchiseModalProps> = ({ isOpen, onClose 
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError('');
+    try {
+      const response = await fetch(`${(process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '')}/franchise-applications`, {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          city: formData.preferredLocation,
+          consent: true,
+          payload: formData,
+        }),
+      });
+      if (!response.ok) throw new Error('Could not submit franchise inquiry.');
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not submit franchise inquiry.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -191,12 +214,14 @@ export const FranchiseModal: React.FC<FranchiseModalProps> = ({ isOpen, onClose 
                     />
                   </div>
 
+                  {error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{error}</p>}
                   <button
                     type="submit"
-                    className="w-full bg-[#F05535] hover:bg-[#D34518] text-white font-bold py-3.5 rounded-xl text-base transition-all shadow-md shadow-red-900/20 flex items-center justify-center gap-2 cursor-pointer"
+                    disabled={submitting}
+                    className="w-full bg-[#F05535] hover:bg-[#D34518] disabled:opacity-60 text-white font-bold py-3.5 rounded-xl text-base transition-all shadow-md shadow-red-900/20 flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Send className="w-4 h-4 text-[#F6A18F]" />
-                    <span>Submit Franchise Application</span>
+                    <span>{submitting ? 'Submitting...' : 'Submit Franchise Application'}</span>
                   </button>
                 </form>
               )}

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SectionHeader } from '../../components/SectionHeader';
 import { CTABand } from '../../components/CTABand';
-import { COMPANY_NEWS, INTERIOR_IMAGE } from '../../data/corporateData';
+import { getSiteContent } from '@/lib/api';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -12,10 +12,11 @@ export const metadata: Metadata = {
     'Corporate news, restaurant openings, product launches, awards and press releases from Brandz Pakistan.',
 };
 
-const categories = ['All', 'Franchise Growth', 'Awards', 'Food Safety', 'Restaurant Openings'];
-
-export default function MediaPage() {
-  const [featured, ...rest] = COMPANY_NEWS;
+export default async function MediaPage() {
+  const { news, images, pageHeroes } = await getSiteContent();
+  const [featured, ...rest] = news;
+  const categories = ['All', ...Array.from(new Set(news.map((item) => item.category).filter(Boolean)))];
+  const hero = pageHeroes.media;
 
   return (
     <main className="bg-[#F7F7F7] text-[#343538]">
@@ -29,7 +30,7 @@ export default function MediaPage() {
         />
         <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
           <Image
-            src={INTERIOR_IMAGE}
+            src={images.interior}
             alt="Brandz Pakistan media feature and brand story"
             fill
             priority
@@ -42,13 +43,13 @@ export default function MediaPage() {
         <div className="relative mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
           <div className="max-w-2xl">
             <p className="mb-6 text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">
-              News & Media
+              {hero?.eyebrow || 'News & Media'}
             </p>
             <h1 className="text-5xl font-bold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">
-              The latest from <span className="text-[#F05535]">Brandz Pakistan</span>
+              {hero?.title || <>The latest from <span className="text-[#F05535]">Brandz Pakistan</span></>}
             </h1>
             <p className="mt-6 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
-              Corporate news, restaurant openings, product launches and press coverage as our brand grows across Pakistan.
+              {hero?.description || 'Corporate news, restaurant openings, product launches and press coverage.'}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -84,7 +85,7 @@ export default function MediaPage() {
           ))}
         </div>
 
-        <article className="mb-12 grid gap-8 overflow-hidden rounded-3xl border border-[#E3E3E4] bg-white shadow-md shadow-[#292A2D]/5 lg:grid-cols-2">
+        {featured && <article className="mb-12 grid gap-8 overflow-hidden rounded-3xl border border-[#E3E3E4] bg-white shadow-md shadow-[#292A2D]/5 lg:grid-cols-2">
           <div className="relative h-64 min-h-[280px] lg:h-auto">
             <img src={featured.image} alt={featured.title} className="absolute inset-0 h-full w-full object-cover" referrerPolicy="no-referrer" />
             <span className="absolute left-4 top-4 rounded-full bg-[#F05535] px-3 py-1 text-xs font-bold text-[#292A2D]">
@@ -111,7 +112,7 @@ export default function MediaPage() {
               Read Full Story <ArrowRight className="h-4 w-4" />
             </button>
           </div>
-        </article>
+        </article>}
 
         <SectionHeader eyebrow="More Stories" title="Recent Coverage" align="left" className="mb-10" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -147,6 +148,7 @@ export default function MediaPage() {
         text="For interviews, brand assets or press information, reach our corporate communications team."
         primaryLabel="Contact Media Team"
         primaryHref="/contact"
+        image={images.interior}
       />
     </main>
   );
