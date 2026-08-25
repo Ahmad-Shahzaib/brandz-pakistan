@@ -2,11 +2,25 @@
 
 import React, { useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
-import { INQUIRY_TYPES } from '../data/siteData';
+import type { InquiryType } from '@/lib/types';
 
-export const ContactForm: React.FC<{ defaultType?: string }> = ({ defaultType = 'general' }) => {
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+
+const defaultInquiryTypes: InquiryType[] = [
+  { id: 'general', label: 'General', description: 'General questions and business support.' },
+  { id: 'franchise', label: 'Franchise', description: 'Franchise and investment enquiries.' },
+  { id: 'supplier', label: 'Supplier', description: 'Supplier partnership enquiries.' },
+  { id: 'media', label: 'Media', description: 'Press and media requests.' },
+];
+
+export const ContactForm: React.FC<{ defaultType?: string; inquiryTypes?: InquiryType[] }> = ({
+  defaultType = 'general',
+  inquiryTypes = defaultInquiryTypes,
+}) => {
   const [type, setType] = useState(defaultType);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   if (sent) {
     return (
@@ -16,7 +30,7 @@ export const ContactForm: React.FC<{ defaultType?: string }> = ({ defaultType = 
         </div>
         <h3 className="mt-5 font-heading text-2xl font-extrabold text-[#343538]">Message Sent</h3>
         <p className="mt-2 text-[#717275]">
-          Thank you for reaching out. The relevant Fri-Chiks ® team will get back to you.
+          Thank you for reaching out. The relevant Brandz Pakistan team will get back to you.
         </p>
         <button
           onClick={() => setSent(false)}
@@ -35,7 +49,28 @@ export const ContactForm: React.FC<{ defaultType?: string }> = ({ defaultType = 
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        setSent(true);
+        const formData = new FormData(e.currentTarget);
+        setSubmitting(true);
+        setError('');
+        fetch(`${API_BASE}/enquiries`, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type,
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            city: formData.get('city'),
+            message: formData.get('message'),
+            consent: formData.get('consent') === 'on',
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error('Could not send message.');
+            setSent(true);
+          })
+          .catch((err) => setError(err instanceof Error ? err.message : 'Could not send message.'))
+          .finally(() => setSubmitting(false));
       }}
       className="space-y-5 rounded-3xl border border-[#E3E3E4] bg-white p-6 shadow-md shadow-[#292A2D]/5 sm:p-8"
     >
@@ -44,7 +79,7 @@ export const ContactForm: React.FC<{ defaultType?: string }> = ({ defaultType = 
           Inquiry Type
         </label>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {INQUIRY_TYPES.map((t) => (
+          {inquiryTypes.map((t) => (
             <button
               key={t.id}
               type="button"
@@ -66,37 +101,40 @@ export const ContactForm: React.FC<{ defaultType?: string }> = ({ defaultType = 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-xs font-bold text-[#343538]">Full Name *</label>
-          <input required className={inputClass} />
+          <input required name="name" className={inputClass} />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-bold text-[#343538]">Email *</label>
-          <input required type="email" className={inputClass} />
+          <input name="email" type="email" className={inputClass} />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-bold text-[#343538]">Phone</label>
-          <input className={inputClass} />
+          <input name="phone" className={inputClass} />
         </div>
         <div>
           <label className="mb-1.5 block text-xs font-bold text-[#343538]">City</label>
-          <input className={inputClass} />
+          <input name="city" className={inputClass} />
         </div>
       </div>
 
       <div>
         <label className="mb-1.5 block text-xs font-bold text-[#343538]">Message *</label>
-        <textarea required rows={5} className={`${inputClass} resize-y`} placeholder="How can we help?" />
+        <textarea name="message" rows={5} className={`${inputClass} resize-y`} placeholder="How can we help?" />
       </div>
 
       <label className="flex items-start gap-2 text-xs text-[#717275]">
-        <input type="checkbox" required className="mt-0.5 accent-[#D34518]" />
-        <span>I consent to Fri-Chiks ® using my details to respond to this inquiry.</span>
+        <input type="checkbox" name="consent" required className="mt-0.5 accent-[#D34518]" />
+        <span>I consent to Brandz Pakistan using my details to respond to this inquiry.</span>
       </label>
+
+      {error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{error}</p>}
 
       <button
         type="submit"
-        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#F05535] py-3.5 text-base font-bold text-[#292A2D] transition hover:bg-[#D34518]"
+        disabled={submitting}
+        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#F05535] py-3.5 text-base font-bold text-[#292A2D] transition hover:bg-[#D34518] disabled:opacity-60"
       >
-        <Send className="h-4 w-4 text-[#292A2D]" /> Send Message
+        <Send className="h-4 w-4 text-[#292A2D]" /> {submitting ? 'Sending...' : 'Send Message'}
       </button>
     </form>
   );

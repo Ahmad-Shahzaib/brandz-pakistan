@@ -3,14 +3,14 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Film, Play, Volume2, ShieldCheck } from 'lucide-react';
-import { HERO_IMAGE } from '../data/corporateData';
 
 interface VideoModalProps {
   isOpen: boolean;
   onClose: () => void;
+  poster?: string;
 }
 
-export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
+export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, poster = '/assets/images/hero_fried_chicken_1785741263782.jpg' }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -49,7 +49,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose }) => {
             {/* Video Container (Simulated HTML5 Player with Poster Fallback & Controls) */}
             <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
               <img
-                src={HERO_IMAGE}
+                src={poster}
                 alt="Corporate Video Stream"
                 className="w-full h-full object-cover filter brightness-90"
                 referrerPolicy="no-referrer"

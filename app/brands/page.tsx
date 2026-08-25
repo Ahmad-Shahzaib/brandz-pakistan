@@ -1,18 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { brands, categories } from '../../data/brands';
+import { getSiteContent } from '@/lib/api';
 
 export const metadata = { title: 'Our Brands', description: 'Explore the Brandz Pakistan food and hospitality portfolio.' };
 
-export default function BrandsPage() {
+export default async function BrandsPage() {
+  const { brands, categories, pageHeroes } = await getSiteContent();
+  const hero = pageHeroes.brands;
+
   return (
     <>
       <section className="bg-[#292A2D] pb-16 pt-32 text-white sm:pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">Brandz Pakistan portfolio</p>
-          <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-[1.02] tracking-[-.045em] sm:text-6xl">A brand for every<br /><span className="text-[#F05535]">appetite and occasion.</span></h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-white/70">Discover the food and hospitality concepts supported by Brandz Pakistan—each with its own identity, flavour and guest experience.</p>
+          <p className="text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">{hero?.eyebrow || 'Brandz Pakistan portfolio'}</p>
+          <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-[1.02] tracking-[-.045em] sm:text-6xl">{hero?.title || 'A brand for every appetite and occasion.'}</h1>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-white/70">{hero?.description || 'Discover the food and hospitality concepts supported by Brandz Pakistan.'}</p>
         </div>
       </section>
 

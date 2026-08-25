@@ -3,24 +3,24 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Phone, Clock, Search, Navigation, Star } from 'lucide-react';
-import { RESTAURANTS } from '../data/siteData';
+import type { Restaurant } from '@/lib/types';
 
-const cities = ['All Cities', ...Array.from(new Set(RESTAURANTS.map((r) => r.city)))];
 const formats = ['All Formats', 'Standard', 'Express', 'Drive-Thru', 'Takeaway'];
 
-export const RestaurantExplorer: React.FC = () => {
+export const RestaurantExplorer: React.FC<{ restaurants: Restaurant[] }> = ({ restaurants }) => {
   const [city, setCity] = useState('All Cities');
   const [format, setFormat] = useState('All Formats');
   const [query, setQuery] = useState('');
+  const cities = useMemo(() => ['All Cities', ...Array.from(new Set(restaurants.map((r) => r.city)))], [restaurants]);
 
   const filtered = useMemo(() => {
-    return RESTAURANTS.filter((r) => {
+    return restaurants.filter((r) => {
       if (city !== 'All Cities' && r.city !== city) return false;
       if (format !== 'All Formats' && r.format !== format) return false;
       if (query && !`${r.name} ${r.area} ${r.city}`.toLowerCase().includes(query.toLowerCase())) return false;
       return true;
     });
-  }, [city, format, query]);
+  }, [city, format, query, restaurants]);
 
   return (
     <div>
@@ -44,7 +44,7 @@ export const RestaurantExplorer: React.FC = () => {
       </div>
 
       <p className="text-sm text-[#717275] mb-6">
-        Showing <strong className="text-[#343538]">{filtered.length}</strong> of {RESTAURANTS.length} restaurants
+        Showing <strong className="text-[#343538]">{filtered.length}</strong> of {restaurants.length} restaurants
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

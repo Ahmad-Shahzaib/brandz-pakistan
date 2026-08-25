@@ -7,7 +7,7 @@ import { HistoryTimeline } from '../../components/HistoryTimeline';
 import { SomethingDifferentStrip } from '../../components/SomethingDifferentStrip';
 import { Leadership } from '../../components/Leadership';
 import { CTABand } from '../../components/CTABand';
-import { STOREFRONT_IMAGE } from '../../data/corporateData';
+import { getSiteContent } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'Our Story',
@@ -15,31 +15,35 @@ export const metadata: Metadata = {
     'Born from a love for great chicken and built for bigger ambitions — the story, philosophy and growth journey of Fri-Chiks ®.',
 };
 
-export default function OurStoryPage() {
+export default async function OurStoryPage() {
+  const { images, timeline, coreValues, leadership, pageHeroes } = await getSiteContent();
+  const hero = pageHeroes['our-story'];
+
   return (
     <>
       <PageHero
-        eyebrow="Our Story"
+        eyebrow={hero?.eyebrow || 'Our Story'}
         crumbs={[{ label: 'Our Story' }]}
-        image={STOREFRONT_IMAGE}
-        title={
+        image={images.storefront}
+        title={hero?.title ||
           <>
             Born From a Love for Great Chicken.
             <br />
             <span className="text-[#F6A18F]">Built for Bigger Ambitions.</span>
           </>
         }
-        description="From a single kitchen in Lahore in 2002 to a 45+ outlet network — a journey powered by consistent taste, standardized systems and franchise partnership."
+        description={hero?.description || 'A journey powered by consistent taste, standardized systems and franchise partnership.'}
       />
-      <BrandStory />
-      <SomethingDifferentStrip />
+      <BrandStory image={images.hero} />
+      <SomethingDifferentStrip teamImage={images.team} interiorImage={images.interior} />
       <MissionVision />
-      <CoreValues />
-      <HistoryTimeline />
-      <Leadership />
+      <CoreValues values={coreValues} />
+      <HistoryTimeline timeline={timeline} />
+      <Leadership members={leadership} />
       <CTABand
         heading="Be Part of the Fri-Chiks ® Story"
         text="Whether you love the food or want to build a business with us, there is a place for you in our journey."
+        image={images.interior}
       />
     </>
   );

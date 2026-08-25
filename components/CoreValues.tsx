@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { CORE_VALUES_DATA } from '../data/corporateData';
+import type { CoreValue } from '../types';
 import { ShieldCheck, TrendingUp, Award, HeartHandshake } from 'lucide-react';
 
-export const CoreValues: React.FC = () => {
+export const CoreValues: React.FC<{ values: CoreValue[] }> = ({ values }) => {
   const renderIcon = (name: string) => {
     switch (name) {
       case 'ShieldCheck':
@@ -44,7 +44,7 @@ export const CoreValues: React.FC = () => {
 
         {/* 4-across Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {CORE_VALUES_DATA.map((value, idx) => {
+          {values.map((value, idx) => {
             return (
               <motion.div
                 key={value.id}

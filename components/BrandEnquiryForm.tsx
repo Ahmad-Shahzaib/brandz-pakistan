@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 interface BrandEnquiryFormProps {
+  brandSlug: string;
   brandName: string;
   brandLogo: string;
   offerings: string[];
@@ -22,12 +23,44 @@ interface BrandEnquiryFormProps {
 const inputClass =
   'w-full rounded-xl border border-[#E3E3E4] bg-white px-4 py-3.5 text-sm text-[#343538] outline-none transition placeholder:text-[#9A9A9D] focus:border-[#F05535] focus:ring-4 focus:ring-[#F05535]/10';
 
-export function BrandEnquiryForm({ brandName, brandLogo, offerings }: BrandEnquiryFormProps) {
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+
+export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }: BrandEnquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const submitEnquiry = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+    const formData = new FormData(event.currentTarget);
+    setSubmitting(true);
+    setError('');
+    fetch(`${API_BASE}/enquiries`, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'brand',
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        city: formData.get('city'),
+        message: formData.get('message'),
+        consent: formData.get('contactConsent') === 'on',
+        payload: {
+          brand_slug: brandSlug,
+          brand_name: brandName,
+          enquiry_type: formData.get('enquiryType'),
+          preferred_contact: formData.get('preferredContact'),
+          interest: formData.get('interest'),
+        },
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error('Could not send enquiry.');
+        setSubmitted(true);
+      })
+      .catch((err) => setError(err instanceof Error ? err.message : 'Could not send enquiry.'))
+      .finally(() => setSubmitting(false));
   };
 
   return (
@@ -188,8 +221,9 @@ export function BrandEnquiryForm({ brandName, brandLogo, offerings }: BrandEnqui
                     <span><strong className="text-[#343538]">Contact permission:</strong> I agree that Brandz Pakistan or the relevant {brandName} team may contact me regarding this enquiry.</span>
                   </label>
 
-                  <button type="submit" className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#F05535] px-6 py-4 text-sm font-extrabold uppercase tracking-[.08em] text-white shadow-lg shadow-[#F05535]/15 transition hover:-translate-y-0.5 hover:bg-[#D34518] hover:shadow-xl">
-                    <Sparkles size={18} /> Send enquiry <Send size={16} />
+                  {error && <p className="mt-5 rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{error}</p>}
+                  <button type="submit" disabled={submitting} className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#F05535] px-6 py-4 text-sm font-extrabold uppercase tracking-[.08em] text-white shadow-lg shadow-[#F05535]/15 transition hover:-translate-y-0.5 hover:bg-[#D34518] hover:shadow-xl disabled:opacity-60">
+                    <Sparkles size={18} /> {submitting ? 'Sending...' : 'Send enquiry'} <Send size={16} />
                   </button>
                 </form>
               )}

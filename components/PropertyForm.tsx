@@ -5,6 +5,9 @@ import { CheckCircle2, Send, Upload } from 'lucide-react';
 
 export const PropertyForm: React.FC = () => {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const apiBase = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
   const inputClass = 'w-full bg-[#F7F7F7] text-sm px-3.5 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#F05535]';
   const label = 'block text-xs font-bold text-[#343538] mb-1.5';
 
@@ -22,50 +25,69 @@ export const PropertyForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="bg-white rounded-3xl border border-gray-200/80 shadow-md p-6 sm:p-8 space-y-5">
+    <form onSubmit={async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      setSubmitting(true);
+      setError('');
+      try {
+        const response = await fetch(`${apiBase}/property-submissions`, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: formData,
+        });
+        if (!response.ok) throw new Error('Could not submit property.');
+        setSent(true);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Could not submit property.');
+      } finally {
+        setSubmitting(false);
+      }
+    }} className="bg-white rounded-3xl border border-gray-200/80 shadow-md p-6 sm:p-8 space-y-5">
       <div className="grid sm:grid-cols-2 gap-4">
-        <div><label className={label}>Owner / Agent Name *</label><input required className={inputClass} /></div>
+        <div><label className={label}>Owner / Agent Name *</label><input name="name" required className={inputClass} /></div>
         <div><label className={label}>Are you the *</label>
-          <select className={inputClass}><option>Owner</option><option>Agent</option><option>Representative</option></select>
+          <select name="payload[role]" className={inputClass}><option>Owner</option><option>Agent</option><option>Representative</option></select>
         </div>
-        <div><label className={label}>Phone / WhatsApp *</label><input required className={inputClass} /></div>
-        <div><label className={label}>Email</label><input type="email" className={inputClass} /></div>
-        <div><label className={label}>City *</label><input required className={inputClass} /></div>
-        <div><label className={label}>Area / Locality *</label><input required className={inputClass} /></div>
+        <div><label className={label}>Phone / WhatsApp *</label><input name="phone" required className={inputClass} /></div>
+        <div><label className={label}>Email</label><input name="email" type="email" className={inputClass} /></div>
+        <div><label className={label}>City *</label><input name="city" required className={inputClass} /></div>
+        <div><label className={label}>Area / Locality *</label><input name="payload[area]" required className={inputClass} /></div>
       </div>
 
-      <div><label className={label}>Complete Address *</label><input required className={inputClass} /></div>
+      <div><label className={label}>Complete Address *</label><input name="payload[address]" required className={inputClass} /></div>
 
       <div className="grid sm:grid-cols-3 gap-4">
         <div><label className={label}>Property Type</label>
-          <select className={inputClass}><option>Corner Plot</option><option>Standalone Building</option><option>Shop / Unit</option><option>Mall / Food Court</option><option>Highway Plot</option></select>
+          <select name="payload[property_type]" className={inputClass}><option>Corner Plot</option><option>Standalone Building</option><option>Shop / Unit</option><option>Mall / Food Court</option><option>Highway Plot</option></select>
         </div>
-        <div><label className={label}>Size (sq.ft.)</label><input className={inputClass} placeholder="e.g. 2000" /></div>
-        <div><label className={label}>Frontage (ft.)</label><input className={inputClass} placeholder="e.g. 30" /></div>
+        <div><label className={label}>Size (sq.ft.)</label><input name="payload[size]" className={inputClass} placeholder="e.g. 2000" /></div>
+        <div><label className={label}>Frontage (ft.)</label><input name="payload[frontage]" className={inputClass} placeholder="e.g. 30" /></div>
         <div><label className={label}>Parking Available</label>
-          <select className={inputClass}><option>Yes</option><option>Limited</option><option>No</option></select>
+          <select name="payload[parking]" className={inputClass}><option>Yes</option><option>Limited</option><option>No</option></select>
         </div>
         <div><label className={label}>Ownership</label>
-          <select className={inputClass}><option>Owned</option><option>Leased</option><option>For Sale</option><option>For Rent</option></select>
+          <select name="payload[ownership]" className={inputClass}><option>Owned</option><option>Leased</option><option>For Sale</option><option>For Rent</option></select>
         </div>
-        <div><label className={label}>Expected Rent / Price (PKR)</label><input className={inputClass} /></div>
+        <div><label className={label}>Expected Rent / Price (PKR)</label><input name="payload[price]" className={inputClass} /></div>
       </div>
 
-      <div><label className={label}>Additional Notes</label><textarea rows={3} className={`${inputClass} resize-y`} placeholder="Footfall, nearby anchors, visibility, map link…" /></div>
+      <div><label className={label}>Additional Notes</label><textarea name="payload[notes]" rows={3} className={`${inputClass} resize-y`} placeholder="Footfall, nearby anchors, visibility, map link…" /></div>
 
       <label className="flex items-center gap-2 text-sm text-[#717275] border-2 border-dashed border-gray-300 rounded-xl p-3 cursor-pointer hover:border-[#F05535] transition-colors">
         <Upload className="w-4 h-4 text-[#F05535]" />
-        <span>Attach property images / documents — upload wiring ready for backend</span>
-        <input type="file" multiple className="hidden" />
+        <span>Attach property images / documents</span>
+        <input type="file" name="attachments[]" multiple className="hidden" />
       </label>
 
       <label className="flex items-start gap-2 text-xs text-[#717275]">
-        <input type="checkbox" required className="mt-0.5 accent-[#F05535]" />
+        <input type="checkbox" name="consent" required className="mt-0.5 accent-[#F05535]" />
         <span>I consent to Fri-Chiks ® reviewing and storing these property details for site evaluation.</span>
       </label>
 
-      <button type="submit" className="w-full bg-[#F05535] hover:bg-[#D34518] text-white font-bold py-3.5 rounded-xl text-base transition-all flex items-center justify-center gap-2 cursor-pointer">
-        <Send className="w-4 h-4 text-[#F6A18F]" /> Submit Property
+      {error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{error}</p>}
+      <button type="submit" disabled={submitting} className="w-full bg-[#F05535] hover:bg-[#D34518] disabled:opacity-60 text-white font-bold py-3.5 rounded-xl text-base transition-all flex items-center justify-center gap-2 cursor-pointer">
+        <Send className="w-4 h-4 text-[#F6A18F]" /> {submitting ? 'Submitting...' : 'Submit Property'}
       </button>
     </form>
   );

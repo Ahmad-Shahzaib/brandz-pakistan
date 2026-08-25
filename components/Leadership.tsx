@@ -4,9 +4,9 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Linkedin } from 'lucide-react';
 import { SectionHeader } from './SectionHeader';
-import { LEADERSHIP } from '../data/siteData';
+import type { LeadershipMember } from '@/lib/types';
 
-export const Leadership: React.FC = () => {
+export const Leadership: React.FC<{ members: LeadershipMember[] }> = ({ members }) => {
   return (
     <section className="py-20 bg-[#F7F7F7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,7 +16,7 @@ export const Leadership: React.FC = () => {
           description="Experienced operators guiding Fri-Chiks ® from the kitchen to national expansion."
         />
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {LEADERSHIP.map((m, idx) => (
+          {members.map((m, idx) => (
             <motion.div
               key={m.id}
               initial={{ opacity: 0, y: 24 }}

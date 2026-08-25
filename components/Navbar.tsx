@@ -5,27 +5,29 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, MessageCircle, X } from 'lucide-react';
+import type { MenuItem } from '@/lib/api';
 
-const links = [
-  ['Home', '/'],
-  ['About', '/#about'],
-  ['Brands', '/#brands'],
-  ['Partners', '/franchise'],
-  ['Careers', '/careers'],
-  ['News', '/media'],
+const fallbackLinks: MenuItem[] = [
+  { id: 1, label: 'Home', url: '/' },
+  { id: 2, label: 'About', url: '/our-story' },
+  { id: 3, label: 'Brands', url: '/brands' },
+  { id: 4, label: 'Partners', url: '/franchise' },
+  { id: 5, label: 'Careers', url: '/careers' },
+  { id: 6, label: 'News', url: '/media' },
 ];
 
-export function Navbar() {
+export function Navbar({ logo, links = fallbackLinks }: { logo?: string; links?: MenuItem[] }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isBrandDetail = /^\/brands\/[^/]+$/.test(pathname);
+  const navLinks = links.length ? links : fallbackLinks;
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <Link href="/" className="group block" aria-label="Brandz Pakistan home">
           <Image
-            src="/assets/logos/brandz-logo.png"
+            src={logo || '/assets/logos/brandz-logo.png'}
             alt="Brandz Pakistan"
             width={180}
             height={39}
@@ -35,8 +37,8 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Main navigation">
-          {links.map(([label, href]) => (
-            <Link key={label} href={href} className="text-[11px] font-bold uppercase tracking-wide text-white/85 transition hover:text-[#F6A18F]">
+          {navLinks.map(({ id, label, url }) => (
+            <Link key={id} href={url} className="text-[11px] font-bold uppercase tracking-wide text-white/85 transition hover:text-[#F6A18F]">
               {label}
             </Link>
           ))}
@@ -57,8 +59,8 @@ export function Navbar() {
 
       {open && (
         <nav className="border-t border-white/10 bg-[#292A2D]/[.98] px-6 py-4 shadow-2xl backdrop-blur xl:hidden" aria-label="Mobile navigation">
-          {links.map(([label, href]) => (
-            <Link key={label} onClick={() => setOpen(false)} href={href} className="block border-b border-white/10 py-4 text-sm font-bold text-white transition hover:text-[#F6A18F]">
+          {navLinks.map(({ id, label, url }) => (
+            <Link key={id} onClick={() => setOpen(false)} href={url} className="block border-b border-white/10 py-4 text-sm font-bold text-white transition hover:text-[#F6A18F]">
               {label}
             </Link>
           ))}

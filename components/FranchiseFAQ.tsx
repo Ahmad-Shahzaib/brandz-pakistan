@@ -3,14 +3,14 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Plus, Minus } from 'lucide-react';
-import { FRANCHISE_FAQS } from '../data/siteData';
+import type { FranchiseFAQ as FranchiseFAQItem } from '@/lib/types';
 
-export const FranchiseFAQ: React.FC = () => {
+export const FranchiseFAQ: React.FC<{ faqs: FranchiseFAQItem[] }> = ({ faqs }) => {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <div className="max-w-3xl mx-auto space-y-3">
-      {FRANCHISE_FAQS.map((faq, idx) => {
+      {faqs.map((faq, idx) => {
         const isOpen = open === idx;
         return (
           <div
