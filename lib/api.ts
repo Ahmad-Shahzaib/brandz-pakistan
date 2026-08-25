@@ -12,8 +12,32 @@ import type {
   SupportPillar,
 } from '@/lib/types';
 import type { AwardItem, CompanyNews, CoreValue, StatItem, TimelineMilestone } from '@/types';
+import { brands as fallbackBrands, getBrand as getFallbackBrand } from '@/data/brands';
+import {
+  AWARD_IMAGE,
+  HERO_IMAGE,
+  INTERIOR_IMAGE,
+  LOGO_IMAGE,
+  STOREFRONT_IMAGE,
+  TEAM_IMAGE,
+  STATS_DATA,
+  CORE_VALUES_DATA,
+  TIMELINE_DATA,
+  AWARDS_DATA,
+} from '@/data/corporateData';
+import {
+  FRANCHISE_FAQS,
+  FRANCHISE_MODELS,
+  FRANCHISE_PROCESS,
+  INVESTMENT_OVERVIEW,
+  LEADERSHIP,
+  RESTAURANTS,
+  SUPPORT_PILLARS,
+  JOBS,
+  INQUIRY_TYPES,
+} from '@/data/siteData';
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '');
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 const ASSET_BASE = (process.env.NEXT_PUBLIC_ASSET_BASE_URL || API_BASE.replace(/\/api\/v1$/, '')).replace(/\/$/, '');
 
 type ApiResponse<T> = { success: boolean; data: T };
@@ -195,6 +219,54 @@ const mapCard = (item: Record<string, unknown>): ContentCard => ({
   icon: String(item.icon || item.iconName || item.icon_name || ''),
 });
 
+function getFallbackContent(): SiteContent {
+  return {
+    settings: {},
+    menus: {},
+    footer: [],
+    images: {
+      hero: HERO_IMAGE,
+      storefront: STOREFRONT_IMAGE,
+      interior: INTERIOR_IMAGE,
+      award: AWARD_IMAGE,
+      team: TEAM_IMAGE,
+      logo: LOGO_IMAGE,
+      footerLogo: LOGO_IMAGE,
+    },
+    brands: fallbackBrands,
+    categories: [...new Set(fallbackBrands.map((brand) => brand.category))],
+    pageHeroes: {},
+    homepageStats: [],
+    homepageValues: [],
+    homepageCapabilities: [],
+    homepageAbout: [],
+    homepageApproach: [],
+    homepageEnquiry: [],
+    homepageCta: [],
+    careersPerks: [],
+    franchiseReasons: [],
+    idealPartner: [],
+    propertyCriteria: [],
+    supplierCategories: [],
+    supplierStandards: [],
+    foodCategories: [],
+    restaurants: RESTAURANTS,
+    franchiseModels: FRANCHISE_MODELS,
+    investment: INVESTMENT_OVERVIEW,
+    franchiseProcess: FRANCHISE_PROCESS,
+    franchiseFaqs: FRANCHISE_FAQS,
+    supportPillars: SUPPORT_PILLARS,
+    stats: STATS_DATA,
+    coreValues: CORE_VALUES_DATA,
+    timeline: TIMELINE_DATA,
+    awards: AWARDS_DATA,
+    news: [],
+    jobs: JOBS,
+    leadership: LEADERSHIP,
+    inquiryTypes: INQUIRY_TYPES,
+  };
+}
+
 function mapBrand(brand: ApiBrand): Brand {
   const gallery = asList(brand.gallery).map(assetUrl);
   const image = assetUrl(brand.hero_image) || gallery[0] || '';
@@ -218,7 +290,12 @@ function mapBrand(brand: ApiBrand): Brand {
 }
 
 export const getSiteContent = cache(async (): Promise<SiteContent> => {
-  const data = await getJson<ApiContent>('/content');
+  let data: ApiContent;
+  try {
+    data = await getJson<ApiContent>('/content');
+  } catch {
+    return getFallbackContent();
+  }
   const settings = data.bootstrap.settings;
   const media = settings.media || {};
   const site = settings.site || {};
@@ -384,8 +461,12 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
 });
 
 export async function getBrand(slug: string) {
-  const brand = await getJson<ApiBrand>(`/brands/${slug}`);
-  return mapBrand(brand);
+  try {
+    const brand = await getJson<ApiBrand>(`/brands/${slug}`);
+    return mapBrand(brand);
+  } catch {
+    return getFallbackBrand(slug);
+  }
 }
 
 export async function submitJson(endpoint: string, body: Record<string, unknown>) {
