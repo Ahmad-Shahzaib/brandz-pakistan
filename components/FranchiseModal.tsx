@@ -27,7 +27,7 @@ export const FranchiseModal: React.FC<FranchiseModalProps> = ({ isOpen, onClose 
     setSubmitting(true);
     setError('');
     try {
-      const response = await fetch(`${(process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8001/api/v1').replace(/\/$/, '')}/franchise-applications`, {
+      const response = await fetch(`${(process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '')}/franchise-applications`, {
         method: 'POST',
         headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
