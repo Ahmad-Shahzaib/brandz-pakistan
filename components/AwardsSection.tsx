@@ -50,7 +50,7 @@ export const AwardsSection: React.FC<{ awards: AwardItem[]; image: string }> = (
           <div className="relative h-[320px] sm:h-[400px] w-full">
             <img
               src={image}
-              alt="Fri-Chiks Award Ceremony Gala"
+              alt="Brandz Pakistan award ceremony"
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-90"
               referrerPolicy="no-referrer"
             />

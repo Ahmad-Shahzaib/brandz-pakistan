@@ -8,7 +8,7 @@ import { MapPin, Eye, Car, Users, Store, Ruler } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Suggest a Location',
   description:
-    'Own or manage a commercial property? Submit it for a potential Fri-Chiks ® restaurant. See our site-selection criteria and share your site.',
+    'Own or manage a commercial property? Submit it for a potential Brandz Pakistan restaurant. See our site-selection criteria and share your site.',
 };
 
 const criteriaIcons = { Users, Eye, Car, Store, Ruler, MapPin };

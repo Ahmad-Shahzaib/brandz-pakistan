@@ -82,7 +82,7 @@ export const PropertyForm: React.FC = () => {
 
       <label className="flex items-start gap-2 text-xs text-[#717275]">
         <input type="checkbox" name="consent" required className="mt-0.5 accent-[#F05535]" />
-        <span>I consent to Fri-Chiks ® reviewing and storing these property details for site evaluation.</span>
+        <span>I consent to Brandz Pakistan reviewing and storing these property details for site evaluation.</span>
       </label>
 
       {error && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{error}</p>}

@@ -6,16 +6,9 @@ import type { InquiryType } from '@/lib/types';
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 
-const defaultInquiryTypes: InquiryType[] = [
-  { id: 'general', label: 'General', description: 'General questions and business support.' },
-  { id: 'franchise', label: 'Franchise', description: 'Franchise and investment enquiries.' },
-  { id: 'supplier', label: 'Supplier', description: 'Supplier partnership enquiries.' },
-  { id: 'media', label: 'Media', description: 'Press and media requests.' },
-];
-
 export const ContactForm: React.FC<{ defaultType?: string; inquiryTypes?: InquiryType[] }> = ({
   defaultType = 'general',
-  inquiryTypes = defaultInquiryTypes,
+  inquiryTypes = [],
 }) => {
   const [type, setType] = useState(defaultType);
   const [sent, setSent] = useState(false);

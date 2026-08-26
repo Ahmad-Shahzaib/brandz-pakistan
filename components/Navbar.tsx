@@ -7,37 +7,29 @@ import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, MessageCircle, X } from 'lucide-react';
 import type { MenuItem } from '@/lib/api';
 
-const fallbackLinks: MenuItem[] = [
-  { id: 1, label: 'Home', url: '/' },
-  { id: 2, label: 'About', url: '/our-story' },
-  { id: 3, label: 'Brands', url: '/brands' },
-  { id: 4, label: 'Partners', url: '/franchise' },
-  { id: 5, label: 'Careers', url: '/careers' },
-  { id: 6, label: 'News', url: '/media' },
-];
-
-export function Navbar({ logo, links = fallbackLinks }: { logo?: string; links?: MenuItem[] }) {
+export function Navbar({ logo, links = [] }: { logo?: string; links?: MenuItem[] }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isBrandDetail = /^\/brands\/[^/]+$/.test(pathname);
-  const navLinks = links.length ? links : fallbackLinks;
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-        <Link href="/" className="group block" aria-label="Brandz Pakistan home">
-          <Image
-            src={logo || '/assets/logos/brandz-logo.png'}
-            alt="Brandz Pakistan"
-            width={180}
-            height={39}
-            priority
-            className="h-auto w-[150px] object-contain transition-opacity group-hover:opacity-85 sm:w-[180px]"
-          />
-        </Link>
+        {logo && (
+          <Link href="/" className="group block" aria-label="Brandz Pakistan home">
+            <Image
+              src={logo}
+              alt="Brandz Pakistan"
+              width={180}
+              height={39}
+              priority
+              className="h-auto w-[150px] object-contain transition-opacity group-hover:opacity-85 sm:w-[180px]"
+            />
+          </Link>
+        )}
 
         <nav className="hidden items-center gap-6 xl:flex" aria-label="Main navigation">
-          {navLinks.map(({ id, label, url }) => (
+          {links.map(({ id, label, url }) => (
             <Link key={id} href={url} className="text-[11px] font-bold uppercase tracking-wide text-white/85 transition hover:text-[#F6A18F]">
               {label}
             </Link>
@@ -59,7 +51,7 @@ export function Navbar({ logo, links = fallbackLinks }: { logo?: string; links?:
 
       {open && (
         <nav className="border-t border-white/10 bg-[#292A2D]/[.98] px-6 py-4 shadow-2xl backdrop-blur xl:hidden" aria-label="Mobile navigation">
-          {navLinks.map(({ id, label, url }) => (
+          {links.map(({ id, label, url }) => (
             <Link key={id} onClick={() => setOpen(false)} href={url} className="block border-b border-white/10 py-4 text-sm font-bold text-white transition hover:text-[#F6A18F]">
               {label}
             </Link>

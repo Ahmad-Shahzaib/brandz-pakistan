@@ -3,10 +3,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Heart, Sparkles } from 'lucide-react';
+import type { ContentCard } from '@/lib/api';
 
-export const SomethingDifferentStrip: React.FC<{ teamImage?: string; interiorImage?: string }> = ({
-  teamImage = '/assets/images/team_opening_1785741327782.jpg',
-  interiorImage = '/assets/images/store_interior_1785741297229.jpg',
+export const SomethingDifferentStrip: React.FC<{ teamImage: string; interiorImage: string; content?: ContentCard }> = ({
+  teamImage,
+  interiorImage,
+  content,
 }) => {
   return (
     <section className="py-16 bg-[#FFF5F2] border-y border-[#F6A18F]/40 overflow-hidden">
@@ -26,13 +28,13 @@ export const SomethingDifferentStrip: React.FC<{ teamImage?: string; interiorIma
             <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-white aspect-4/3 sm:aspect-16/10">
               <img
                 src={teamImage}
-                alt="Fri-Chiks Happy Staff and Customers"
+                alt={content?.description || 'Brandz Pakistan hospitality team'}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs px-3 py-1 rounded-lg text-xs font-bold text-[#343538]">
-                Warm Local Hospitality
+                {content?.description}
               </div>
             </div>
           </motion.div>
@@ -47,17 +49,17 @@ export const SomethingDifferentStrip: React.FC<{ teamImage?: string; interiorIma
           >
             <div className="inline-flex items-center gap-1 text-[#F05535] font-bold text-xs uppercase tracking-widest mb-1">
               <Sparkles className="w-3.5 h-3.5 fill-[#F05535]" />
-              <span>The Fri-Chiks ® Signature</span>
+              <span>{content?.label}</span>
               <Sparkles className="w-3.5 h-3.5 fill-[#F05535]" />
             </div>
 
             {/* Signature Expressive Font Callout */}
             <h2 className="font-script text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F05535] leading-tight -rotate-2 drop-shadow-xs">
-              "Something Different!"
+              "{content?.title}"
             </h2>
 
             <p className="mt-3 text-sm sm:text-base text-[#717275] font-medium max-w-sm mx-auto leading-relaxed">
-              We don't do cookie-cutter fast food. Every batch is freshly marinated in our proprietary 12-spice blend for an unforgettable local flavor profile.
+              {content?.text}
             </p>
           </motion.div>
 
@@ -72,14 +74,14 @@ export const SomethingDifferentStrip: React.FC<{ teamImage?: string; interiorIma
             <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-white aspect-4/3 sm:aspect-16/10">
               <img
                 src={interiorImage}
-                alt="Fri-Chiks Store Environment and Quality"
+                alt={content?.value || 'Brandz Pakistan store environment'}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-3 right-3 bg-[#F05535] text-white px-3 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
                 <Heart className="w-3.5 h-3.5 fill-white text-[#F6A18F]" />
-                <span>Made With Passion</span>
+                <span>{content?.value}</span>
               </div>
             </div>
           </motion.div>

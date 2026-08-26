@@ -75,7 +75,7 @@ export const FranchiseModal: React.FC<FranchiseModalProps> = ({ isOpen, onClose 
 
               <div className="flex items-center gap-2 text-[#F6A18F] text-xs font-extrabold uppercase tracking-widest mb-1">
                 <Building2 className="w-4 h-4" />
-                <span>Fri-Chiks ® Partnership</span>
+                <span>Brandz Pakistan Partnership</span>
               </div>
 
               <h3 className="font-heading font-extrabold text-2xl text-white">

@@ -72,7 +72,7 @@ export const CoreValues: React.FC<{ values: CoreValue[] }> = ({ values }) => {
 
                 <div className="mt-6 pt-4 border-t border-gray-200/60 flex items-center justify-between text-xs font-semibold text-[#717275]">
                   <span>Pillar #{idx + 1}</span>
-                  <span className="text-[#F05535]">Fri-Chiks ® Standard</span>
+                  <span className="text-[#F05535]">Brandz Pakistan Standard</span>
                 </div>
               </motion.div>
             );
