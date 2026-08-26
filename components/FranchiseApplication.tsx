@@ -140,7 +140,7 @@ export const FranchiseApplication: React.FC = () => {
           <CheckCircle2 className="w-12 h-12" />
         </div>
         <h2 className="font-heading font-extrabold text-3xl text-[#343538] mt-6">
-          Thank You for Your Interest in Fri-Chiks ®
+          Thank You for Your Interest in Brandz Pakistan
         </h2>
         <p className="text-[#717275] mt-3 leading-relaxed">
           Your application has been received. Our franchise development team will review your submission and reach out to <strong className="text-[#343538]">{data.email}</strong> to discuss the next steps.
@@ -289,13 +289,13 @@ export const FranchiseApplication: React.FC = () => {
             {step === 5 && (
               <div className="space-y-4">
                 <h3 className="font-heading font-extrabold text-xl text-[#343538]">Final Questions</h3>
-                <Field label="Why Fri-Chiks ®?">
+                <Field label="Why Brandz Pakistan?">
                   <textarea rows={3} className={inputClass} value={data.whyFrichiks} onChange={(e) => set('whyFrichiks', e.target.value)} placeholder="Tell us what draws you to the brand…" />
                 </Field>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="How Did You Hear About Us?">
                     <select className={inputClass} value={data.hearAbout} onChange={(e) => set('hearAbout', e.target.value)}>
-                      <option>Website</option><option>Social Media</option><option>A Fri-Chiks ® Restaurant</option><option>Referral</option><option>News / Press</option><option>Other</option>
+                      <option>Website</option><option>Social Media</option><option>A Brandz Pakistan Restaurant</option><option>Referral</option><option>News / Press</option><option>Other</option>
                     </select>
                   </Field>
                 </div>
@@ -328,7 +328,7 @@ export const FranchiseApplication: React.FC = () => {
                 </label>
                 <label className="flex items-start gap-2.5 text-sm text-[#343538] cursor-pointer">
                   <input type="checkbox" checked={data.consent} onChange={(e) => set('consent', e.target.checked)} className="mt-1 accent-[#F05535]" />
-                  <span>I consent to Fri-Chiks ® processing my details to respond to this application.</span>
+                  <span>I consent to Brandz Pakistan processing my details to respond to this application.</span>
                 </label>
               </div>
             )}

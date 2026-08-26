@@ -7,7 +7,7 @@ import { getSiteContent } from '@/lib/api';
 export const metadata: Metadata = {
   title: 'Restaurants',
   description:
-    'Find a Fri-Chiks ® near you. Browse our growing network of restaurants across Lahore, Faisalabad, Gujranwala and Islamabad by city, format and service.',
+    'Find a Brandz Pakistan restaurant near you. Browse our growing network across Lahore, Faisalabad, Gujranwala, and Islamabad by city, format, and service.',
 };
 
 export default async function RestaurantsPage() {
@@ -34,7 +34,7 @@ export default async function RestaurantsPage() {
       </section>
       <CTABand
         heading="Don't See Your City Yet?"
-        text="We're expanding fast. Bring Fri-Chiks ® to your area as a franchise partner, or suggest a location you own."
+        text="We're expanding fast. Bring Brandz Pakistan to your area as a franchise partner, or suggest a location you own."
         primaryLabel="Explore Franchise"
         primaryHref="/franchise"
         image={images.interior}

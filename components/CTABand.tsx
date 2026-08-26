@@ -7,19 +7,19 @@ import { ArrowRight, PhoneCall } from 'lucide-react';
 import { useModals } from './SiteChrome';
 
 interface CTABandProps {
-  heading?: string;
-  text?: string;
+  heading: string;
+  text: string;
   primaryLabel?: string;
   primaryHref?: string;
-  image?: string;
+  image: string;
 }
 
 export const CTABand: React.FC<CTABandProps> = ({
-  heading = 'Your Next Business Could Be a Brandz Pakistan Brand',
-  text = 'Join a growing food brand backed by proven restaurant systems, operational experience and dedicated franchise support.',
+  heading,
+  text,
   primaryLabel = 'Apply for Franchise',
   primaryHref = '/apply',
-  image = '/assets/images/store_interior_1785741297229.jpg',
+  image,
 }) => {
   const { openFranchiseModal } = useModals();
   return (

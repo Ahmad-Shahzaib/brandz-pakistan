@@ -3,8 +3,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Target, Eye, Sparkles } from 'lucide-react';
+import type { ContentCard } from '@/lib/api';
 
-export const MissionVision: React.FC = () => {
+export const MissionVision: React.FC<{ items: ContentCard[] }> = ({ items }) => {
+  const mission = items[0];
+  const vision = items[1];
   return (
     <section className="py-20 bg-[#F7F7F7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,14 +21,13 @@ export const MissionVision: React.FC = () => {
             Our Purpose & Ambition
           </h2>
           <p className="text-[#717275] text-base mt-2">
-            Guiding every Fri-Chiks ® recipe, store opening, and franchise partnership.
+            Editable strategic direction from the Brandz Pakistan CMS.
           </p>
         </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          {/* Mission Card - Fri-Chiks Red Fill */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -43,26 +45,25 @@ export const MissionVision: React.FC = () => {
                   <Target className="w-7 h-7" />
                 </div>
                 <span className="text-xs uppercase font-extrabold tracking-widest bg-white/20 px-3 py-1 rounded-full backdrop-blur-xs text-white">
-                  Our Mission
+                  {mission?.label}
                 </span>
               </div>
 
               <h3 className="font-heading text-2xl sm:text-3xl font-extrabold tracking-tight mb-4 text-white">
-                Deliver Unmatched Taste & Empower Local Franchisees
+                {mission?.title}
               </h3>
 
               <p className="text-white/95 text-base sm:text-lg leading-relaxed font-normal">
-                To serve fresh, 100% Halal-certified golden fried chicken crafted with secret local marinades, while providing turnkey franchise platforms that cultivate sustainable profitability.
+                {mission?.text}
               </p>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/20 flex items-center gap-2 text-xs font-semibold text-white/90">
               <Sparkles className="w-4 h-4 text-[#F6A18F]" />
-              <span>Standardized Quality • 100% Halal Integrity • Community Focused</span>
+              <span>{mission?.description}</span>
             </div>
           </motion.div>
 
-          {/* Vision Card - Fri-Chiks Golden Accent Fill */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -80,22 +81,22 @@ export const MissionVision: React.FC = () => {
                   <Eye className="w-7 h-7" />
                 </div>
                 <span className="text-xs uppercase font-extrabold tracking-widest bg-[#F6A18F]/20 text-[#F6A18F] px-3 py-1 rounded-full border border-[#F6A18F]/30">
-                  Our Vision
+                  {vision?.label}
                 </span>
               </div>
 
               <h3 className="font-heading text-2xl sm:text-3xl font-extrabold tracking-tight mb-4 text-white">
-                To Be Pakistan's Leading Homegrown QSR Franchise
+                {vision?.title}
               </h3>
 
               <p className="text-gray-300 text-base sm:text-lg leading-relaxed font-normal">
-                To expand the Fri-Chiks ® brand into every major city across Pakistan, celebrated for operational excellence, customer loyalty, and franchisee satisfaction across 50+ locations by 2027.
+                {vision?.text}
               </p>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/15 flex items-center gap-2 text-xs font-semibold text-gray-300">
               <Sparkles className="w-4 h-4 text-[#F6A18F]" />
-              <span>50 Outlets Roadmap • Central Processing Hub • Digital Ordering</span>
+              <span>{vision?.description}</span>
             </div>
           </motion.div>
 

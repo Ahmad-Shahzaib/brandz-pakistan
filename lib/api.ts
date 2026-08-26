@@ -145,6 +145,10 @@ export type SiteContent = {
   propertyCriteria: ContentCard[];
   supplierCategories: ContentCard[];
   supplierStandards: ContentCard[];
+  ourStoryIntro: ContentCard[];
+  ourStorySignature: ContentCard[];
+  ourStoryMissionVision: ContentCard[];
+  ourStoryCta: ContentCard[];
   foodCategories: FoodCategory[];
   restaurants: Restaurant[];
   franchiseModels: FranchiseModel[];
@@ -347,6 +351,10 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
     propertyCriteria: (collections.property_criteria || []).map(mapCard),
     supplierCategories: (collections.supplier_categories || []).map(mapCard),
     supplierStandards: (collections.supplier_standards || []).map(mapCard),
+    ourStoryIntro: (collections.our_story_intro || []).map(mapCard),
+    ourStorySignature: (collections.our_story_signature || []).map(mapCard),
+    ourStoryMissionVision: (collections.our_story_mission_vision || []).map(mapCard),
+    ourStoryCta: (collections.our_story_cta || []).map(mapCard),
     foodCategories: (collections.food_categories || []).map((item) => ({
       id: String(item.id || slugify(item.name)),
       name: String(item.name || item.title || ''),

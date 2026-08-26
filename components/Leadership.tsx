@@ -13,7 +13,7 @@ export const Leadership: React.FC<{ members: LeadershipMember[] }> = ({ members 
         <SectionHeader
           eyebrow="Leadership"
           title="The People Behind the Brand"
-          description="Experienced operators guiding Fri-Chiks ® from the kitchen to national expansion."
+          description="Experienced operators guiding Brandz Pakistan from concept development to national expansion."
         />
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {members.map((m, idx) => (

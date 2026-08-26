@@ -8,7 +8,7 @@ import { MapPin, Phone, Mail, Clock, Building2, ArrowRight } from 'lucide-react'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Contact Fri-Chiks ® corporate — general, franchise, partnership, property, supplier, media and careers inquiries, plus our headquarters details.',
+    'Contact Brandz Pakistan for general, franchise, partnership, property, supplier, media, and careers inquiries, plus our headquarters details.',
 };
 
 export default async function ContactPage() {
@@ -33,7 +33,7 @@ export default async function ContactPage() {
         <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
           <Image
             src={images.interior}
-            alt="Fri-Chiks interior and service environment"
+            alt="Brandz Pakistan interior and service environment"
             fill
             priority
             sizes="(min-width: 1024px) 58vw, 100vw"

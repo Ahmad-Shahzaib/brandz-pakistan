@@ -8,7 +8,7 @@ import { CheckCircle2, Boxes, ShieldCheck, Truck, ClipboardList } from 'lucide-r
 export const metadata: Metadata = {
   title: 'Suppliers & Vendors',
   description:
-    'Partner with Fri-Chiks ® as an approved supplier. Understand our procurement categories, supplier standards and vendor onboarding.',
+    'Partner with Brandz Pakistan as an approved supplier. Understand our procurement categories, supplier standards and vendor onboarding.',
 };
 
 const standardIcons = { ShieldCheck, Truck, ClipboardList, Boxes };

@@ -9,7 +9,7 @@ import { getSiteContent } from '@/lib/api';
 export const metadata: Metadata = {
   title: 'Achievements',
   description:
-    'Milestones, growth numbers, awards and recognition earned by Fri-Chiks ® across two decades of building a homegrown QSR brand.',
+    'Milestones, growth numbers, awards and recognition earned by Brandz Pakistan across two decades of building homegrown QSR brands.',
 };
 
 export default async function AchievementsPage() {
@@ -48,7 +48,13 @@ export default async function AchievementsPage() {
 
       <HistoryTimeline timeline={timeline} />
       <AwardsSection awards={awards} image={images.award} />
-      <CTABand image={images.interior} />
+      <CTABand
+        heading="Celebrate the Next Milestone With Us"
+        text="Connect with Brandz Pakistan for partnerships, media enquiries, and growth opportunities."
+        primaryLabel="Contact the Team"
+        primaryHref="/contact"
+        image={images.interior}
+      />
     </>
   );
 }

@@ -12,12 +12,13 @@ import { getSiteContent } from '@/lib/api';
 export const metadata: Metadata = {
   title: 'Our Story',
   description:
-    'Born from a love for great chicken and built for bigger ambitions — the story, philosophy and growth journey of Fri-Chiks ®.',
+    'Built around food, franchise systems, and bigger ambitions: the story, philosophy, and growth journey of Brandz Pakistan.',
 };
 
 export default async function OurStoryPage() {
-  const { images, timeline, coreValues, leadership, pageHeroes } = await getSiteContent();
+  const { images, timeline, coreValues, leadership, pageHeroes, ourStoryIntro, ourStorySignature, ourStoryMissionVision, ourStoryCta } = await getSiteContent();
   const hero = pageHeroes['our-story'];
+  const cta = ourStoryCta[0];
 
   return (
     <>
@@ -34,15 +35,17 @@ export default async function OurStoryPage() {
         }
         description={hero?.description || 'A journey powered by consistent taste, standardized systems and franchise partnership.'}
       />
-      <BrandStory image={images.hero} />
-      <SomethingDifferentStrip teamImage={images.team} interiorImage={images.interior} />
-      <MissionVision />
+      <BrandStory image={images.hero} content={ourStoryIntro[0]} />
+      <SomethingDifferentStrip teamImage={images.team} interiorImage={images.interior} content={ourStorySignature[0]} />
+      <MissionVision items={ourStoryMissionVision} />
       <CoreValues values={coreValues} />
       <HistoryTimeline timeline={timeline} />
       <Leadership members={leadership} />
       <CTABand
-        heading="Be Part of the Fri-Chiks ® Story"
-        text="Whether you love the food or want to build a business with us, there is a place for you in our journey."
+        heading={cta?.title || 'Be Part of the Brandz Pakistan Story'}
+        text={cta?.text || cta?.description || ''}
+        primaryLabel={cta?.label || 'Apply for Franchise'}
+        primaryHref={cta?.value || '/apply'}
         image={images.interior}
       />
     </>

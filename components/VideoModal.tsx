@@ -29,7 +29,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, poster 
                 </div>
                 <div>
                   <h3 className="font-heading font-extrabold text-base sm:text-lg text-white">
-                    Fri-Chiks ® Corporate Documentary
+                    Brandz Pakistan Corporate Documentary
                   </h3>
                   <p className="text-xs text-gray-400">
                     "Standards, Crunch & Franchise Scaling" (2:45)
@@ -80,7 +80,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, poster 
                   </div>
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-[#F05535]" />
-                    <span className="text-[11px] font-bold">Fri-Chiks HQ Official</span>
+                    <span className="text-[11px] font-bold">Brandz Pakistan HQ Official</span>
                   </div>
                 </div>
               </div>

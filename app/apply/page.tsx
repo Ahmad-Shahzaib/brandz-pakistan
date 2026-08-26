@@ -6,7 +6,7 @@ import { getSiteContent } from '@/lib/api';
 export const metadata: Metadata = {
   title: 'Franchise Application',
   description:
-    'Apply to become a Fri-Chiks ® franchise partner. Complete the multi-step application and our franchise development team will be in touch.',
+    'Apply to become a Brandz Pakistan franchise partner. Complete the multi-step application and our franchise development team will be in touch.',
 };
 
 export default async function ApplyPage() {

@@ -83,7 +83,7 @@ export default async function FoodPage() {
 
       <CTABand
         heading="Love the Food? Build the Business."
-        text="A proven menu is the foundation of a Fri-Chiks ® franchise. Explore how you can bring it to your city."
+        text="A proven menu is the foundation of a Brandz Pakistan franchise. Explore how you can bring it to your city."
         primaryLabel="Explore Franchise"
         primaryHref="/franchise"
         image={images.interior}
