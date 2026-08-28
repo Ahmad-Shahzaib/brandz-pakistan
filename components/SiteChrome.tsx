@@ -33,6 +33,8 @@ export const SiteChrome: React.FC<{ children: React.ReactNode; content?: ChromeC
 }) => {
   const [franchiseOpen, setFranchiseOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const partnerLabel = settingText(content?.settings || {}, 'site', 'partner_portal_label', 'Partner Portal');
+  const partnerUrl = settingText(content?.settings || {}, 'site', 'partner_portal_url', '/contact');
 
   return (
     <ModalContext.Provider
@@ -41,7 +43,12 @@ export const SiteChrome: React.FC<{ children: React.ReactNode; content?: ChromeC
         openVideoModal: () => setVideoOpen(true),
       }}
     >
-      <Navbar logo={content?.images.logo} links={(content?.menus.primary?.items || []) as MenuItem[]} />
+      <Navbar
+        logo={content?.images.logo}
+        links={(content?.menus.primary?.items || []) as MenuItem[]}
+        partnerLabel={partnerLabel}
+        partnerUrl={partnerUrl}
+      />
       <ScrollReveal />
       <main className="grow">{children}</main>
       <Footer

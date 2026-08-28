@@ -12,30 +12,6 @@ import type {
   SupportPillar,
 } from '@/lib/types';
 import type { AwardItem, CompanyNews, CoreValue, StatItem, TimelineMilestone } from '@/types';
-import { brands as fallbackBrands, getBrand as getFallbackBrand } from '@/data/brands';
-import {
-  AWARD_IMAGE,
-  HERO_IMAGE,
-  INTERIOR_IMAGE,
-  LOGO_IMAGE,
-  STOREFRONT_IMAGE,
-  TEAM_IMAGE,
-  STATS_DATA,
-  CORE_VALUES_DATA,
-  TIMELINE_DATA,
-  AWARDS_DATA,
-} from '@/data/corporateData';
-import {
-  FRANCHISE_FAQS,
-  FRANCHISE_MODELS,
-  FRANCHISE_PROCESS,
-  INVESTMENT_OVERVIEW,
-  LEADERSHIP,
-  RESTAURANTS,
-  SUPPORT_PILLARS,
-  JOBS,
-  INQUIRY_TYPES,
-} from '@/data/siteData';
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_BASE_URL || 'https://brandz-pakistan.softsuitetech.com/api/v1').replace(/\/$/, '');
 const ASSET_BASE = (process.env.NEXT_PUBLIC_ASSET_BASE_URL || API_BASE.replace(/\/api\/v1$/, '')).replace(/\/$/, '');
@@ -72,6 +48,9 @@ export type PageHeroContent = {
   eyebrow: string;
   title: string;
   description: string;
+  backgroundColor: string;
+  overlayOpacity: number;
+  imagePosition: 'top' | 'center' | 'bottom';
 };
 
 type ApiBrand = {
@@ -229,16 +208,16 @@ function getFallbackContent(): SiteContent {
     menus: {},
     footer: [],
     images: {
-      hero: HERO_IMAGE,
-      storefront: STOREFRONT_IMAGE,
-      interior: INTERIOR_IMAGE,
-      award: AWARD_IMAGE,
-      team: TEAM_IMAGE,
-      logo: LOGO_IMAGE,
-      footerLogo: LOGO_IMAGE,
+      hero: '/assets/images/hero_fried_chicken_1785741263782.jpg',
+      storefront: '/assets/images/storefront_signage_1785741282569.jpg',
+      interior: '/assets/images/store_interior_1785741297229.jpg',
+      award: '/assets/images/award_ceremony_1785741311301.jpg',
+      team: '/assets/images/team_opening_1785741327782.jpg',
+      logo: '/assets/logos/brandz-logo.png',
+      footerLogo: '/assets/logos/brandz-logo.png',
     },
-    brands: fallbackBrands,
-    categories: [...new Set(fallbackBrands.map((brand) => brand.category))],
+    brands: [],
+    categories: [],
     pageHeroes: {},
     homepageStats: [],
     homepageValues: [],
@@ -258,20 +237,20 @@ function getFallbackContent(): SiteContent {
     ourStoryMissionVision: [],
     ourStoryCta: [],
     foodCategories: [],
-    restaurants: RESTAURANTS,
-    franchiseModels: FRANCHISE_MODELS,
-    investment: INVESTMENT_OVERVIEW,
-    franchiseProcess: FRANCHISE_PROCESS,
-    franchiseFaqs: FRANCHISE_FAQS,
-    supportPillars: SUPPORT_PILLARS,
-    stats: STATS_DATA,
-    coreValues: CORE_VALUES_DATA,
-    timeline: TIMELINE_DATA,
-    awards: AWARDS_DATA,
+    restaurants: [],
+    franchiseModels: [],
+    investment: [],
+    franchiseProcess: [],
+    franchiseFaqs: [],
+    supportPillars: [],
+    stats: [],
+    coreValues: [],
+    timeline: [],
+    awards: [],
     news: [],
-    jobs: JOBS,
-    leadership: LEADERSHIP,
-    inquiryTypes: INQUIRY_TYPES,
+    jobs: [],
+    leadership: [],
+    inquiryTypes: [],
   };
 }
 
@@ -319,6 +298,13 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
           eyebrow: String(content.eyebrow || page.title || ''),
           title: String(hero.heading || page.title || ''),
           description: String(hero.subheading || ''),
+          backgroundColor: String(content.background_color || '#292A2D'),
+          overlayOpacity: Number(content.overlay_opacity || 35),
+          imagePosition: (
+            ['top', 'bottom'].includes(String(content.image_position))
+              ? String(content.image_position)
+              : 'center'
+          ) as PageHeroContent['imagePosition'],
         },
       ];
     })
@@ -472,12 +458,12 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
   };
 });
 
-export async function getBrand(slug: string) {
+export async function getBrand(slug: string): Promise<Brand | undefined> {
   try {
     const brand = await getJson<ApiBrand>(`/brands/${slug}`);
     return mapBrand(brand);
   } catch {
-    return getFallbackBrand(slug);
+    return undefined;
   }
 }
 
