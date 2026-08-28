@@ -7,7 +7,17 @@ import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, MessageCircle, X } from 'lucide-react';
 import type { MenuItem } from '@/lib/api';
 
-export function Navbar({ logo, links = [] }: { logo?: string; links?: MenuItem[] }) {
+export function Navbar({
+  logo,
+  links = [],
+  partnerLabel = 'Partner Portal',
+  partnerUrl = '/contact',
+}: {
+  logo?: string;
+  links?: MenuItem[];
+  partnerLabel?: string;
+  partnerUrl?: string;
+}) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const isBrandDetail = /^\/brands\/[^/]+$/.test(pathname);
@@ -39,8 +49,8 @@ export function Navbar({ logo, links = [] }: { logo?: string; links?: MenuItem[]
               <MessageCircle size={14} /> Enquire Now
             </Link>
           )}
-          <Link href="/contact" className="inline-flex min-h-10 items-center gap-2 rounded-md border border-[#F05535]/70 px-4 text-[10px] font-extrabold uppercase tracking-wide text-[#F6A18F] transition hover:bg-[#F05535] hover:text-white">
-            Partner portal <ArrowUpRight size={14} />
+          <Link href={partnerUrl} className="inline-flex min-h-10 items-center gap-2 rounded-md border border-[#F05535]/70 px-4 text-[10px] font-extrabold uppercase tracking-wide text-[#F6A18F] transition hover:bg-[#F05535] hover:text-white">
+            {partnerLabel} <ArrowUpRight size={14} />
           </Link>
         </nav>
 
@@ -61,8 +71,8 @@ export function Navbar({ logo, links = [] }: { logo?: string; links?: MenuItem[]
               <MessageCircle size={15} /> Enquire Now
             </Link>
           )}
-          <Link onClick={() => setOpen(false)} href="/contact" className={`${isBrandDetail ? 'mt-3' : 'mt-5'} flex min-h-11 items-center justify-center gap-2 rounded-md border border-[#F05535]/70 px-4 text-xs font-extrabold uppercase tracking-wide text-[#F6A18F]`}>
-            Contact Brandz <ArrowUpRight size={15} />
+          <Link onClick={() => setOpen(false)} href={partnerUrl} className={`${isBrandDetail ? 'mt-3' : 'mt-5'} flex min-h-11 items-center justify-center gap-2 rounded-md border border-[#F05535]/70 px-4 text-xs font-extrabold uppercase tracking-wide text-[#F6A18F]`}>
+            {partnerLabel} <ArrowUpRight size={15} />
           </Link>
         </nav>
       )}

@@ -35,14 +35,15 @@ export default async function HomePage() {
   } = await getSiteContent();
   const hero = pageHeroes.home;
   const about = homepageAbout[0];
-  const purpose = homepageApproach[0];
-  const vision = homepageApproach[1];
   const enquiry = homepageEnquiry[0];
   const finalCta = homepageCta[0];
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#292A2D] pt-20 text-white">
+      <section
+        className="relative overflow-hidden pt-20 text-white"
+        style={{ backgroundColor: hero?.backgroundColor || '#292A2D' }}
+      >
         <div
           className="absolute inset-0 opacity-35"
           style={{
@@ -57,7 +58,17 @@ export default async function HomePage() {
             fill
             priority
             sizes="(min-width: 1024px) 59vw, 100vw"
-            className="object-cover object-center opacity-90"
+            className={`object-cover opacity-90 ${
+              hero?.imagePosition === 'top'
+                ? 'object-top'
+                : hero?.imagePosition === 'bottom'
+                  ? 'object-bottom'
+                  : 'object-center'
+            }`}
+          />
+          <div
+            className="absolute inset-0 bg-black"
+            style={{ opacity: Math.min(Math.max(hero?.overlayOpacity || 35, 0), 80) / 100 }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#292A2D] via-[#292A2D]/75 to-transparent" />
         </div>
@@ -143,30 +154,30 @@ export default async function HomePage() {
                 </h2>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
-                <article className="rounded-xl bg-[#343538] p-7 text-white sm:p-9">
-                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[.14em] text-[#F6A18F]">
-                    <span>{purpose?.label || 'Our purpose'}</span>
-                    <ArrowRight size={16} />
-                  </div>
-                  <h3 className="mt-10 text-2xl font-bold leading-tight">
-                    {purpose?.title}
-                  </h3>
-                  <p className="mt-5 text-sm leading-6 text-white/65">
-                    {purpose?.text || purpose?.description}
-                  </p>
-                </article>
-                <article className="rounded-xl border border-[#E3E3E4] bg-[#F7F7F7] p-7 sm:p-9">
-                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[.14em] text-[#D34518]">
-                    <span>{vision?.label || 'Our vision'}</span>
-                    <ArrowRight size={16} />
-                  </div>
-                  <h3 className="mt-10 text-2xl font-bold leading-tight text-[#343538]">
-                    {vision?.title}
-                  </h3>
-                  <p className="mt-5 text-sm leading-6 text-[#717275]">
-                    {vision?.text || vision?.description}
-                  </p>
-                </article>
+                {homepageApproach.map((item, index) => {
+                  const featured = index === 0;
+                  return (
+                    <article
+                      key={item.id}
+                      className={`rounded-xl p-7 sm:p-9 ${
+                        featured ? 'bg-[#343538] text-white' : 'border border-[#E3E3E4] bg-[#F7F7F7] text-[#343538]'
+                      }`}
+                    >
+                      <div
+                        className={`flex items-center justify-between text-[10px] font-bold uppercase tracking-[.14em] ${
+                          featured ? 'text-[#F6A18F]' : 'text-[#D34518]'
+                        }`}
+                      >
+                        <span>{item.label || (featured ? 'Our purpose' : 'Our vision')}</span>
+                        <ArrowRight size={16} />
+                      </div>
+                      <h3 className="mt-10 text-2xl font-bold leading-tight">{item.title}</h3>
+                      <p className={`mt-5 text-sm leading-6 ${featured ? 'text-white/65' : 'text-[#717275]'}`}>
+                        {item.text || item.description}
+                      </p>
+                    </article>
+                  );
+                })}
               </div>
             </div>
           </div>

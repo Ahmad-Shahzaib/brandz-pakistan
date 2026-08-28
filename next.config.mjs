@@ -9,6 +9,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'http', hostname: '127.0.0.1', port: '8001' },
+      { protocol: 'http', hostname: '127.0.0.1', port: '8002' },
       { protocol: 'https', hostname: 'brandz-pakistan.softsuitetech.com' },
     ],
   },
