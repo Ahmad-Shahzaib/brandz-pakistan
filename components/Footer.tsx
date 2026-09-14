@@ -44,18 +44,44 @@ export function Footer({
           ))}
 
           <div>
-            <h3 className="text-xs font-extrabold uppercase tracking-wide text-white">Contact</h3>
-            <div className="mt-6 space-y-4 text-sm leading-6 text-[#B8B8BA]">
-              {email && <a href={`mailto:${email}`} className="flex gap-2.5 transition hover:text-[#F6A18F]"><Mail className="mt-1 shrink-0 text-[#F05535]" size={15} />{email}</a>}
-              {phone && <a href={`tel:${phone.replace(/[^\d+]/g, '')}`} className="flex gap-2.5 transition hover:text-[#F6A18F]"><Phone className="mt-1 shrink-0 text-[#F05535]" size={15} />{phone}</a>}
-              {address && <p className="flex gap-2.5"><MapPin className="mt-1 shrink-0 text-[#F05535]" size={15} />{address}</p>}
+            <h3 className="text-xs font-extrabold uppercase tracking-wide text-white">Contact Us</h3>
+            <div className="mt-6 space-y-3.5 text-sm leading-6 text-[#B8B8BA]">
+              {email && (
+                <div className="flex items-start gap-2.5">
+                  <Mail className="mt-1 shrink-0 text-[#F05535]" size={15} />
+                  <a href={`mailto:${email}`} className="break-all transition hover:text-[#F6A18F]" aria-label={`Email us at ${email}`}>
+                    {email}
+                  </a>
+                </div>
+              )}
+              {phone && (
+                <div className="flex items-start gap-2.5">
+                  <Phone className="mt-1 shrink-0 text-[#F05535]" size={15} />
+                  <a href={`tel:${phone.replace(/[^\d+]/g, '')}`} className="transition hover:text-[#F6A18F]" aria-label={`Call us at ${phone}`}>
+                    {phone}
+                  </a>
+                </div>
+              )}
+              {address && (
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="mt-1 shrink-0 text-[#F05535]" size={15} />
+                  <span>{address}</span>
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col justify-between gap-4 border-t border-white/10 pt-6 text-[11px] text-[#9D9EA1] sm:flex-row">
           <p>© 2026 Brandz Pakistan. All rights reserved.</p>
-          <div className="flex gap-5"><span>Privacy Policy</span><span>Terms of Use</span></div>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="transition hover:text-white">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="transition hover:text-white">
+              Terms of Use
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

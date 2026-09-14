@@ -77,7 +77,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
             {eyebrow}
           </span>
 
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-[-.04em] leading-[1.05]">
             {title}
           </h1>
 

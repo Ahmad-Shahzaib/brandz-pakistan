@@ -20,8 +20,8 @@ export const MissionVision: React.FC<{ items: ContentCard[] }> = ({ items }) => 
           <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#343538] mt-3">
             Our Purpose & Ambition
           </h2>
-          <p className="text-[#717275] text-base mt-2">
-            Editable strategic direction from the Brandz Pakistan CMS.
+          <p className="text-[#717275] text-base mt-2 max-w-xl mx-auto">
+            Guiding principles shaping how we build enduring food brands, empower franchise partners, and deliver hospitality excellence across Pakistan.
           </p>
         </div>
 

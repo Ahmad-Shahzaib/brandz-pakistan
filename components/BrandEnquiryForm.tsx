@@ -29,10 +29,27 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [preferredContact, setPreferredContact] = useState('phone');
 
   const submitEnquiry = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const email = String(formData.get('email') || '').trim();
+    const phone = String(formData.get('phone') || '').trim();
+
+    if ((preferredContact === 'phone' || preferredContact === 'whatsapp') && !phone) {
+      setError('Please provide your phone/WhatsApp number as your selected contact method.');
+      return;
+    }
+    if (preferredContact === 'email' && !email) {
+      setError('Please provide your email address as your selected contact method.');
+      return;
+    }
+    if (!phone && !email) {
+      setError('Please provide at least a phone number or email address.');
+      return;
+    }
+
     setSubmitting(true);
     setError('');
     fetch(`${API_BASE}/enquiries`, {
@@ -41,8 +58,8 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
       body: JSON.stringify({
         type: 'brand',
         name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
+        email,
+        phone,
         city: formData.get('city'),
         message: formData.get('message'),
         consent: formData.get('contactConsent') === 'on',
@@ -50,7 +67,7 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
           brand_slug: brandSlug,
           brand_name: brandName,
           enquiry_type: formData.get('enquiryType'),
-          preferred_contact: formData.get('preferredContact'),
+          preferred_contact: preferredContact,
           interest: formData.get('interest'),
         },
       }),
@@ -140,17 +157,33 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
                       <input name="name" required className={inputClass} placeholder="Your full name" />
                     </div>
                     <div>
-                      <label className="mb-2 block text-xs font-bold">Phone number *</label>
+                      <label className="mb-2 block text-xs font-bold">
+                        Phone number {preferredContact === 'phone' || preferredContact === 'whatsapp' ? '*' : '(optional)'}
+                      </label>
                       <div className="relative">
                         <Phone size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#9A9A9D]" />
-                        <input name="phone" type="tel" required className={`${inputClass} pl-11`} placeholder="03xx xxxxxxx" />
+                        <input
+                          name="phone"
+                          type="tel"
+                          required={preferredContact === 'phone' || preferredContact === 'whatsapp'}
+                          className={`${inputClass} pl-11`}
+                          placeholder="03xx xxxxxxx"
+                        />
                       </div>
                     </div>
                     <div>
-                      <label className="mb-2 block text-xs font-bold">Email address *</label>
+                      <label className="mb-2 block text-xs font-bold">
+                        Email address {preferredContact === 'email' ? '*' : '(optional)'}
+                      </label>
                       <div className="relative">
                         <Mail size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#9A9A9D]" />
-                        <input name="email" type="email" required className={`${inputClass} pl-11`} placeholder="name@example.com" />
+                        <input
+                          name="email"
+                          type="email"
+                          required={preferredContact === 'email'}
+                          className={`${inputClass} pl-11`}
+                          placeholder="name@example.com"
+                        />
                       </div>
                     </div>
                     <div>
@@ -182,11 +215,16 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
                     <div>
                       <label className="mb-2 block text-xs font-bold">Preferred contact *</label>
                       <div className="relative">
-                        <select name="preferredContact" required defaultValue="" className={`${inputClass} appearance-none pr-11`}>
-                          <option value="" disabled>Choose contact method</option>
-                          <option>Phone call</option>
-                          <option>WhatsApp</option>
-                          <option>Email</option>
+                        <select
+                          name="preferredContact"
+                          required
+                          value={preferredContact}
+                          onChange={(e) => setPreferredContact(e.target.value)}
+                          className={`${inputClass} appearance-none pr-11`}
+                        >
+                          <option value="phone">Phone call</option>
+                          <option value="whatsapp">WhatsApp</option>
+                          <option value="email">Email</option>
                         </select>
                         <ChevronDown size={17} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#717275]" />
                       </div>

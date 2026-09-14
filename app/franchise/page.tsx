@@ -127,31 +127,36 @@ export default async function FranchisePage() {
             {franchiseModels.map((m) => (
               <div
                 key={m.id}
-                className={`rounded-2xl border-2 bg-white p-6 transition-all ${
-                  m.featured ? 'border-[#F05535] shadow-lg shadow-[#292A2D]/5' : 'border-[#E3E3E4] hover:border-[#F05535]'
+                className={`flex flex-col justify-between rounded-3xl border-2 bg-white p-7 transition-all ${
+                  m.featured ? 'border-[#F05535] shadow-xl shadow-[#292A2D]/5' : 'border-[#E3E3E4] hover:border-[#F05535]'
                 }`}
               >
-                <div className="mb-3 flex items-center justify-between">
-                  <h3 className="font-heading text-xl font-extrabold text-[#343538]">{m.name}</h3>
-                  {m.featured && (
-                    <span className="rounded-full bg-[#F05535] px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-[#292A2D]">
-                      Popular
-                    </span>
-                  )}
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 className="card-title text-xl">{m.name}</h3>
+                    {m.featured && (
+                      <span className="rounded-full bg-[#FFF0EC] border border-[#F05535]/30 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-[#D34518]">
+                        Flagship Format
+                      </span>
+                    )}
+                  </div>
+                  <p className="body-regular text-sm text-[#717275]">{m.description}</p>
+                  <div className="mt-5 space-y-2 rounded-2xl bg-[#F7F7F7] p-4 text-xs text-[#343538]">
+                    <p><strong className="text-[#717275]">Required Area:</strong> {m.area}</p>
+                    <p><strong className="text-[#717275]">Optimal Location:</strong> {m.bestFor}</p>
+                  </div>
                 </div>
-                <p className="text-sm leading-relaxed text-[#717275]">{m.description}</p>
-                <div className="mt-4 space-y-1.5 text-xs text-[#343538]">
-                  <p><span className="font-bold">Area:</span> {m.area}</p>
-                  <p><span className="font-bold">Best for:</span> {m.bestFor}</p>
+                <div className="mt-6 border-t border-gray-100 pt-5">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#8A8B8E] mb-3">Key Features</p>
+                  <ul className="grid grid-cols-1 gap-2">
+                    {m.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2 text-xs text-[#343538]">
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-[#F05535]" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="mt-4 grid grid-cols-2 gap-1.5">
-                  {m.features.map((f) => (
-                    <li key={f} className="flex items-center gap-1.5 text-xs text-[#717275]">
-                      <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#D34518]" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
@@ -162,21 +167,26 @@ export default async function FranchisePage() {
         <SectionHeader
           eyebrow="Investment Overview"
           title="Transparent About the Essentials"
-          description="Final figures depend on format, location and property condition — verified details are shared with qualified applicants."
+          description="Every restaurant is built for resilient unit economics. Initial capital includes turnkey architectural design, commercial equipment, and staff training."
         />
-        <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {investment.map((item) => (
-            <div key={item.label} className="rounded-2xl border border-[#E3E3E4] bg-[#F7F7F7] p-5">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { label: 'Turnkey Investment', value: 'PKR 18M – 38M', note: 'Varies by outlet format & square footage' },
+            { label: 'Restaurant Footprint', value: '600 – 3,500 sq.ft.', note: 'Express kiosk to full dine-in restaurant' },
+            { label: 'Estimated Fit-Out Time', value: '8 – 14 Weeks', note: 'From site handover to grand opening' },
+            { label: 'Franchise Royalty & Support', value: '5% Ongoing', note: 'Covers audits, marketing & central supply' },
+          ].map((item) => (
+            <div key={item.label} className="rounded-2xl border border-[#E3E3E4] bg-white p-6 shadow-xs">
               <p className="text-xs font-bold uppercase tracking-[.12em] text-[#717275]">{item.label}</p>
-              <p className="mt-1.5 font-heading text-lg font-extrabold text-[#D34518]">{item.value}</p>
-              {item.note && <p className="mt-1 text-xs text-[#717275]">{item.note}</p>}
+              <p className="mt-2 font-heading text-2xl font-extrabold text-[#D34518]">{item.value}</p>
+              <p className="mt-2 text-xs text-[#717275]">{item.note}</p>
             </div>
           ))}
         </div>
         <div className="mx-auto mt-8 flex max-w-3xl items-start gap-3 rounded-2xl border border-[#F1C3B8] bg-[#FFF0EC] p-5">
           <Info className="mt-0.5 h-5 w-5 shrink-0 text-[#D34518]" />
-          <p className="text-sm text-[#717275]">
-            <strong className="text-[#343538]">Please note:</strong> Investment requirements vary based on location, restaurant format, property condition and market. Contact the franchise team for current investment details.
+          <p className="text-xs sm:text-sm text-[#717275] leading-relaxed">
+            <strong className="text-[#343538]">Note on Investment:</strong> Exact expenditure depends on location tenancy terms, MEP utility infrastructure, and selected brand equipment packages. Verified financial disclosures are provided to qualified applicants during Phase 1 screening.
           </p>
         </div>
       </section>

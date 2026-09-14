@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: var(--font-playfair), 'Playfair Display SC', serif;
+  --font-heading: var(--font-karla), 'Karla', sans-serif;
   --font-sans: var(--font-karla), 'Karla', sans-serif;
-  --font-script: var(--font-caveat), 'Caveat', cursive;
+  --font-script: var(--font-karla), 'Karla', sans-serif;
 
   --color-brand-primary: #F05535;
   --color-brand-primary-dark: #D34518;
@@ -39,20 +39,77 @@
 }
 
 @layer components {
-  .eyebrow { @apply mb-5 text-xs font-bold uppercase tracking-[.18em] text-[#F05535]; }
-  .section-title { @apply font-heading text-3xl font-bold leading-[1.12] tracking-[-.025em] text-[#343538] sm:text-5xl; }
-  .brand-card { @apply rounded-xl border border-[#E3E3E4] bg-white p-6 transition duration-300 hover:border-[#F05535] hover:shadow-lg hover:shadow-[#343538]/5; }
-  .brand-mark { @apply grid h-16 w-16 place-items-center rounded-2xl font-heading text-xl font-extrabold; }
+  /* Standardized Typography Scale */
+  .hero-title {
+    @apply font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-[-0.04em];
+  }
+  .inner-hero-title {
+    @apply font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-[-0.035em];
+  }
+  .section-title {
+    @apply font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.12] tracking-[-0.03em] text-[#343538];
+  }
+  .card-title {
+    @apply font-heading text-xl sm:text-2xl font-bold leading-snug text-[#343538];
+  }
+  .eyebrow {
+    @apply mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-[#F05535];
+  }
+  .body-lead {
+    @apply text-base sm:text-lg leading-relaxed text-[#717275];
+  }
+  .body-regular {
+    @apply text-sm sm:text-base leading-relaxed text-[#717275];
+  }
+  .small-copy {
+    @apply text-xs leading-normal text-[#8A8B8E];
+  }
+
+  /* Standardized Section Container & Spacing */
+  .section-container {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
+  }
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+  .section-padding-sm {
+    @apply py-12 sm:py-16;
+  }
+
+  /* Standardized Reusable Card */
+  .brand-card {
+    @apply rounded-2xl border border-[#E3E3E4] bg-white p-6 transition duration-300 hover:border-[#F05535] hover:shadow-lg hover:shadow-[#343538]/5;
+  }
+  .brand-mark {
+    @apply grid h-16 w-16 place-items-center rounded-2xl font-heading text-xl font-extrabold;
+  }
+
+  /* Standardized Global Buttons */
+  .btn-primary {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#F05535] px-6 py-3 text-sm font-bold text-white shadow-md shadow-[#F05535]/15 transition duration-200 hover:-translate-y-0.5 hover:bg-[#D34518] hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border border-[#E3E3E4] bg-white px-6 py-3 text-sm font-bold text-[#343538] transition duration-200 hover:border-[#F05535] hover:bg-[#FFF0EC] hover:text-[#D34518];
+  }
+  .btn-dark {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-[#343538] px-6 py-3 text-sm font-bold text-white transition duration-200 hover:bg-black;
+  }
+
+  /* Standardized Form Input Class */
+  .form-input-standard {
+    @apply min-h-[50px] w-full rounded-xl border border-[#E3E3E4] bg-[#F7F7F7] px-4 py-3 text-sm text-[#343538] placeholder:text-[#8A8B8E] transition focus:border-[#F05535] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#F05535]/20;
+  }
 }
 
 @layer base {
   html, body { overflow-x: clip; }
   body { letter-spacing: -0.01em; }
-  a, button { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05535] focus-visible:ring-offset-2; }
+  a, button, input, select, textarea {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F05535] focus-visible:ring-offset-2;
+  }
 }
 
-/* One-time section reveals are assigned by ScrollReveal, with a different motion
-   direction for consecutive sections so long corporate pages keep their rhythm. */
+/* Motion and reduced-motion handling */
 @media (prefers-reduced-motion: no-preference) {
   .scroll-reveal {
     opacity: 0;
@@ -67,5 +124,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

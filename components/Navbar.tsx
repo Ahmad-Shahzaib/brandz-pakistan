@@ -11,7 +11,7 @@ export function Navbar({
   logo,
   links = [],
   partnerLabel = 'Partner Portal',
-  partnerUrl = '/contact',
+  partnerUrl = '/portal',
 }: {
   logo?: string;
   links?: MenuItem[];

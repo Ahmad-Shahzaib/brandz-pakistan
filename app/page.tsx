@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -12,10 +13,23 @@ import {
   UsersRound,
 } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
+import { HomeBrandsSection } from '@/components/HomeBrandsSection';
 import { getSiteContent } from '@/lib/api';
 
 const icons = { Handshake, ShieldCheck, ChartNoAxesCombined, UsersRound, Building2, Store, Network };
 const iconFor = (name: string) => icons[name as keyof typeof icons] || ShieldCheck;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { pageHeroes } = await getSiteContent();
+  const hero = pageHeroes.home;
+  return {
+    title: hero?.metaTitle || hero?.title || 'Brandz Pakistan | Multi-Brand Hospitality Platform',
+    description:
+      hero?.metaDescription ||
+      hero?.description ||
+      'Building the Future of Pakistani Food & Hospitality Brands.',
+  };
+}
 
 export default async function HomePage() {
   const {
@@ -33,75 +47,121 @@ export default async function HomePage() {
     homepageEnquiry,
     homepageCta,
   } = await getSiteContent();
+
   const hero = pageHeroes.home;
   const about = homepageAbout[0];
   const enquiry = homepageEnquiry[0];
   const finalCta = homepageCta[0];
 
+  // Server-side console output showing all bound API data from /pages/home
+  console.log('========================================================');
+  console.log('📌 [SERVER RENDER: HomePage — API Bound Data]');
+  console.log('Heading:', hero?.title);
+  console.log('Subheading:', hero?.description);
+  console.log('Eyebrow:', hero?.eyebrow);
+  console.log('Primary CTA Button:', {
+    label: hero?.primaryCtaLabel || 'Explore our brands',
+    url: hero?.primaryCtaUrl || '#brands',
+  });
+  console.log('Secondary CTA Button:', {
+    label: hero?.secondaryCtaLabel || 'About us',
+    url: hero?.secondaryCtaUrl || '#about',
+  });
+  console.log('Stats Items Count:', homepageStats.length);
+  console.log('Brands Count:', brands.length);
+  console.log('========================================================\n');
+
   return (
     <>
-      <section
-        className="relative overflow-hidden pt-20 text-white"
-        style={{ backgroundColor: hero?.backgroundColor || '#292A2D' }}
-      >
+      {/* Perfected Hero Section */}
+      <section className="relative overflow-hidden bg-[#292A2D] pt-24 pb-20 sm:pt-32 sm:pb-28 text-white">
+        {/* Ambient Warm Gradient Lighting */}
         <div
-          className="absolute inset-0 opacity-35"
+          className="absolute inset-0 opacity-40 pointer-events-none"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 18% 88%, #B93A23 0, transparent 32%), radial-gradient(circle at 78% 5%, #454649 0, transparent 44%)',
+              'radial-gradient(circle at 18% 85%, #D34518 0, transparent 38%), radial-gradient(circle at 80% 12%, #454649 0, transparent 42%)',
           }}
         />
-        <div className="absolute inset-y-0 right-0 w-full lg:w-[59%]">
+
+        {/* Hero Media with Smooth Gradient Overlay */}
+        <div className="absolute inset-y-0 right-0 w-full lg:w-[60%]">
           <Image
             src={images.hero}
-            alt="Signature fried chicken from the Brandz Pakistan portfolio"
+            alt="Signature dining and restaurant experiences from Brandz Pakistan"
             fill
             priority
-            sizes="(min-width: 1024px) 59vw, 100vw"
-            className={`object-cover opacity-90 ${
-              hero?.imagePosition === 'top'
-                ? 'object-top'
-                : hero?.imagePosition === 'bottom'
-                  ? 'object-bottom'
-                  : 'object-center'
-            }`}
+            sizes="(min-width: 1024px) 60vw, 100vw"
+            className="object-cover object-center opacity-90"
           />
-          <div
-            className="absolute inset-0 bg-black"
-            style={{ opacity: Math.min(Math.max(hero?.overlayOpacity || 35, 0), 80) / 100 }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#292A2D] via-[#292A2D]/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#292A2D] via-[#292A2D]/80 to-transparent" />
         </div>
-        <div className="relative mx-auto grid min-h-[620px] max-w-7xl items-center px-6 py-20 lg:grid-cols-[.9fr_1.1fr] lg:px-8 lg:py-24">
+
+        {/* Hero Content Grid */}
+        <div className="relative mx-auto grid min-h-[600px] max-w-7xl items-center px-6 py-12 lg:grid-cols-[1fr_1fr] lg:px-8">
           <div className="z-10 max-w-2xl">
+            {/* Eyebrow Matching Platform Standard */}
             <p className="mb-6 text-[11px] font-bold uppercase tracking-[.2em] text-[#F6A18F]">
-              {hero?.eyebrow || 'Brandz Pakistan'}
+              {hero?.eyebrow || 'Brandz Pakistan · Food & Hospitality Group'}
             </p>
-            <h1 className="text-5xl font-bold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl">
-              {hero?.title || '40 Brands. One Bold Vision.'}
+
+            {/* Main Title Matching Platform Standard Sans-Serif Scale */}
+            <h1 className="text-5xl font-bold leading-[.98] tracking-[-.045em] sm:text-6xl lg:text-7xl text-white">
+              {hero?.title || 'The Power Behind Great Brands.'}
             </h1>
-            <p className="mt-6 max-w-lg text-base leading-7 text-white/80 sm:text-lg">
-              {hero?.description || 'We build and scale distinctive food brands that people love.'}
+
+            {/* Subheading with Crisp Readability */}
+            <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-gray-200">
+              {hero?.description || 'Building the Future of Pakistani Food & Hospitality Brands.'}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+
+            {/* High-Contrast Interactive CTA Buttons */}
+            <div className="mt-8 flex flex-wrap items-center gap-3.5">
               <Link
-                href="#brands"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#F05535] px-6 py-3 text-sm font-bold text-[#292A2D] transition hover:bg-[#D34518]"
+                href={hero?.primaryCtaUrl || '#brands'}
+                className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full bg-[#F05535] hover:bg-[#D34518] text-white px-8 py-3.5 text-sm font-bold transition-all duration-200 shadow-lg shadow-[#F05535]/30 hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
               >
-                Explore our brands <ArrowRight size={16} />
+                <span>{hero?.primaryCtaLabel || 'Explore our brands'}</span>
+                <ArrowRight size={16} className="text-white/90" />
               </Link>
               <Link
-                href="#about"
-                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/60 bg-black/10 px-6 py-3 text-sm font-bold text-white backdrop-blur transition hover:bg-white/10"
+                href={hero?.secondaryCtaUrl || '#about'}
+                className="inline-flex min-h-[50px] items-center justify-center gap-2 rounded-full border border-white/30 hover:border-white/60 bg-white/10 hover:bg-white/15 text-white px-8 py-3.5 text-sm font-bold backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
               >
-                About us <ArrowRight size={16} />
+                <span>{hero?.secondaryCtaLabel || 'About us'}</span>
+                <ArrowRight size={16} className="text-white/70" />
               </Link>
             </div>
-            <div className="mt-11 grid max-w-xl grid-cols-4 divide-x divide-white/20 border-y border-white/20 py-4">
+
+            {/* Polished Glass Brand Portfolio Badges */}
+            <div className="mt-8 flex flex-wrap items-center gap-2.5">
+              <span className="text-xs font-semibold text-gray-300 mr-1">Featured Brands:</span>
+              {[
+                { name: 'Fri-Chiks', href: '/brands/fri-chiks' },
+                { name: "Timmy's", href: '/brands/timmys' },
+                { name: 'Shamana', href: '/brands/shamana-restaurant' },
+                { name: 'Whata Pizza', href: '/brands/whata-pizza' },
+              ].map((b) => (
+                <Link
+                  key={b.name}
+                  href={b.href}
+                  className="text-xs font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 px-3.5 py-1 rounded-full transition-all backdrop-blur-md"
+                >
+                  {b.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Clean, High-Contrast Stat Strip */}
+            <div className="mt-12 grid max-w-xl grid-cols-4 divide-x divide-white/15 border-y border-white/15 py-5">
               {homepageStats.map((item) => (
-                <div key={item.id} className="px-3 first:pl-0">
-                  <p className="text-lg font-bold text-white">{item.value}</p>
-                  <p className="mt-1 text-[9px] font-bold uppercase tracking-[.1em] text-white/60">{item.label}</p>
+                <div key={item.id} className="px-3 first:pl-0 text-left">
+                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-none">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-[.15em] text-[#F6A18F]">
+                    {item.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -183,59 +243,12 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8" id="brands">
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <p className="eyebrow !text-[#D34518]">Our brands</p>
-              <h2 className="text-3xl font-bold tracking-[-.035em] sm:text-4xl">A portfolio for every occasion.</h2>
-            </div>
-            <Link
-              href="/brands"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[.1em] text-[#D34518]"
-            >
-              View all brands <ArrowRight size={15} />
-            </Link>
-          </div>
-          <div className="mt-7 flex flex-wrap gap-2">
-            {['All', ...categories].slice(0, 6).map((category, index) => (
-              <a
-                href={index === 0 ? '#brands' : `#${category.toLowerCase().replaceAll(' ', '-')}`}
-                key={category}
-                className={`rounded-md px-4 py-2 text-[10px] font-bold uppercase tracking-wide ${
-                  index === 0 ? 'bg-[#B93A23] text-white' : 'border border-[#E3E3E4] bg-white text-[#717275]'
-                }`}
-              >
-                {category}
-              </a>
-            ))}
-          </div>
-          <div className="mt-6 grid gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {brands.slice(0, 18).map((brand) => (
-              <Link
-                href={`/brands/${brand.slug}`}
-                key={brand.slug}
-                className="group flex h-28 items-center justify-center rounded-lg border border-[#E3E3E4] bg-white p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[#E39A88] hover:shadow-md"
-              >
-                <Image
-                  src={brand.logo}
-                  alt={`${brand.name} official logo`}
-                  width={160}
-                  height={90}
-                  className="max-h-full w-full object-contain"
-                />
-              </Link>
-            ))}
-          </div>
-          <div className="mt-7 flex justify-center">
-            <Link
-              href="/brands"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[#D7C2BD] bg-white px-6 py-3 text-xs font-bold text-[#4A4B4E]"
-            >
-              Explore all brands <ArrowRight size={15} />
-            </Link>
-          </div>
+        {/* Interactive Brands Explorer with category filter tabs */}
+        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+          <HomeBrandsSection brands={brands} categories={categories} />
         </section>
 
+        {/* Featured Stories linking to dedicated article pages */}
         <section className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
           <div className="flex items-end justify-between gap-6">
             <div>
@@ -244,14 +257,20 @@ export default async function HomePage() {
             </div>
             <Link
               href="/media"
-              className="hidden items-center gap-2 text-xs font-bold uppercase tracking-[.1em] text-[#D34518] sm:inline-flex"
+              className="hidden items-center gap-2 text-xs font-bold uppercase tracking-[.1em] text-[#D34518] sm:inline-flex hover:underline"
             >
               View all stories <ArrowRight size={15} />
             </Link>
           </div>
-          <div className="mt-7 grid gap-5 lg:grid-cols-2">
+          <div className="mt-7 grid gap-6 lg:grid-cols-2">
             {news.slice(0, 2).map((item) => (
-              <Story key={item.id} image={item.image || images.storefront} label={item.category} title={item.title} href="/media" />
+              <Story
+                key={item.id}
+                image={item.image || images.storefront}
+                label={item.category}
+                title={item.title}
+                href={`/media/${item.slug || item.id}`}
+              />
             ))}
           </div>
         </section>
@@ -303,7 +322,7 @@ export default async function HomePage() {
         </section>
 
         <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
-          <div className="flex flex-col justify-between gap-7 rounded-xl bg-[#343538] p-8 text-white md:flex-row md:items-center md:p-11">
+          <div className="flex flex-col justify-between gap-7 rounded-2xl bg-[#343538] p-8 text-white md:flex-row md:items-center md:p-11 shadow-xl">
             <div className="flex max-w-lg gap-5">
               <Award className="mt-1 shrink-0 text-[#F6A18F]" size={34} />
               <div>
@@ -315,7 +334,7 @@ export default async function HomePage() {
             </div>
             <Link
               href={finalCta?.value || '/contact'}
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#F05535] px-7 py-3.5 text-sm font-bold text-[#343538]"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#F05535] px-7 py-3.5 text-sm font-bold text-white hover:bg-[#D34518] transition-colors shadow-md"
             >
               {finalCta?.label || 'Partner with us'} <ArrowRight size={16} />
             </Link>
@@ -328,23 +347,26 @@ export default async function HomePage() {
 
 function Story({ image, label, title, href }: { image: string; label: string; title: string; href: string }) {
   return (
-    <article className="group relative min-h-[330px] overflow-hidden rounded-xl">
+    <article className="group relative min-h-[340px] overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all">
       <Image
         src={image}
         alt={title}
         fill
         sizes="(min-width: 1024px) 50vw, 100vw"
-        className="object-cover transition duration-500 group-hover:scale-105"
+        className="object-cover transition duration-700 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#242528] via-[#242528]/25 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#242528] via-[#242528]/40 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 p-7 text-white">
         <p className="text-[10px] font-bold uppercase tracking-[.14em] text-[#F6A18F]">{label}</p>
-        <h3 className="mt-3 max-w-sm text-2xl font-bold leading-tight">{title}</h3>
+        <h3 className="mt-2.5 max-w-md text-xl sm:text-2xl font-bold leading-tight group-hover:text-[#F6A18F] transition-colors">
+          <Link href={href}>{title}</Link>
+        </h3>
         <Link
           href={href}
-          className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-full bg-[#F05535] px-5 py-2.5 text-xs font-bold text-[#343538]"
+          className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-full bg-[#F05535] hover:bg-[#D34518] px-5 py-2.5 text-xs font-bold text-white transition-all shadow-xs"
         >
-          Read story <ArrowRight size={14} />
+          <span>Read story</span>
+          <ArrowRight size={14} />
         </Link>
       </div>
     </article>

@@ -11,6 +11,10 @@ interface CTABandProps {
   text: string;
   primaryLabel?: string;
   primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  onSecondaryClick?: () => void;
+  hideSecondary?: boolean;
   image: string;
 }
 
@@ -19,12 +23,16 @@ export const CTABand: React.FC<CTABandProps> = ({
   text,
   primaryLabel = 'Apply for Franchise',
   primaryHref = '/apply',
+  secondaryLabel = 'Talk to Our Franchise Team',
+  secondaryHref,
+  onSecondaryClick,
+  hideSecondary = false,
   image,
 }) => {
   const { openFranchiseModal } = useModals();
   return (
-    <section className="py-16 sm:py-20 bg-[#F7F7F7]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="section-padding bg-[#F7F7F7]">
+      <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,18 +52,31 @@ export const CTABand: React.FC<CTABandProps> = ({
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={primaryHref}
-                className="flex items-center gap-2 rounded-xl bg-[#F05535] px-7 py-4 text-base font-bold text-[#292A2D] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#D34518]"
+                className="btn-primary min-h-[50px] px-8 text-base shadow-lg"
               >
                 <span>{primaryLabel}</span>
-                <ArrowRight className="h-5 w-5 text-[#292A2D]" />
+                <ArrowRight className="h-5 w-5" />
               </Link>
-              <button
-                onClick={openFranchiseModal}
-                className="flex cursor-pointer items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20"
-              >
-                <PhoneCall className="h-4 w-4 text-[#F6A18F]" />
-                <span>Talk to Our Franchise Team</span>
-              </button>
+              {!hideSecondary && (
+                secondaryHref ? (
+                  <Link
+                    href={secondaryHref}
+                    className="flex min-h-[50px] items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20"
+                  >
+                    <PhoneCall className="h-4 w-4 text-[#F6A18F]" />
+                    <span>{secondaryLabel}</span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={onSecondaryClick || openFranchiseModal}
+                    className="flex min-h-[50px] cursor-pointer items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 text-base font-bold text-white backdrop-blur-md transition hover:bg-white/20"
+                  >
+                    <PhoneCall className="h-4 w-4 text-[#F6A18F]" />
+                    <span>{secondaryLabel}</span>
+                  </button>
+                )
+              )}
             </div>
           </div>
         </motion.div>

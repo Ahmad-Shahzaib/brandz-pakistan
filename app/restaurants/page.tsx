@@ -5,9 +5,9 @@ import { CTABand } from '../../components/CTABand';
 import { getSiteContent } from '@/lib/api';
 
 export const metadata: Metadata = {
-  title: 'Restaurants',
+  title: 'Restaurants | Brand Outlets & Locations Across Pakistan',
   description:
-    'Find a Brandz Pakistan restaurant near you. Browse our growing network across Lahore, Faisalabad, Gujranwala, and Islamabad by city, format, and service.',
+    'Find a Brandz Pakistan restaurant near you. Explore Fri-Chiks, Timmy’s, Shamana, and Whata Pizza locations across Lahore, Faisalabad, Gujranwala, and Islamabad.',
 };
 
 export default async function RestaurantsPage() {
@@ -20,23 +20,36 @@ export default async function RestaurantsPage() {
         eyebrow={hero?.eyebrow || 'Restaurant Network'}
         crumbs={[{ label: 'Restaurants' }]}
         image={images.storefront}
-        title={hero?.title ||
-          <>
-            Growing One <span className="text-[#F6A18F]">Restaurant at a Time</span>
-          </>
+        title={
+          hero?.title || (
+            <>
+              Growing One <span className="text-[#F6A18F]">Restaurant at a Time</span>
+            </>
+          )
         }
-        description={hero?.description || "Find your nearest Brandz Pakistan restaurant and see the formats we operate."}
+        description={
+          hero?.description ||
+          'Featured Brand Outlets & Key Locations Across Pakistan. Find your nearest Brandz Pakistan dining, express, or drive-thru outlet.'
+        }
       />
       <section className="py-16 sm:py-20 bg-[#F7F7F7]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h2 className="section-title">Explore Outlets & Locations</h2>
+            <p className="body-lead mt-2">
+              Featured Brand Outlets & Key Locations Across Pakistan
+            </p>
+          </div>
           <RestaurantExplorer restaurants={restaurants} />
         </div>
       </section>
       <CTABand
         heading="Don't See Your City Yet?"
-        text="We're expanding fast. Bring Brandz Pakistan to your area as a franchise partner, or suggest a location you own."
+        text="We're expanding fast across Pakistan. Bring Brandz Pakistan to your area as a franchise partner, or suggest a location you own."
         primaryLabel="Explore Franchise"
         primaryHref="/franchise"
+        secondaryLabel="Partner Portal"
+        secondaryHref="/portal"
         image={images.interior}
       />
     </>

@@ -37,10 +37,13 @@ export interface StatItem {
 
 export interface CompanyNews {
   id: string;
+  slug?: string;
   date: string;
   title: string;
   summary: string;
   category: string;
   readTime: string;
   image: string;
+  body?: string;
+  content?: string;
 }

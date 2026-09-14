@@ -53,9 +53,9 @@ export const SomethingDifferentStrip: React.FC<{ teamImage: string; interiorImag
               <Sparkles className="w-3.5 h-3.5 fill-[#F05535]" />
             </div>
 
-            {/* Signature Expressive Font Callout */}
-            <h2 className="font-script text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F05535] leading-tight -rotate-2 drop-shadow-xs">
-              "{content?.title}"
+            {/* Signature Brand Philosophy Callout */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F05535] leading-tight tracking-tight">
+              &ldquo;{content?.title}&rdquo;
             </h2>
 
             <p className="mt-3 text-sm sm:text-base text-[#717275] font-medium max-w-sm mx-auto leading-relaxed">

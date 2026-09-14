@@ -60,6 +60,7 @@ export interface SupportPillar {
 export interface Restaurant {
   id: string;
   name: string;
+  brand?: string;
   city: string;
   area: string;
   address: string;
@@ -73,11 +74,17 @@ export interface Restaurant {
 
 export interface Job {
   id: string;
+  slug?: string;
   title: string;
   department: string;
   location: string;
   type: string;
   summary: string;
+  description?: string;
+  requirements?: string[];
+  responsibilities?: string[];
+  qualifications?: string[];
+  benefits?: string[];
 }
 
 export interface LeadershipMember {

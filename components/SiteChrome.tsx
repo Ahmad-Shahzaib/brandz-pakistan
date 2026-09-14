@@ -34,7 +34,15 @@ export const SiteChrome: React.FC<{ children: React.ReactNode; content?: ChromeC
   const [franchiseOpen, setFranchiseOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
   const partnerLabel = settingText(content?.settings || {}, 'site', 'partner_portal_label', 'Partner Portal');
-  const partnerUrl = settingText(content?.settings || {}, 'site', 'partner_portal_url', '/contact');
+  const partnerUrl = settingText(content?.settings || {}, 'site', 'partner_portal_url', '/portal');
+
+  // Standardize navigation labels across entire site (e.g. "Partners" -> "Franchising")
+  const primaryLinks = ((content?.menus.primary?.items || []) as MenuItem[]).map((link) => {
+    if (link.url === '/franchise' || link.label === 'Partners') {
+      return { ...link, label: 'Franchising' };
+    }
+    return link;
+  });
 
   return (
     <ModalContext.Provider
@@ -45,7 +53,7 @@ export const SiteChrome: React.FC<{ children: React.ReactNode; content?: ChromeC
     >
       <Navbar
         logo={content?.images.logo}
-        links={(content?.menus.primary?.items || []) as MenuItem[]}
+        links={primaryLinks}
         partnerLabel={partnerLabel}
         partnerUrl={partnerUrl}
       />

@@ -40,22 +40,22 @@ export const BrandStory: React.FC<{ image: string; content?: ContentCard }> = ({
               <div className="flex items-start gap-3 bg-[#F7F7F7] p-3.5 rounded-xl border border-gray-100">
                 <CheckCircle className="w-5 h-5 text-[#F05535] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-sm text-[#343538]">Quality Systems</h4>
-                  <p className="text-xs text-[#717275]">{content?.value}</p>
+                  <h3 className="font-bold text-sm text-[#343538]">Quality Systems</h3>
+                  <p className="text-xs text-[#717275]">{content?.value || 'Standardized kitchen manuals and strict ingredient traceability across all outlets.'}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3 bg-[#F7F7F7] p-3.5 rounded-xl border border-gray-100">
                 <CheckCircle className="w-5 h-5 text-[#F05535] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-bold text-sm text-[#343538]">Brand Discipline</h4>
-                  <p className="text-xs text-[#717275]">Editable from CMS through the public content API.</p>
+                  <h3 className="font-bold text-sm text-[#343538]">Brand Discipline</h3>
+                  <p className="text-xs text-[#717275]">Central training and routine quality audits preserving customer trust nationwide.</p>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Dynamic Product Photo Overlapping Blob Background */}
+          {/* Right Column: Product Photo */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -67,7 +67,7 @@ export const BrandStory: React.FC<{ image: string; content?: ContentCard }> = ({
               {/* Soft Rounded Organic Blob Background */}
               <div className="absolute -inset-4 bg-gradient-to-br from-[#FFF0EC] via-[#FFF5F2] to-[#FFF0EC] rounded-3xl transform rotate-2 shadow-inner" />
 
-              {/* Product Photo Breaking Out */}
+              {/* Product Photo */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
@@ -83,11 +83,11 @@ export const BrandStory: React.FC<{ image: string; content?: ContentCard }> = ({
                 {/* Overlaid Floating Quality Tag */}
                 <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-lg border border-gray-100 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#F6A18F] fill-[#F6A18F]" />
-                  <span className="text-xs font-extrabold text-[#343538]">CMS Managed</span>
+                  <span className="text-xs font-extrabold text-[#343538]">Hospitality Excellence</span>
                 </div>
 
                 <div className="absolute bottom-4 left-4 bg-[#343538]/90 backdrop-blur-md text-white px-4 py-2.5 rounded-2xl border border-white/20 text-xs font-medium">
-                  <span className="font-bold text-[#F6A18F]">Brandz Pakistan</span> • Dynamic Content
+                  <span className="font-bold text-[#F6A18F]">Brandz Pakistan</span> • National Platform
                 </div>
               </motion.div>
             </div>
