@@ -37,16 +37,28 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
     const email = String(formData.get('email') || '').trim();
     const phone = String(formData.get('phone') || '').trim();
 
-    if ((preferredContact === 'phone' || preferredContact === 'whatsapp') && !phone) {
-      setError('Please provide your phone/WhatsApp number as your selected contact method.');
-      return;
+    if ((preferredContact === 'phone' || preferredContact === 'whatsapp')) {
+      if (!phone) {
+        setError('Please provide your phone/WhatsApp number as your selected contact method.');
+        return;
+      }
+      if (phone.replace(/\D/g, '').length < 10) {
+        setError('Please enter a valid phone or WhatsApp number (at least 10 digits).');
+        return;
+      }
     }
-    if (preferredContact === 'email' && !email) {
-      setError('Please provide your email address as your selected contact method.');
-      return;
+    if (preferredContact === 'email') {
+      if (!email) {
+        setError('Please provide your email address as your selected contact method.');
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setError('Please enter a valid email address.');
+        return;
+      }
     }
     if (!phone && !email) {
-      setError('Please provide at least a phone number or email address.');
+      setError('Please provide at least a phone number or email address so we can reach you.');
       return;
     }
 
@@ -166,6 +178,7 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
                           name="phone"
                           type="tel"
                           required={preferredContact === 'phone' || preferredContact === 'whatsapp'}
+                          onChange={() => setError('')}
                           className={`${inputClass} pl-11`}
                           placeholder="03xx xxxxxxx"
                         />
@@ -181,6 +194,7 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
                           name="email"
                           type="email"
                           required={preferredContact === 'email'}
+                          onChange={() => setError('')}
                           className={`${inputClass} pl-11`}
                           placeholder="name@example.com"
                         />
@@ -219,7 +233,10 @@ export function BrandEnquiryForm({ brandSlug, brandName, brandLogo, offerings }:
                           name="preferredContact"
                           required
                           value={preferredContact}
-                          onChange={(e) => setPreferredContact(e.target.value)}
+                          onChange={(e) => {
+                            setPreferredContact(e.target.value);
+                            setError('');
+                          }}
                           className={`${inputClass} appearance-none pr-11`}
                         >
                           <option value="phone">Phone call</option>

@@ -200,15 +200,27 @@ export const RestaurantExplorer: React.FC<{ restaurants: Restaurant[] }> = ({ re
                   <MapPin className="w-4 h-4 text-[#F05535] shrink-0 mt-0.5" />
                   <span className="text-[#343538]">{r.address}</span>
                 </p>
-                <p className="flex items-center gap-2">
+                <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4 text-[#F05535] shrink-0" />
-                  <a
-                    href={`tel:${r.phone.replace(/[^0-9+]/g, '')}`}
-                    className="text-[#343538] hover:text-[#F05535] hover:underline font-medium transition-colors"
-                  >
-                    {r.phone}
-                  </a>
-                </p>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {r.phone.split(/[/,]/).map((phoneNum, pIdx, pArr) => {
+                      const trimmed = phoneNum.trim();
+                      const dial = trimmed.replace(/[^0-9+]/g, '');
+                      return (
+                        <span key={trimmed} className="inline-flex items-center gap-1">
+                          <a
+                            href={`tel:${dial}`}
+                            className="text-[#343538] hover:text-[#F05535] hover:underline font-medium transition-colors cursor-pointer"
+                            aria-label={`Call ${r.name} at ${trimmed}`}
+                          >
+                            {trimmed}
+                          </a>
+                          {pIdx < pArr.length - 1 && <span className="text-[#8A8B8E]">/</span>}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
                 <p className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-[#F05535] shrink-0" />
                   <span>{r.hours}</span>

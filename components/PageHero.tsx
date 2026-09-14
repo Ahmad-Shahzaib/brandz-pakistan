@@ -73,9 +73,11 @@ export const PageHero: React.FC<PageHeroProps> = ({
             ))}
           </nav>
 
-          <span className="inline-flex items-center gap-2 bg-[#F6A18F] text-[#343538] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            {eyebrow}
-          </span>
+          {eyebrow && eyebrow.trim().toLowerCase() !== (crumbs[crumbs.length - 1]?.label || '').trim().toLowerCase() && (
+            <span className="inline-flex items-center gap-2 bg-[#F6A18F] text-[#343538] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
+              {eyebrow}
+            </span>
+          )}
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-[-.04em] leading-[1.05]">
             {title}

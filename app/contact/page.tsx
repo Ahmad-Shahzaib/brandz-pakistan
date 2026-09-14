@@ -108,27 +108,68 @@ export default async function ContactPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="h-4 w-4 shrink-0 text-[#F05535]" />
-                  <a
-                    href={`tel:${cleanPhone}`}
-                    className="text-[#343538] hover:text-[#F05535] hover:underline font-semibold transition-colors"
-                  >
-                    {rawPhone}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {rawPhone.split(/[/,]/).map((p, idx, arr) => {
+                      const trimmed = p.trim();
+                      const dial = trimmed.replace(/[^0-9+]/g, '');
+                      return (
+                        <span key={trimmed} className="inline-flex items-center gap-1">
+                          <a
+                            href={`tel:${dial}`}
+                            className="text-[#343538] hover:text-[#F05535] hover:underline font-semibold transition-colors cursor-pointer"
+                            aria-label={`Call Brandz Pakistan at ${trimmed}`}
+                          >
+                            {trimmed}
+                          </a>
+                          {idx < arr.length - 1 && <span className="text-[#717275]">/</span>}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="h-4 w-4 shrink-0 text-[#F05535]" />
-                  <a
-                    href={`mailto:${email}`}
-                    className="text-[#343538] hover:text-[#F05535] hover:underline font-semibold transition-colors"
-                  >
-                    {email}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {email.split(/[/,]/).map((e, idx, arr) => {
+                      const trimmed = e.trim();
+                      return (
+                        <span key={trimmed} className="inline-flex items-center gap-1">
+                          <a
+                            href={`mailto:${trimmed}`}
+                            className="text-[#343538] hover:text-[#F05535] hover:underline font-semibold transition-colors cursor-pointer"
+                            aria-label={`Send email to ${trimmed}`}
+                          >
+                            {trimmed}
+                          </a>
+                          {idx < arr.length - 1 && <span className="text-[#717275]">/</span>}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </li>
                 <li className="flex items-center gap-3">
                   <Clock className="h-4 w-4 shrink-0 text-[#F05535]" />
                   <span className="text-[#343538]">Mon–Sat: 9:00 AM – 6:00 PM (PKT)</span>
                 </li>
               </ul>
+
+              {/* Direct Quick Action CTAs */}
+              <div className="mt-6 flex flex-wrap gap-2.5 pt-4 border-t border-gray-100">
+                <a
+                  href={`tel:${cleanPhone}`}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#FFF0EC] hover:bg-[#F05535] text-[#D34518] hover:text-white px-4 py-2.5 text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  aria-label={`Call headquarters directly at ${rawPhone}`}
+                >
+                  <Phone className="w-3.5 h-3.5" /> Call HQ Directly
+                </a>
+                <a
+                  href={`mailto:${email}`}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-[#F7F7F7] hover:bg-[#343538] text-[#343538] hover:text-white px-4 py-2.5 text-xs font-bold transition-all border border-gray-200/80 cursor-pointer"
+                  aria-label={`Send an email to ${email}`}
+                >
+                  <Mail className="w-3.5 h-3.5" /> Email Executive Desk
+                </a>
+              </div>
             </div>
 
             {/* Support Desk Card */}

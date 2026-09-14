@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!article) {
     return {
-      title: 'Article Not Found | Brandz Pakistan',
+      title: 'Article Not Found',
     };
   }
 

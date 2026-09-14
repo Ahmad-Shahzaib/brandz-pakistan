@@ -64,7 +64,7 @@ export default async function OurStoryPage() {
   return (
     <>
       <PageHero
-        eyebrow={hero?.eyebrow || 'Our Story'}
+        eyebrow={hero?.eyebrow && hero.eyebrow.toLowerCase() !== 'our story' ? hero.eyebrow : 'Heritage & Vision'}
         crumbs={[{ label: 'Our Story' }]}
         image={images.storefront}
         title={hero?.title ||

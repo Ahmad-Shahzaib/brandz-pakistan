@@ -59,48 +59,15 @@ export const HistoryTimeline: React.FC<{ timeline: TimelineMilestone[] }> = ({ t
           </div>
         </div>
 
-        {/* Mobile Dedicated Vertical Timeline (sm:hidden) */}
-        <div className="sm:hidden relative mt-8 pl-6 border-l-2 border-[#F05535]/40 space-y-8">
-          {timeline.map((item, index) => (
-            <div key={item.id} className="relative">
-              {/* Node bullet */}
-              <div className="absolute -left-[31px] top-1 w-6 h-6 rounded-full bg-[#F05535] border-2 border-white shadow-md flex items-center justify-center text-white">
-                <div className="w-2 h-2 rounded-full bg-white" />
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="font-heading text-xl font-extrabold text-[#F05535]">{item.year}</span>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#717275] bg-gray-100 px-2 py-0.5 rounded-md">
-                  {item.category}
-                </span>
-              </div>
-              <div className="bg-[#F7F7F7] rounded-2xl p-4 border border-[#E3E3E4]">
-                <div className="relative rounded-xl overflow-hidden h-36 mb-3 bg-gray-100">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute top-2 left-2 bg-[#F6A18F] text-[#343538] font-extrabold text-[10px] px-2 py-0.5 rounded-md">
-                    {item.highlightKeyword}
-                  </div>
-                </div>
-                <h3 className="font-heading font-bold text-base text-[#343538] mb-1">{item.title}</h3>
-                <p className="text-xs text-[#717275] leading-relaxed">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Desktop Timeline Horizontal Container (hidden sm:block) */}
-        <div className="relative hidden sm:block">
+        {/* Unified Responsive Timeline Container (No DOM duplication) */}
+        <div className="relative mt-4">
           {/* Central Horizontal Line */}
           <div className="absolute top-10 left-0 right-0 h-1 bg-gradient-to-r from-gray-200 via-[#F6A18F] to-[#F05535] z-0 rounded-full" />
 
           {/* Scrollable Track */}
           <div
             ref={scrollContainerRef}
-            className="flex items-start gap-6 sm:gap-8 overflow-x-auto hide-scrollbar pt-4 pb-8 px-2 snap-x snap-mandatory relative z-10"
+            className="flex items-start gap-4 sm:gap-8 overflow-x-auto hide-scrollbar pt-4 pb-8 px-2 snap-x snap-mandatory relative z-10"
           >
             {timeline.map((item, index) => {
               const isActive = activeYear === item.year;

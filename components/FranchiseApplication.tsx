@@ -227,17 +227,25 @@ export const FranchiseApplication: React.FC = () => {
 
       {/* Progress Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-2" aria-live="polite">
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold text-[#343538]">Step {step + 1} of {steps.length}</span>
             <span className="text-sm text-[#717275]">• {steps[step].label}</span>
           </div>
           <span className="text-xs font-semibold text-[#F05535]">{Math.round(progress)}% Completed</span>
         </div>
-        <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden">
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round(progress)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Application progress: Step ${step + 1} of ${steps.length} (${steps[step].label})`}
+          className="h-2.5 bg-gray-200 rounded-full overflow-hidden"
+        >
           <motion.div className="h-full bg-[#F05535] rounded-full" animate={{ width: `${progress}%` }} transition={{ duration: 0.4 }} />
         </div>
-        <div className="mt-4 hidden sm:flex items-center justify-between">
+        {/* Visual-only desktop step indicator (aria-hidden to avoid duplicate screen-reader speech) */}
+        <div className="mt-4 hidden sm:flex items-center justify-between" aria-hidden="true">
           {steps.map((s) => {
             const Icon = s.icon;
             const done = s.id < step;

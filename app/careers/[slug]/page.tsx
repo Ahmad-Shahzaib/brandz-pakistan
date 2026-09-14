@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!job) {
     return {
-      title: 'Job Not Found | Brandz Pakistan Careers',
+      title: 'Job Not Found',
     };
   }
 
@@ -76,7 +76,8 @@ export default async function JobDetailPage({ params }: Props) {
             <span className="bg-[#F05535] text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
               {job.department}
             </span>
-            <span className="bg-white/10 text-gray-300 text-[11px] font-bold px-3 py-1 rounded-full">
+            <span className="text-white/40 select-none" aria-hidden="true">•</span>
+            <span className="bg-white/10 text-gray-200 text-[11px] font-bold px-3 py-1 rounded-full">
               {job.type}
             </span>
           </div>
@@ -85,15 +86,17 @@ export default async function JobDetailPage({ params }: Props) {
             {job.title}
           </h1>
 
-          <div className="mt-4 flex flex-wrap items-center gap-6 text-sm text-gray-300">
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-300">
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-[#F6A18F]" />
-              {job.location}
+              <span>Location: {job.location}</span>
             </span>
+            <span className="text-white/30 select-none" aria-hidden="true">•</span>
             <span className="flex items-center gap-2">
               <Briefcase className="w-4 h-4 text-[#F6A18F]" />
-              Brandz Pakistan Corporate & Operations
+              Brandz Pakistan Corporate &amp; Operations
             </span>
+            <span className="text-white/30 select-none" aria-hidden="true">•</span>
             <span className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-[#F6A18F]" />
               Immediate Hiring

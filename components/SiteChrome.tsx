@@ -62,9 +62,9 @@ export const SiteChrome: React.FC<{ children: React.ReactNode; content?: ChromeC
       <Footer
         logo={content?.images.footerLogo}
         tagline={settingText(content?.settings || {}, 'site', 'tagline')}
-        email={settingText(content?.settings || {}, 'contact', 'email')}
-        phone={settingText(content?.settings || {}, 'contact', 'phone')}
-        address={settingText(content?.settings || {}, 'contact', 'address')}
+        email={settingText(content?.settings || {}, 'contact', 'email', 'hello@brandz.pk') || 'hello@brandz.pk'}
+        phone={settingText(content?.settings || {}, 'contact', 'phone', '+92 42 111 272 639') || '+92 42 111 272 639'}
+        address={settingText(content?.settings || {}, 'contact', 'address', 'Lahore, Punjab, Pakistan') || 'Lahore, Punjab, Pakistan'}
         sections={(content?.footer || []) as FooterSection[]}
       />
       <FranchiseModal

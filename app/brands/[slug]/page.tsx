@@ -33,7 +33,7 @@ export async function generateMetadata({
   if (!brand) return { title: 'Brand Details' };
 
   return {
-    title: `${brand.name} | Brandz Pakistan`,
+    title: brand.tagline ? `${brand.name} — ${brand.tagline}` : brand.name,
     description:
       brand.description ||
       `${brand.name} — ${brand.tagline}. An official food & hospitality concept in the Brandz Pakistan portfolio.`,
@@ -94,16 +94,21 @@ export default async function BrandPage({ params }: { params: Promise<{ slug: st
               />
             </div>
 
-            {/* Category & Established badge */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-md border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[.18em] text-[#F6A18F] backdrop-blur-sm">
-                {brand.category}
+            {/* Category, Established & Network Metadata with Clear Labels */}
+            <div className="flex flex-wrap items-center gap-2.5 text-xs">
+              <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#F05535]/30 bg-[#F05535]/15 px-3.5 py-1.5 font-bold text-[#F6A18F] backdrop-blur-sm">
+                <span className="text-white/60 font-medium uppercase text-[10px] tracking-wider">Category:</span>
+                <span>{brand.category}</span>
               </span>
-              <span className="rounded-md border border-white/10 bg-black/20 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white/80">
-                Since {brand.since}
+              <span className="text-white/30 select-none" aria-hidden="true">•</span>
+              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-3.5 py-1.5 font-semibold text-white/90 backdrop-blur-sm">
+                <span className="text-white/60 font-medium uppercase text-[10px] tracking-wider">Established:</span>
+                <span>Since {brand.since}</span>
               </span>
-              <span className="rounded-md border border-white/10 bg-black/20 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white/80">
-                {brand.locations}
+              <span className="text-white/30 select-none" aria-hidden="true">•</span>
+              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-3.5 py-1.5 font-semibold text-white/90 backdrop-blur-sm">
+                <span className="text-white/60 font-medium uppercase text-[10px] tracking-wider">Network:</span>
+                <span>{brand.locations.includes('Outlet') || brand.locations.includes('Location') ? brand.locations : `${brand.locations} Outlets`}</span>
               </span>
             </div>
 

@@ -146,19 +146,23 @@ export const CareersExplorer: React.FC<{ jobs: Job[] }> = ({ jobs }) => {
                 {job.summary}
               </p>
 
-              {/* Visually Separated Location & Type Chips */}
-              <div className="pt-1 flex flex-wrap items-center gap-3 text-xs">
+              {/* Visually & Semantically Separated Location & Type Chips */}
+              <div className="pt-1 flex flex-wrap items-center gap-2.5 text-xs">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F7F7F7] border border-gray-200/80 text-[#343538] font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-[#F05535]" />
-                  {job.location}
+                  <MapPin className="w-3.5 h-3.5 text-[#F05535]" aria-hidden="true" />
+                  <span className="font-semibold text-gray-500">Location:</span>
+                  <span>{job.location}</span>
                 </span>
+                <span className="text-gray-300 select-none" aria-hidden="true">•</span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F7F7F7] border border-gray-200/80 text-[#343538] font-medium">
-                  <Briefcase className="w-3.5 h-3.5 text-[#717275]" />
-                  {job.type}
+                  <Briefcase className="w-3.5 h-3.5 text-[#717275]" aria-hidden="true" />
+                  <span className="font-semibold text-gray-500">Type:</span>
+                  <span>{job.type}</span>
                 </span>
+                <span className="text-gray-300 select-none" aria-hidden="true">•</span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#F7F7F7] border border-gray-200/80 text-[#343538] font-medium">
-                  <Clock className="w-3.5 h-3.5 text-[#717275]" />
-                  Hiring Now
+                  <Clock className="w-3.5 h-3.5 text-[#717275]" aria-hidden="true" />
+                  <span>Hiring Now</span>
                 </span>
               </div>
             </div>

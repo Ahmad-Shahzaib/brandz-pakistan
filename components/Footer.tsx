@@ -49,17 +49,38 @@ export function Footer({
               {email && (
                 <div className="flex items-start gap-2.5">
                   <Mail className="mt-1 shrink-0 text-[#F05535]" size={15} />
-                  <a href={`mailto:${email}`} className="break-all transition hover:text-[#F6A18F]" aria-label={`Email us at ${email}`}>
-                    {email}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {email.split(/[/,]/).map((eStr, i, arr) => {
+                      const cleanE = eStr.trim();
+                      return (
+                        <span key={cleanE} className="inline-flex items-center gap-1">
+                          <a href={`mailto:${cleanE}`} className="break-all transition hover:text-[#F6A18F] hover:underline" aria-label={`Email us at ${cleanE}`}>
+                            {cleanE}
+                          </a>
+                          {i < arr.length - 1 && <span className="text-[#717275]">/</span>}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
               {phone && (
                 <div className="flex items-start gap-2.5">
                   <Phone className="mt-1 shrink-0 text-[#F05535]" size={15} />
-                  <a href={`tel:${phone.replace(/[^\d+]/g, '')}`} className="transition hover:text-[#F6A18F]" aria-label={`Call us at ${phone}`}>
-                    {phone}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {phone.split(/[/,]/).map((pStr, i, arr) => {
+                      const cleanP = pStr.trim();
+                      const dial = cleanP.replace(/[^\d+]/g, '');
+                      return (
+                        <span key={cleanP} className="inline-flex items-center gap-1">
+                          <a href={`tel:${dial}`} className="transition hover:text-[#F6A18F] hover:underline" aria-label={`Call us at ${cleanP}`}>
+                            {cleanP}
+                          </a>
+                          {i < arr.length - 1 && <span className="text-[#717275]">/</span>}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
               {address && (
@@ -93,7 +114,32 @@ function FooterColumn({ title, links }: { title: string; links: string[][] }) {
     <div>
       <h3 className="text-xs font-extrabold uppercase tracking-wide text-white">{title}</h3>
       <div className="mt-6 space-y-3.5">
-        {links.map(([label, href]) => <Link key={label} href={href} className="block text-sm text-[#B8B8BA] transition hover:text-[#F6A18F]">{label}</Link>)}
+        {links.map(([label, href]) => {
+          const isMail = href.startsWith('mailto:') || (!href.startsWith('/') && !href.startsWith('http') && href.includes('@'));
+          const isTel = href.startsWith('tel:') || (!href.startsWith('/') && !href.startsWith('http') && /^\+?[\d\s\-()]+$/.test(href));
+
+          if (isMail) {
+            const mailTarget = href.startsWith('mailto:') ? href : `mailto:${href}`;
+            return (
+              <a key={label} href={mailTarget} className="block text-sm text-[#B8B8BA] transition hover:text-[#F6A18F] hover:underline">
+                {label}
+              </a>
+            );
+          }
+          if (isTel) {
+            const telTarget = href.startsWith('tel:') ? href : `tel:${href.replace(/[^\d+]/g, '')}`;
+            return (
+              <a key={label} href={telTarget} className="block text-sm text-[#B8B8BA] transition hover:text-[#F6A18F] hover:underline">
+                {label}
+              </a>
+            );
+          }
+          return (
+            <Link key={label} href={href} className="block text-sm text-[#B8B8BA] transition hover:text-[#F6A18F]">
+              {label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

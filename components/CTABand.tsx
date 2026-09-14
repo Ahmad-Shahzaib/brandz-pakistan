@@ -24,7 +24,7 @@ export const CTABand: React.FC<CTABandProps> = ({
   primaryLabel = 'Apply for Franchise',
   primaryHref = '/apply',
   secondaryLabel = 'Talk to Our Franchise Team',
-  secondaryHref,
+  secondaryHref = '/contact',
   onSecondaryClick,
   hideSecondary = false,
   image,
